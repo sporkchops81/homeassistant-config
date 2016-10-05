@@ -1,0 +1,75 @@
+#################################################################
+## Scripts
+#################################################################
+
+  abodeaway:
+    alias: 'Abode Arm'
+    sequence:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.abodestatus
+          option: 'away'
+      - service: ifttt.trigger
+        data: {"event":"AbodeAway", "value1":"Arm Abode"}
+      - service: climate.set_away_mode
+        data:
+          entity_id: climate.downstairs
+          away_mode: 'True'          
+      - service: climate.set_away_mode
+        data:
+          entity_id: climate.upstairs
+          away_mode: 'True'     
+
+          
+  abodehome:
+    alias: 'Abode Home'
+    sequence:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.abodestatus
+          option: 'home'
+      - service: ifttt.trigger
+        data: {"event":"AbodeHome", "value1":"Abode Home"}
+      # - service: input_boolean.turn_on
+        # data:
+          # entity_id: input_boolean.startrecording
+        
+  abodestandby:
+    alias: 'Abode Standby'
+    sequence:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.abodestatus
+          option: 'standby'
+      - service: ifttt.trigger
+        data: {"event":"AbodeStandby", "value1":"Abode Standby"}
+#      - service: input_boolean.turn_off
+#        data:
+#          entity_id: input_boolean.startrecording
+      - service: climate.set_away_mode
+        data:
+          entity_id: climate.upstairs
+          away_mode: 'False'     
+      - service: climate.set_away_mode
+        data:
+          entity_id: climate.downstairs
+          away_mode: 'False'
+
+  garagedoornotification:
+    alias: 'Garage Door Open'
+    sequence:
+      - service: media_player.sonos_snapshot
+        entity_id: media_player.livingroomsonos
+      - service: media_player.volume_set
+        entity_id: media_player.livingroomsonos
+        data:
+          volume_level: .7
+      - service: media_player.play_media
+        entity_id: media_player.livingroomsonos
+        data:
+          media_content_id: 'https://dl.dropboxusercontent.com/u/7457/HASS/Garage_Door_open.mp3'
+          media_content_type: 'music'
+      - delay:
+          seconds: 3
+      - service: media_player.sonos_restore
+        entity_id: media_player.livingroomsonos

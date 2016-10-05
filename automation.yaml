@@ -1,0 +1,479 @@
+#################################################################
+## Automations
+#################################################################
+- alias: 'Mark Alok Away'
+  condition:
+    condition: state
+    entity_id: input_boolean.alokhome
+    state: 'on'
+  trigger:
+    - platform: state
+      entity_id: device_tracker.myiphone
+      state: 'not_home' 
+      for:
+        minutes: 10
+    - platform: state
+      entity_id: device_tracker.pi_alokphone, device_tracker.alokiosiphone
+      state: 'not_home' 
+  action:
+    - service: homeassistant.turn_off
+      entity_id: input_boolean.alokhome
+    # - service: logbook.log
+      # data:
+        # name: "Alok away: "
+        # message: >
+          # {{ trigger.entity_id }} turned from {{ trigger.from_state.state }} to {{ trigger.to_state.state }}
+
+- alias: 'Mark Rashmi Away'
+  condition:
+    condition: state
+    entity_id: input_boolean.rashmihome
+    state: 'on'
+  trigger:
+    - platform: state
+      entity_id: device_tracker.rashmisiphone
+      state: 'not_home' 
+      for:
+        minutes: 10
+    - platform: state
+      entity_id: device_tracker.pi_rashmiphone, device_tracker.rashmiappiphone
+      state: 'not_home' 
+  action:
+    - service: homeassistant.turn_off
+      entity_id: input_boolean.rashmihome
+ 
+
+- alias: 'Mark Alok Home'
+  condition:
+    condition: state
+    entity_id: input_boolean.alokhome
+    state: 'off'
+  trigger:
+    - platform: state
+      entity_id: device_tracker.myiphone, device_tracker.pi_alokphone, device_tracker.alokiosiphone
+      state: 'home'
+  action:
+     service: homeassistant.turn_on
+     entity_id: input_boolean.alokhome
+
+- alias: 'Mark Rashmi Home'
+  condition:
+    condition: state
+    entity_id: input_boolean.rashmihome
+    state: 'off'
+  trigger:
+    - platform: state
+      entity_id: device_tracker.rashmisiphone, device_tracker.pi_rashmiphone, device_tracker.rashmiappiphone
+      state: 'home' 
+  action:
+     service: homeassistant.turn_on
+     entity_id: input_boolean.rashmihome
+     
+- alias: Heal Z-Wave Network
+  trigger:
+    platform: time
+    after: '2:31:00'
+  action:
+    service: zwave.heal_network
+
+- alias: 'Disarm Abode from Away'
+  condition:
+    condition: state
+    entity_id: input_select.abodestatus
+    state: 'away'
+  trigger:
+   - platform: state
+     entity_id: group.household
+     state: 'on'
+  action:
+     service: homeassistant.turn_on
+     entity_id: script.abodestandby   
+
+- alias: 'Garage Door open'
+  condition:
+    condition: state
+    entity_id: sensor.garagedoor
+    state: 'Open'
+  trigger:
+    - platform: state
+      entity_id: input_select.abodestatus
+      state: 'home'
+    - platform: state
+      entity_id: input_select.abodestatus
+      state: 'away'      
+  action:
+    - service: notify.pushbullet
+      data:
+        message: "Garage Door Open"
+        title: "Garage Door Open"
+    - service: homeassistant.turn_on
+      entity_id: script.garagedoornotification   
+      
+- alias: 'Disarm Abode at night'
+  condition:
+    condition: state
+    entity_id: input_select.abodestatus
+    state: 'home'
+  trigger:
+   - platform: state
+     entity_id: input_boolean.rashmihome, input_boolean.alokhome
+     to: 'on'
+  action:
+    service: homeassistant.turn_on
+    entity_id: script.abodestandby  
+    
+- alias: 'Abode Home from Standby'
+  condition:
+    condition: and
+    conditions:
+     - condition: state
+       entity_id: input_select.abodestatus
+       state: 'standby'
+     - condition: or
+       conditions:
+        - condition: time
+          after: '22:15:00'
+        - condition: time
+          before: '07:45:00'          
+     - condition: state
+       entity_id: input_boolean.abodeupdate
+       state: 'on'
+  trigger:
+   - platform: time
+     minutes: '/10'
+  action:
+     service: homeassistant.turn_on
+     entity_id: script.abodehome
+
+- alias: 'Abode Standby'
+  condition:
+    condition: and
+    conditions:
+     - condition: state
+       entity_id: group.household
+       state: 'on'
+     - condition: time
+       after: '08:15:00'
+       before: '21:45:00'
+     - condition: state
+       entity_id: input_boolean.abodeupdate
+       state: 'on'
+     - condition: template
+       value_template: '{{ (as_timestamp(now()) - as_timestamp(states.input_select.abodestatus.last_changed)) > 300 }}'
+     - condition: or
+       conditions:
+        - condition: state
+          entity_id: input_select.abodestatus
+          state: 'home'
+        - condition: state
+          entity_id: input_select.abodestatus
+          state: 'away'  
+  trigger:
+   - platform: time
+     minutes: '/10'
+  action:
+     service: homeassistant.turn_on
+     entity_id: script.abodestandby
+     
+- alias: 'Arm Abode'
+  condition:
+    condition: state
+    entity_id: input_boolean.abodeupdate
+    state: 'on'
+  trigger:
+    - platform: state
+      entity_id: group.household
+      state: 'off' 
+  action:
+     service: homeassistant.turn_on
+     entity_id: script.abodeaway
+     
+- alias: 'Abode Home at night'
+  condition:
+    condition: and
+    conditions:
+     - condition: state
+       entity_id: input_boolean.abodeupdate
+       state: 'on'
+     - condition: state
+       entity_id: group.household
+       state: 'on'              
+  trigger:
+    platform: time
+    after: '22:00:00'
+  action:
+     service: homeassistant.turn_on
+     entity_id: script.abodehome
+     
+- alias: 'Disarm Abode in the morning'
+  condition:
+    condition: and
+    conditions:
+     - condition: state
+       entity_id: group.household
+       state: 'on'
+     - condition: state
+       entity_id: input_boolean.abodeupdate
+       state: 'on'       
+  trigger:
+    platform: time
+    after: '08:00:00'
+  action:
+     service: homeassistant.turn_on
+     entity_id: script.abodestandby
+
+- alias: "Update Available Notification"
+  trigger:
+    platform: state
+    entity_id: updater.updater
+  action:
+    service: notify.pushbullet
+    data:
+      message: "HomeAssistant update available"
+      title: "Update HASS"
+
+- alias: "Morning Commute"
+  condition:
+    condition: and
+    conditions:
+     - condition: time
+       after: '08:15:00'
+       before: '11:00:00'
+     - condition: time
+       weekday:
+         - mon
+         - tue
+         - wed
+         - thu
+         - fri
+     - condition: state
+       entity_id: input_boolean.alokhome
+       state: 'on'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.morning_commute
+    below: 43
+  action:
+    service: notify.pushbullet
+    data:
+      message: Commute time is 43 minutes
+      title: Leave for Work
+      target: device/myiPhone
+      
+- alias: "Evening Commute"
+  condition:
+    condition: and
+    conditions:
+     - condition: time
+       after: '17:00:00'
+       before: '20:00:00'
+     - condition: time
+       weekday:
+         - mon
+         - tue
+         - wed
+         - thu
+         - fri
+     - condition: state
+       entity_id: input_boolean.alokhome
+       state: 'off'    
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.evening_commute
+    below: 43
+  action:
+    service: notify.pushbullet
+    data:
+      message: Commute time is 43 minutes
+      title: Leave for Home
+      target: device/myiPhone
+
+- alias: "Plex Spy notification"
+  trigger:
+    platform: state
+    entity_id: sensor.plexspy
+  action:
+    service: notify.pushbullet
+    data_template:
+      message: >
+        {{ trigger.to_state.state }} people streaming
+      title: Plex Streaming
+      target: device/myiPhone
+      
+- alias: Enable Recording
+  trigger:
+    platform: state
+    entity_id: input_boolean.startrecording
+    state: 'on'     
+  action:
+    service: switch.turn_on
+    entity_id: switch.foscam_record
+
+- alias: Disable Recording
+  trigger:
+    platform: state
+    entity_id: input_boolean.startrecording
+    state: 'off'     
+  action:
+    service: switch.turn_off
+    entity_id: switch.foscam_record
+
+- alias: Downstairs thermostat to Input_Boolean
+  trigger:
+    platform: state
+    entity_id: sensor.downstairsthermmode
+  action:
+    service_template: >
+      {% if is_state('sensor.downstairsthermmode', 'Home') %}
+        homeassistant.turn_off
+      {% elif is_state('sensor.downstairsthermmode', 'Away') %}
+        homeassistant.turn_on
+      {% else %}
+      {% endif %}
+    entity_id: input_boolean.thermo_away_main
+    
+- alias: Change downstairs Thermostat mode
+  condition:
+    condition: template
+    value_template: '{{ (as_timestamp(now()) - as_timestamp(states.sensor.downstairsthermmode.last_changed)) > 60 }}'  
+  trigger:
+    platform: state
+    entity_id: input_boolean.thermo_away_main
+  action:
+     service: climate.set_away_mode
+     entity_id: climate.downstairs
+     data_template:
+       away_mode: >
+         {% if is_state('input_boolean.thermo_away_main', 'off') %}
+           off
+         {% elif is_state('input_boolean.thermo_away_main', 'on') %}
+           on
+         {% else %}
+         {% endif %}
+
+- alias: Upstairs thermostat to Input_Boolean
+  trigger:
+    platform: state
+    entity_id: sensor.upstairshermostatmode
+  action:
+    service_template: >
+      {% if is_state('sensor.upstairshermostatmode', 'Home') %}
+        homeassistant.turn_off
+      {% elif is_state('sensor.upstairshermostatmode', 'Away') %}
+        homeassistant.turn_on
+      {% else %}
+      {% endif %}
+    entity_id: input_boolean.thermo_away_upstairs
+    
+- alias: Change upstairs Thermostat mode
+  condition:
+    condition: template
+    value_template: '{{ (as_timestamp(now()) - as_timestamp(states.sensor.upstairshermostatmode.last_changed)) > 60 }}'  
+  trigger:
+    platform: state
+    entity_id: input_boolean.thermo_away_upstairs
+  action:
+    service: climate.set_away_mode
+    entity_id: climate.upstairs
+    data_template:
+      away_mode: >
+        {% if is_state('input_boolean.thermo_away_upstairs', 'off') %}
+          off
+        {% elif is_state('input_boolean.thermo_away_upstairs', 'on') %}
+          on
+        {% else %}
+        {% endif %}
+
+- alias: Driveway light at night
+  trigger:
+    platform: sun
+    event: sunset
+    offset: "00:45:00"
+  action:
+    - service: switch.turn_on
+      entity_id: switch.driveway
+
+- alias: Driveway light Off
+  trigger:
+    platform: sun
+    event: sunset
+    offset: "01:30:00"
+  action:
+    - service: switch.turn_off
+      entity_id: switch.driveway  
+
+# - alias: 'Disarm Abode from Away'
+  # condition:
+    # condition: state
+    # entity_id: input_select.abodestatus
+    # state: 'away'
+  # trigger:
+   # - platform: state
+     # entity_id: device_tracker.myiphone
+     # from: "not_home"
+     # to: "home"
+   # - platform: state
+     # entity_id: device_tracker.rashmisiphone
+     # from: "not_home"
+     # to: "home"
+  # action:
+     # service: homeassistant.turn_on
+     # entity_id: script.abodestandby
+# - alias: 'Arm Abode'
+  # condition:
+    # condition: state
+    # entity_id: input_boolean.abodeupdate
+    # state: 'on'
+  # trigger:
+    # platform: state
+    # entity_id: group.household
+    # state: 'not_home'
+    # for:
+      # minutes: 2
+  # action:
+     # service: homeassistant.turn_on
+     # entity_id: script.abodeaway
+# - alias: 'Abode Home at night regular'
+  # condition:
+    # condition: and
+    # conditions:
+     # - condition: state
+       # entity_id: group.household
+       # state: 'home'
+     # - condition: state
+       # entity_id: input_boolean.abodeupdate
+       # state: 'on'       
+  # trigger:
+    # platform: time
+    # after: '22:00:00'
+  # action:
+     # service: homeassistant.turn_on
+     # entity_id: script.abodehome
+# - alias: 'Abode Standby'
+  # condition:
+    # condition: and
+    # conditions:
+     # - condition: state
+       # entity_id: group.household
+       # state: 'home'
+     # - condition: time
+       # after: '08:15:00'
+       # before: '21:45:00'
+     # - condition: state
+       # entity_id: input_boolean.abodeupdate
+       # state: 'on'
+     # - condition: or
+       # conditions:
+        # - condition: state
+          # entity_id: input_select.abodestatus
+          # state: 'home'
+        # - condition: state
+          # entity_id: input_select.abodestatus
+          # state: 'away'  
+  # trigger:
+   # - platform: time
+     # minutes: '/5'
+  # action:
+     # service: homeassistant.turn_on
+     # entity_id: script.abodestandby
+# {{ (as_timestamp(now) - as_timestamp(states.sensor.ars_bloom_voltage.last_changed)) > 300 }}

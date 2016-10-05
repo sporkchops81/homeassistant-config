@@ -1,0 +1,102 @@
+#################################################################
+## Groups
+#################################################################
+
+  default_view:
+    view: yes
+    icon: mdi:home
+    entities:
+      - group.abode_status
+      - group.weather     
+      - group.device_location
+      - group.update
+      - group.information
+      - group.thermostats
+
+  cameras:
+    name: Cameras
+    view: yes
+    icon: mdi:camera
+    entities:
+      - camera.ars_bloom
+      - camera.radarga
+#      - camera.door_camera
+#      - camera.door_camera_2
+#      - camera.door_camera_3
+  
+  media:
+    name: Media
+    view: yes
+    icon: mdi:play-circle-outline
+    entities:
+      - group.media_player
+      
+  update:
+    - updater.updater
+
+  Weather:
+    - sensor.pws_weather
+    - sensor.pws_temp_f
+    - sensor.pws_pressure_in
+    - sensor.pws_relative_humidity
+    - binary_sensor.ars_bloom_rain
+    - sensor.pws_wind_dir
+    - sensor.pws_wind_string
+#    - sensor.forecastio_wind_speed
+    - sensor.forecastio_cloud_coverage
+    - sensor.forecastio_hourly_summary
+    - sensor.forecastio_daily_summary
+
+  Thermostats:
+    - climate.downstairs
+    - sensor.downstairsthermoper
+    - sensor.downstairshumidity
+#    - sensor.downstairsthermmode
+    - sensor.living_room_temperature
+    - input_boolean.thermo_away_main
+    - climate.upstairs
+    - sensor.upstairsthermostatoperation
+    - sensor.upstairshumidity
+#    - sensor.upstairshermostatmode
+    - input_boolean.thermo_away_upstairs
+    
+  Household:
+    - input_boolean.alokhome
+    - input_boolean.rashmihome    
+
+  Information:
+    - sensor.time__date
+    - sensor.morning_commute
+    - sensor.evening_commute
+    - sensor.plexspy
+    - sensor.usdinr
+    - sensor.bloomlastupdate
+    - binary_sensor.garagedoor
+    - sensor.ars_bloom_voltage
+    - switch.driveway
+#    - sensor.battery_alok_phone
+#    - sensor.battery_rashmi_phone
+
+  Media Player:
+    - media_player.castlivingroom
+    - media_player.livingroomsonos
+    - media_player.my_shield_android_tv
+    - media_player.panasonic_viera_tv
+    - media_player.shieldtv
+    - media_player.kodi_nstv
+
+  Abode Status:
+    - input_select.abodestatus
+    - input_boolean.abodeupdate
+    - input_boolean.startrecording
+    - binary_sensor.downstairs_occupancy
+    - binary_sensor.living_room_occupancy
+    - binary_sensor.upstairs_occupancy
+
+  Device Location:
+#    - group.ios_app
+#    - group.mqtt
+#    - group.household2
+    - input_boolean.alokhome
+    - input_boolean.rashmihome 
+    - device_tracker.toshibaaio    

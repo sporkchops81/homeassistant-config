@@ -1,0 +1,231 @@
+
+#Forecast.io weather sensors
+  - platform: forecast
+    api_key: !secret forecast.io_key
+    monitored_conditions:
+      - wind_speed
+      - cloud_cover
+      - hourly_summary
+      - daily_summary
+#Time and Date Sensor
+  - platform: time_date
+    display_options:
+      - 'time_date'
+  - platform: plex
+    name: PlexSpy
+    host: 192.168.2.113
+    port: 32400
+    username: !secret plex_user
+    password: !secret plex_password    
+#Morning Commute Google Travel Time Sensor
+  - platform: google_travel_time
+    name: Morning Commute
+    api_key: !secret google_key
+    origin: !secret add_home
+    destination: !secret add_buckhead
+    options:
+      mode: driving 
+#Evening Commute Google Travel Time Sensor  
+  - platform: google_travel_time
+    name: Evening Commute
+    api_key: !secret google_key
+    origin: !secret add_buckhead
+    destination: !secret add_home
+    options:
+      mode: driving  
+#Wunderground Custom Component
+  - platform: wunderground
+    api_key: !secret wunderground_key
+    pws_id: KGASUWAN45
+    monitored_conditions:
+      - weather
+      - temp_f
+      - pressure_in
+      - wind_string
+      - relative_humidity
+#MQTT Sensor
+#  - platform: mqtt
+#    state_topic: "owntracks/pi/alokphone"
+#    name: "Battery Alok Phone"
+#    unit_of_measurement: "%"
+#    value_template: '{{ value_json.batt }}'      
+#  - platform: mqtt
+#    state_topic: "owntracks/pi/rashmiphone"
+#    name: "Battery Rashmi Phone"
+#    unit_of_measurement: "%"
+#    value_template: '{{ value_json.batt }}'   
+# OpenExchangeRate Sensor - Custom Component
+  - platform: openexchangerates
+    api_key: !secret openexchangerates_key
+    base: USD
+    quote: INR
+    name: USDINR
+  - platform: template
+    sensors:
+      bloomlastupdate:
+        value_template: >-
+           {% if states.sensor.ars_bloom_temperature != None %}
+             {{ relative_time(states.sensor.ars_bloom_temperature.last_updated) }}
+           {% else %}
+             unknown
+           {% endif %}
+      # bloomrain:
+        # value_template: >-
+           # {%- if is_state("binary_sensor.ars_bloom_rain", "off") -%}
+             # Clear
+           # {% else %}
+             # Rain
+           # {% endif %}        
+      # garagedoor:
+        # friendly_name: "Garage Door"
+        # value_template: >-
+           # {% if  states.sensor.garage_door_tilt_sensor_alarm_level_5.state == '255' %}
+              # Open
+           # {% elif states.sensor.garage_door_tilt_sensor_alarm_level_5.state == '0' %}
+              # Closed
+           # {% elif states.sensor.garage_door_tilt_sensor_alarm_level_5 != None %}
+              # unknown
+           # {% endif %}
+      garagedoorbattery:
+        friendly_name: "Garage Door Sensor Battery"
+        unit_of_measurement: "%"
+        value_template: >-
+           {% if states.sensor.garage_door_tilt_sensor_alarm_level_5 != None %}
+             {{ states.sensor.garage_door_tilt_sensor_alarm_level_5.attributes.battery_level }}
+           {% else %}
+             unknown
+           {% endif %}
+      downstairshumidity:
+        friendly_name: "Downstairs Humidity"
+        unit_of_measurement: "%"
+        value_template: >-
+           {% if states.climate.downstairs != None %}
+             {{ states.climate.downstairs.attributes.actual_humidity }}
+           {% else %}
+             unknown
+           {% endif %}
+        entity_id: 
+          - climate.downstairs  
+      downstairsthermmode:
+        friendly_name: "Downstairs Away mode"
+        value_template: >-
+           {% if  states.climate.downstairs.attributes.away_mode == 'off' %}
+              Home
+           {% elif states.climate.downstairs.attributes.away_mode == 'on' %}
+              Away
+           {% elif states.climate.downstairs != None %}
+              unknown
+           {% endif %}
+
+        entity_id: 
+          - climate.downstairs 
+      downstairsthermoper:
+        friendly_name: "Downstairs Thermostat"
+        value_template: >-
+           {% if states.climate.downstairs != None %}
+             {{ states.climate.downstairs.attributes.operation }}
+           {% else %}
+             unknown
+           {% endif %}
+        entity_id: 
+          - climate.downstairs 
+      upstairshumidity:
+        friendly_name: "Upstairs Humidity"
+        unit_of_measurement: "%"
+        value_template: >-
+           {% if states.climate.upstairs != None %}
+             {{ states.climate.upstairs.attributes.actual_humidity }}
+           {% else %}
+             unknown
+           {% endif %}
+        entity_id: 
+          - climate.upstairs 
+      upstairshermostatmode:
+        friendly_name: "Upstairs Away Mode"
+        value_template: >-
+           {% if  states.climate.upstairs.attributes.away_mode == 'off' %}
+              Home
+           {% elif states.climate.upstairs.attributes.away_mode == 'on' %}
+              Away
+           {% elif states.climate.upstairs != None %}
+              unknown
+           {% endif %}
+        entity_id: 
+          - climate.upstairs
+      upstairsthermostatoperation:
+        friendly_name: "Upstairs Thermostat"
+        value_template: >-
+           {% if states.climate.upstairs != None %}
+             {{ states.climate.upstairs.attributes.operation }}
+           {% else %}
+             unknown
+           {% endif %}
+        entity_id: 
+          - climate.upstairs
+      # upstairsoccupancy:
+        # friendly_name: "Upstairs Occupancy"
+        # value_template: >-
+           # {% if  states.binary_sensor.upstairs_occupancy.state == "off" %}
+              # Unoccupied
+           # {% elif states.binary_sensor.upstairs_occupancy.state == "on" %}
+              # Occupied
+           # {% elif states.binary_sensor.upstairs_occupancy != None %}
+              # unknown
+           # {% endif %}
+        # entity_id: 
+          # - binary_sensor.upstairs_occupancy
+      # downstairsoccupancy:
+        # friendly_name: "Downstairs Occupancy"
+        # value_template: >-
+           # {% if  states.binary_sensor.downstairs_occupancy.state == "off" %}
+              # Unoccupied
+           # {% elif states.binary_sensor.downstairs_occupancy.state == "on" %}
+              # Occupied
+           # {% elif states.binary_sensor.downstairs_occupancy != None %}
+              # unknown
+           # {% endif %}
+        # entity_id: 
+          # - binary_sensor.downstairs_occupancy
+      # livingroomoccupancy:
+        # friendly_name: "Living Room Occupancy"
+        # value_template: >-
+           # {% if  states.binary_sensor.living_room_occupancy.state == "off" %}
+              # Unoccupied
+           # {% elif states.binary_sensor.living_room_occupancy.state == "on" %}
+              # Occupied
+           # {% elif states.binary_sensor.living_room_occupancy != None %}
+              # unknown
+           # {% endif %}
+        # entity_id: 
+          # - binary_sensor.living_room_occupancy
+      phonebatteryalok:
+        friendly_name: "Battery Alok Phone"
+        unit_of_measurement: "%"
+        value_template: >-
+           {% if states.device_tracker.alokiosiphone != None %}
+             {{ states.device_tracker.alokiosiphone.attributes.battery }}
+           {% else %}
+             unknown
+           {% endif %}       
+      phonebatteryrashmi:
+        friendly_name: "Battery Rashmi Phone"
+        unit_of_measurement: "%"
+        value_template: >-
+           {% if states.device_tracker.rashmiappiphone != None %}
+             {{ states.device_tracker.rashmiappiphone.attributes.battery }}
+           {% else %}
+             unknown
+           {% endif %}       
+#      bloomsky_last_update:
+#        value_template: '{{ states.sensor.ars_bloom_temperature.last_updated.strftime("%H:%M, %Y-%m-%d") }} '
+#      timeutcnow:
+#        value_template: '{{ utcnow.strftime("%H:%M, %Y-%m-%d") }}'
+#      usdeur:        
+#        value_template: ' {{ states.sensor.exchange_rates.attributes.EUR }}'      
+#  - platform: currencylayer
+#    api_key: !secret currencylayer_key
+#    base: USD
+#    quote:
+#      - INR
+#      - EUR
+#      - GBP

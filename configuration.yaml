@@ -1,0 +1,269 @@
+homeassistant:
+  # Omitted values in this section will be auto detected using freegeoip.io
+
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude_home
+  longitude: !secret longitude_home
+  elevation: 322
+  # Name of the location where Home Assistant is running
+  name: Home
+  # C for Celcius, F for Fahrenheit
+  temperature_unit: F
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/New_York
+  unit_system: imperial
+  customize: !include customize.yaml
+
+zone:
+  name: Home
+  latitude: !secret latitude_home
+  longitude: !secret longitude_home
+  radius: 100
+  icon: mdi:home
+
+zone 2:
+  name: Buckhead
+  latitude: !secret latitude_buckhead
+  longitude: !secret longitude_buckhead
+  icon: mdi:school
+  
+zone 3:
+  name: Downtown
+  latitude: !secret latitude_downtown
+  longitude: !secret longitude_downtown
+  icon: mdi:school
+
+http:
+  api_password: !secret http_password
+  ssl_certificate: !secret ssl_certificate
+  ssl_key: !secret ssl_key
+  approved_ips:
+    - 192.168.2.104
+    
+# View all events in a logbook
+logbook:
+  exclude:
+    domains:
+      - sun  
+    entities:
+      - sensor.pws_weather
+      - sensor.pws_temp_f
+      - sensor.pws_pressure_in
+      - sensor.pws_relative_humidity
+      - binary_sensor.ars_bloom_rain
+      - sensor.ars_bloom_uvindex
+      - sensor.pws_wind_dir
+      - sensor.pws_wind_string
+      - sensor.forecastio_wind_speed
+      - sensor.forecastio_cloud_coverage
+      - sensor.forecastio_hourly_summary
+      - sensor.forecastio_daily_summary
+      - sensor.time__date
+      - sensor.bloomlastupdate
+      - sensor.garage_door_tilt_sensor_alarm_level_5
+      - sensor.garage_door_tilt_sensor_alarm_type_5
+      - sensor.garage_door_tilt_sensor_burglar_5
+      - sensor.garage_door_tilt_sensor_sourcenodeid_5
+      - sensor.garagedoorbattery
+      - sensor.phonebatteryalok
+      - sensor.phonebatteryrashmi
+      - sensor.usdinr
+      - sensor.downstairsthermoper
+      - sensor.upstairsthermostatoperation
+      - group.abode_status
+      - group.device_location
+      - group.thermostats
+      
+      
+recorder:
+  purge_days: 7
+# Enables the frontend
+frontend:
+
+# Allows you to issue voice commands from the frontend
+conversation:
+
+# Discover some devices automatically
+discovery:
+wemo:
+updater:
+
+#Adds Amazon Echo support
+emulated_hue:
+  expose_by_default: false
+
+# Show links to resources in log and frontend
+#introduction:
+
+# Enables support for tracking state changes over time.
+history:
+
+# Track the sun
+sun:
+zwave:
+  usb_path: /dev/ttyACM0
+  config_path: /srv/hass/hass_venv/lib/python3.4/site-packages/libopenzwave-0.3.1-py3.4-linux-armv7l.egg/config
+
+media_player:
+  - platform: sonos
+    hosts: 192.168.2.150
+  - platform: kodi
+    host: http://192.168.2.28
+    port: 8080
+    name: Kodi NSTV
+    user: !secret kodi_username
+    password: !secret kodi_password
+  - platform: panasonic_viera
+    host: 192.168.2.129
+    port: 55000
+    name: Panasonic Viera TV
+  - platform: plex
+    host: 192.168.2.113
+
+camera:
+  - platform: foscam
+    ip: 192.168.2.200
+    name: Door Camera
+    port: 88
+    username: !secret foscam_username
+    password: !secret foscam_password
+  - platform: foscam
+    ip: 192.168.2.212
+    name: Door Camera
+    port: 88
+    username: !secret foscam_username
+    password: !secret foscam_password
+  - platform: foscam
+    ip: 192.168.2.35
+    name: Door Camera
+    port: 88
+    username: !secret foscam_username
+    password: !secret foscam_password    
+  - platform: bloomsky  
+  - platform: generic
+    still_image_url: https://radblast.wunderground.com/cgi-bin/radar/WUNIDS_map?station=FFC&brand=wui&num=1&delay=100&type=NTP&frame=0&scale=1&noclutter=0&showstorms=5&mapx=400&mapy=240&centerx=400&centery=240&transx=0&transy=0&showlabels=1&severe=0&rainsnow=0&lightning=0&smooth=0&rand=24427697&lat=0&lon=0&label=you  
+    name: RadarGA
+ifttt:
+  key: !secret ifttt_key
+
+device_tracker:
+#  - platform: bluetooth_tracker
+  - platform: asuswrt
+    host: 192.168.2.1
+    protocol: telnet
+    username: !secret asus_username
+    password: !secret asus_password
+  - platform: owntracks
+    max_gps_accuracy: 200 
+  - platform: unifi
+    host: 192.168.2.161
+    username: !secret unifi_username
+    password: !secret unifi_password
+
+notify:
+  - platform: pushbullet
+    api_key: !secret pushbullet_key
+    name: pushbullet
+  - platform: ecobee
+    name: ecobee  
+  - platform: ios
+    name: ios_alok
+    target: !secret ios_alok_push   
+  - platform: ios
+    name: ios_rashmi
+    target: !secret ios_rashmi_push 
+mqtt:
+  broker: 127.0.0.1
+  port: 1883
+  client_id: home-assistant-1
+  username: pi
+  password: raspberry
+  
+bloomsky:
+  api_key: !secret bloomsky_key
+
+ecobee:
+  api_key: !secret ecobee_key
+  hold_temp: True 
+ 
+logger:
+  default: error 
+#  default: warning  
+#  logs:
+#    homeassistant.components.notify: info
+#    homeassistant.components.automation: info    
+#    homeassistant.components.mqtt: debug
+
+input_select:
+  abodestatus:
+    name: Abode status
+    options:
+     - standby
+     - home
+     - away
+    initial: standby
+    icon: mdi:security
+
+input_boolean:
+  abodeupdate:
+    name: Abode Updates
+    initial: on
+    icon: mdi:security
+  startrecording:
+    name: Camera Recording
+    initial: off
+    icon: mdi:record-rec
+  alokhome:
+    name: Alok Home
+    initial: on
+    icon: mdi:cellphone-iphone
+  rashmihome:
+    name: Rashmi Home
+    initial: on
+    icon: mdi:cellphone-iphone
+  thermo_away_main:
+    name: Downstairs Away Mode
+    initial: off
+    icon: mdi:home
+  thermo_away_upstairs:
+    name: Upstairs Away Mode
+    initial: off
+    icon: mdi:home
+    
+switch:
+ platform: command_line
+ switches:
+   #Switch for Foscam Motion Detection
+   foscam_record:
+     command_on: 'curl -k "http://192.168.2.200:88/cgi-bin/CGIProxy.fcgi?cmd=setMotionDetectConfig&isEnable=1&linkage=8&snapInterval=5&sensitivity=2&triggerInterval=10&isMovAlarmEnable=1&isPirAlarmEnable=1&schedule0=281474976710655&schedule1=281474976710655&schedule2=281474976710655&schedule3=281474976710655&schedule4=281474976710655&schedule5=281474976710655&schedule6=281474976710655&area0=1023&area1=1023&area2=1023=&area3=1023&area4=1023&area5=1023&area6=1023&area7=1023&area8=1023&area9=1023&usr=arsaboo&pwd=alok18"'
+     command_off: 'curl -k "http://192.168.2.200:88/cgi-bin/CGIProxy.fcgi?cmd=setMotionDetectConfig&isEnable=0&linkage=8&snapInterval=5&sensitivity=2&triggerInterval=10&isMovAlarmEnable=0&isPirAlarmEnable=0&schedule0=281474976710655&schedule1=281474976710655&schedule2=281474976710655&schedule3=281474976710655&schedule4=281474976710655&schedule5=281474976710655&schedule6=281474976710655&area0=1023&area1=1023&area2=1023=&area3=1023&area4=1023&area5=1023&area6=1023&area7=1023&area8=1023&area9=1023&usr=arsaboo&pwd=alok18"'
+     value_template: ''
+   foscam_record2:
+     command_on: 'curl -k "http://192.168.2.212:88/cgi-bin/CGIProxy.fcgi?cmd=setMotionDetectConfig&isEnable=1&linkage=8&snapInterval=5&sensitivity=2&triggerInterval=10&isMovAlarmEnable=1&isPirAlarmEnable=1&schedule0=281474976710655&schedule1=281474976710655&schedule2=281474976710655&schedule3=281474976710655&schedule4=281474976710655&schedule5=281474976710655&schedule6=281474976710655&area0=1023&area1=1023&area2=1023=&area3=1023&area4=1023&area5=1023&area6=1023&area7=1023&area8=1023&area9=1023&usr=arsaboo&pwd=alok18"'
+     command_off: 'curl -k "http://192.168.2.212:88/cgi-bin/CGIProxy.fcgi?cmd=setMotionDetectConfig&isEnable=0&linkage=8&snapInterval=5&sensitivity=2&triggerInterval=10&isMovAlarmEnable=0&isPirAlarmEnable=0&schedule0=281474976710655&schedule1=281474976710655&schedule2=281474976710655&schedule3=281474976710655&schedule4=281474976710655&schedule5=281474976710655&schedule6=281474976710655&area0=1023&area1=1023&area2=1023=&area3=1023&area4=1023&area5=1023&area6=1023&area7=1023&area8=1023&area9=1023&usr=arsaboo&pwd=alok18"'
+     value_template: ''
+   foscam_record3:
+     command_on: 'curl -k "http://192.168.2.35:88/cgi-bin/CGIProxy.fcgi?cmd=setMotionDetectConfig&isEnable=1&linkage=8&snapInterval=5&sensitivity=2&triggerInterval=10&isMovAlarmEnable=1&isPirAlarmEnable=1&schedule0=281474976710655&schedule1=281474976710655&schedule2=281474976710655&schedule3=281474976710655&schedule4=281474976710655&schedule5=281474976710655&schedule6=281474976710655&area0=1023&area1=1023&area2=1023=&area3=1023&area4=1023&area5=1023&area6=1023&area7=1023&area8=1023&area9=1023&usr=arsaboo&pwd=alok18"'
+     command_off: 'curl -k "http://192.168.2.35:88/cgi-bin/CGIProxy.fcgi?cmd=setMotionDetectConfig&isEnable=0&linkage=8&snapInterval=5&sensitivity=2&triggerInterval=10&isMovAlarmEnable=0&isPirAlarmEnable=0&schedule0=281474976710655&schedule1=281474976710655&schedule2=281474976710655&schedule3=281474976710655&schedule4=281474976710655&schedule5=281474976710655&schedule6=281474976710655&area0=1023&area1=1023&area2=1023=&area3=1023&area4=1023&area5=1023&area6=1023&area7=1023&area8=1023&area9=1023&usr=arsaboo&pwd=alok18"'
+     value_template: ''
+
+ios:
+  health_check: true # If true, you will receive a notification when Home Assistant starts and stops.
+  push_categories: # Defines actionable notifications. Categories are groups of actions. You specify the category in the notification.
+    - name: Alarm
+      identifier: 'ALARM' # Must be unique and ALL CAPS
+      actions:
+        - identifier: 'SOUND_ALARM' # Must be unique and ALL CAPS
+          title: 'Sound Alarm' # Needs to be short!
+          activationMode: 'background' # or background. The mode in which to run the app when the action is performed.
+          authenticationRequired: yes # A Boolean value indicating whether the user must unlock the device before the action is performed.
+          destructive: yes # A Boolean value indicating whether the action is destructive.  When the value of this property is true, the system displays the corresponding button differently to indicate that the action is destructive.
+          behavior: 'default' # or TextInput. When TextInput the system provides a way for the user to enter a text response to be included with the notification.
+          context: 'default' # or Minimal. Default = In this context, the full UI is displayed for the notification’s alert. You may specify up to four custom actions in this context. Minimal = In this context, a minimal UI is displayed for the notification’s alert. You may specify up to two custom actions in this context.
+
+
+automation: !include automation.yaml
+group: !include groups.yaml
+script: !include scripts.yaml
+sensor: !include sensor.yaml
+binary_sensor: !include binary_sensor.yaml

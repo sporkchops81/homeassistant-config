@@ -54,7 +54,6 @@ __pycache__
 home-assistant.env
 home-assistant.*
 known_devices.yaml
-configuration.yaml
 secrets.yaml
 components
 deps

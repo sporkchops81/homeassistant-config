@@ -33,28 +33,16 @@
     destination: !secret add_home
     options:
       mode: driving  
-#Wunderground Custom Component
+
   - platform: wunderground
     api_key: !secret wunderground_key
-    pws_id: KGASUWAN45
+    pws_id: !secret wunderground_pws
     monitored_conditions:
       - weather
       - temp_f
       - pressure_in
       - wind_string
       - relative_humidity
-#MQTT Sensor
-#  - platform: mqtt
-#    state_topic: "owntracks/pi/alokphone"
-#    name: "Battery Alok Phone"
-#    unit_of_measurement: "%"
-#    value_template: '{{ value_json.batt }}'      
-#  - platform: mqtt
-#    state_topic: "owntracks/pi/rashmiphone"
-#    name: "Battery Rashmi Phone"
-#    unit_of_measurement: "%"
-#    value_template: '{{ value_json.batt }}'   
-# OpenExchangeRate Sensor - Custom Component
   - platform: openexchangerates
     api_key: !secret openexchangerates_key
     base: USD
@@ -69,23 +57,6 @@
            {% else %}
              unknown
            {% endif %}
-      # bloomrain:
-        # value_template: >-
-           # {%- if is_state("binary_sensor.ars_bloom_rain", "off") -%}
-             # Clear
-           # {% else %}
-             # Rain
-           # {% endif %}        
-      # garagedoor:
-        # friendly_name: "Garage Door"
-        # value_template: >-
-           # {% if  states.sensor.garage_door_tilt_sensor_alarm_level_5.state == '255' %}
-              # Open
-           # {% elif states.sensor.garage_door_tilt_sensor_alarm_level_5.state == '0' %}
-              # Closed
-           # {% elif states.sensor.garage_door_tilt_sensor_alarm_level_5 != None %}
-              # unknown
-           # {% endif %}
       garagedoorbattery:
         friendly_name: "Garage Door Sensor Battery"
         unit_of_measurement: "%"
@@ -162,6 +133,41 @@
            {% endif %}
         entity_id: 
           - climate.upstairs
+      phonebatteryalok:
+        friendly_name: "Battery Alok Phone"
+        unit_of_measurement: "%"
+        value_template: >-
+           {% if states.device_tracker.alokiosiphone != None %}
+             {{ states.device_tracker.alokiosiphone.attributes.battery }}
+           {% else %}
+             unknown
+           {% endif %}       
+      phonebatteryrashmi:
+        friendly_name: "Battery Rashmi Phone"
+        unit_of_measurement: "%"
+        value_template: >-
+           {% if states.device_tracker.rashmiappiphone != None %}
+             {{ states.device_tracker.rashmiappiphone.attributes.battery }}
+           {% else %}
+             unknown
+           {% endif %}
+      # bloomrain:
+        # value_template: >-
+           # {%- if is_state("binary_sensor.ars_bloom_rain", "off") -%}
+             # Clear
+           # {% else %}
+             # Rain
+           # {% endif %}        
+      # garagedoor:
+        # friendly_name: "Garage Door"
+        # value_template: >-
+           # {% if  states.sensor.garage_door_tilt_sensor_alarm_level_5.state == '255' %}
+              # Open
+           # {% elif states.sensor.garage_door_tilt_sensor_alarm_level_5.state == '0' %}
+              # Closed
+           # {% elif states.sensor.garage_door_tilt_sensor_alarm_level_5 != None %}
+              # unknown
+           # {% endif %}           
       # upstairsoccupancy:
         # friendly_name: "Upstairs Occupancy"
         # value_template: >-
@@ -198,24 +204,6 @@
            # {% endif %}
         # entity_id: 
           # - binary_sensor.living_room_occupancy
-      phonebatteryalok:
-        friendly_name: "Battery Alok Phone"
-        unit_of_measurement: "%"
-        value_template: >-
-           {% if states.device_tracker.alokiosiphone != None %}
-             {{ states.device_tracker.alokiosiphone.attributes.battery }}
-           {% else %}
-             unknown
-           {% endif %}       
-      phonebatteryrashmi:
-        friendly_name: "Battery Rashmi Phone"
-        unit_of_measurement: "%"
-        value_template: >-
-           {% if states.device_tracker.rashmiappiphone != None %}
-             {{ states.device_tracker.rashmiappiphone.attributes.battery }}
-           {% else %}
-             unknown
-           {% endif %}       
 #      bloomsky_last_update:
 #        value_template: '{{ states.sensor.ars_bloom_temperature.last_updated.strftime("%H:%M, %Y-%m-%d") }} '
 #      timeutcnow:

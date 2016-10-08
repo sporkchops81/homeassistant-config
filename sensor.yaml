@@ -1,7 +1,7 @@
 
 #Forecast.io weather sensors
-  - platform: forecast
-    api_key: !secret forecast.io_key
+  - platform: darksky
+    api_key: !secret darksky_key
     monitored_conditions:
       - wind_speed
       - cloud_cover

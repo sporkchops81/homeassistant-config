@@ -18,11 +18,6 @@
   action:
     - service: homeassistant.turn_off
       entity_id: input_boolean.alokhome
-    # - service: logbook.log
-      # data:
-        # name: "Alok away: "
-        # message: >
-          # {{ trigger.entity_id }} turned from {{ trigger.from_state.state }} to {{ trigger.to_state.state }}
 
 - alias: 'Mark Rashmi Away'
   condition:
@@ -401,7 +396,7 @@
   action:
     - service: switch.turn_off
       entity_id: switch.driveway  
-
+      
 # - alias: 'Disarm Abode from Away'
   # condition:
     # condition: state

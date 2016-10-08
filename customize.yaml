@@ -68,15 +68,11 @@
      sensor.pws_relative_humidity:
        icon: mdi:water-percent
        friendly_name: 'Outdoor Humidity'
-     sensor.forecastio_cloud_coverage:
-       icon: mdi:weather-cloudy
+     sensor.dark_sky_cloud_coverage:
        friendly_name: 'Cloud Coverage'
-     sensor.forecastio_wind_speed:
-       icon: mdi:weather-windy
-       friendly_name: 'Wind Speed'
-     sensor.forecastio_daily_summary:
+     sensor.dark_sky_daily_summary:
        friendly_name: 'Daily Summary'
-     sensor.forecastio_hourly_summary:
+     sensor.dark_sky_hourly_summary:
        friendly_name: 'Hourly Summary'
      group.weather:
        icon: mdi:weather-pouring             

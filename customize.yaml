@@ -104,12 +104,10 @@
      sensor.garagedoor:
        icon: mdi:glassdoor         
        
-     media_player.livingroomsonos:
-       friendly_name: Sonos Play:5
+     # media_player.livingroomsonos:
+       # friendly_name: Sonos Play:5
      media_player.castlivingroom:
        friendly_name: Chromecast
-     media_player.panasonic_viera_tv:
-       friendly_name: Panasonic Viera TV
      media_player.shieldtv:
        friendly_name: ShieldTV Cast
      media_player.my_shield_android_tv:
@@ -147,6 +145,7 @@
        emulated_hue_name: "Upstairs thermostat"
      switch.driveway:
        emulated_hue: true
+       emulated_hue_name: "Driveway Light"
 
      climate.ecobee:
        max_temp: 90

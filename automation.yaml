@@ -1,7 +1,7 @@
 #################################################################
 ## Automations
 #################################################################
-- alias: 'Mark Alok Away'
+- alias: 'Alok Away'
   condition:
     condition: state
     entity_id: input_boolean.alokhome
@@ -19,7 +19,7 @@
     - service: homeassistant.turn_off
       entity_id: input_boolean.alokhome
 
-- alias: 'Mark Rashmi Away'
+- alias: 'Rashmi Away'
   condition:
     condition: state
     entity_id: input_boolean.rashmihome
@@ -38,7 +38,7 @@
       entity_id: input_boolean.rashmihome
  
 
-- alias: 'Mark Alok Home'
+- alias: 'Alok Home'
   condition:
     condition: state
     entity_id: input_boolean.alokhome
@@ -51,7 +51,7 @@
      service: homeassistant.turn_on
      entity_id: input_boolean.alokhome
 
-- alias: 'Mark Rashmi Home'
+- alias: 'Rashmi Home'
   condition:
     condition: state
     entity_id: input_boolean.rashmihome
@@ -395,80 +395,4 @@
     offset: "01:30:00"
   action:
     - service: switch.turn_off
-      entity_id: switch.driveway  
-      
-# - alias: 'Disarm Abode from Away'
-  # condition:
-    # condition: state
-    # entity_id: input_select.abodestatus
-    # state: 'away'
-  # trigger:
-   # - platform: state
-     # entity_id: device_tracker.myiphone
-     # from: "not_home"
-     # to: "home"
-   # - platform: state
-     # entity_id: device_tracker.rashmisiphone
-     # from: "not_home"
-     # to: "home"
-  # action:
-     # service: homeassistant.turn_on
-     # entity_id: script.abodestandby
-# - alias: 'Arm Abode'
-  # condition:
-    # condition: state
-    # entity_id: input_boolean.abodeupdate
-    # state: 'on'
-  # trigger:
-    # platform: state
-    # entity_id: group.household
-    # state: 'not_home'
-    # for:
-      # minutes: 2
-  # action:
-     # service: homeassistant.turn_on
-     # entity_id: script.abodeaway
-# - alias: 'Abode Home at night regular'
-  # condition:
-    # condition: and
-    # conditions:
-     # - condition: state
-       # entity_id: group.household
-       # state: 'home'
-     # - condition: state
-       # entity_id: input_boolean.abodeupdate
-       # state: 'on'       
-  # trigger:
-    # platform: time
-    # after: '22:00:00'
-  # action:
-     # service: homeassistant.turn_on
-     # entity_id: script.abodehome
-# - alias: 'Abode Standby'
-  # condition:
-    # condition: and
-    # conditions:
-     # - condition: state
-       # entity_id: group.household
-       # state: 'home'
-     # - condition: time
-       # after: '08:15:00'
-       # before: '21:45:00'
-     # - condition: state
-       # entity_id: input_boolean.abodeupdate
-       # state: 'on'
-     # - condition: or
-       # conditions:
-        # - condition: state
-          # entity_id: input_select.abodestatus
-          # state: 'home'
-        # - condition: state
-          # entity_id: input_select.abodestatus
-          # state: 'away'  
-  # trigger:
-   # - platform: time
-     # minutes: '/5'
-  # action:
-     # service: homeassistant.turn_on
-     # entity_id: script.abodestandby
-# {{ (as_timestamp(now) - as_timestamp(states.sensor.ars_bloom_voltage.last_changed)) > 300 }}
+      entity_id: switch.driveway 

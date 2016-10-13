@@ -1,6 +1,12 @@
 #################################################################
 ## Customize
 #################################################################
+     climate.downstairs:
+       friendly_name: EcobeeDown
+       entity_picture: /local/Ecobee.png
+     climate.upstairs:
+       friendly_name: EcobeeUp
+       entity_picture: /local/Ecobee.png
 #devices
 
      device_tracker.myiphone:
@@ -35,7 +41,7 @@
        icon: mdi:amazon
      device_tracker.94a1a273348b:
        friendly_name: BloomSky
-       icon: mdi:compass-outline             
+       icon: mdi:compass-outline
 
 #weather
      sensor.ars_bloom_voltage:

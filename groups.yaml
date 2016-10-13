@@ -30,6 +30,7 @@
     icon: mdi:play-circle-outline
     entities:
       - group.media_player
+      - group.all_automations
       
   update:
     - updater.updater

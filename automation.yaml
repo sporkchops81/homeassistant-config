@@ -18,6 +18,10 @@
   action:
     - service: homeassistant.turn_off
       entity_id: input_boolean.alokhome
+    - service: logbook.log
+      data_template:
+        name: "Alok away: "
+        message: "{{ trigger.entity_id }} turned from {{ trigger.from_state.state }} to {{ trigger.to_state.state }}"
 
 - alias: 'Rashmi Away'
   condition:
@@ -36,6 +40,10 @@
   action:
     - service: homeassistant.turn_off
       entity_id: input_boolean.rashmihome
+    - service: logbook.log
+      data_template:
+        name: "Rashmi away: "
+        message: "{{ trigger.entity_id }} turned from {{ trigger.from_state.state }} to {{ trigger.to_state.state }}"
  
 
 - alias: 'Alok Home'
@@ -48,8 +56,12 @@
       entity_id: device_tracker.myiphone, device_tracker.pi_alokphone, device_tracker.alokiosiphone
       state: 'home'
   action:
-     service: homeassistant.turn_on
-     entity_id: input_boolean.alokhome
+    - service: homeassistant.turn_on
+      entity_id: input_boolean.alokhome
+    - service: logbook.log
+      data_template:
+        name: "Alok home: "
+        message: "{{ trigger.entity_id }} turned from {{ trigger.from_state.state }} to {{ trigger.to_state.state }}"    
 
 - alias: 'Rashmi Home'
   condition:
@@ -61,8 +73,12 @@
       entity_id: device_tracker.rashmisiphone, device_tracker.pi_rashmiphone, device_tracker.rashmiappiphone
       state: 'home' 
   action:
-     service: homeassistant.turn_on
-     entity_id: input_boolean.rashmihome
+    - service: homeassistant.turn_on
+      entity_id: input_boolean.rashmihome
+    - service: logbook.log
+      data_template:
+        name: "Rashmi home: "
+        message: "{{ trigger.entity_id }} turned from {{ trigger.from_state.state }} to {{ trigger.to_state.state }}"     
      
 - alias: Heal Z-Wave Network
   trigger:

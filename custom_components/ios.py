@@ -65,9 +65,8 @@ def setup(hass, config):
     DEVICES = config_from_file(hass.config.path(DEVICES_FILE))
 
     app_config = config[DOMAIN]
-    push_categories = app_config.get("push_categories")
-    health_check = app_config.get("health_check", False)
-
+    push_categories = app_config.get("push_categories", [])
+    
     discovery = loader.get_component("discovery")
     device_tracker = loader.get_component("device_tracker")
     zeroconf = loader.get_component("zeroconf")
@@ -77,29 +76,6 @@ def setup(hass, config):
 
     hass.wsgi.register_view(iOSAppIdentifyDeviceView(hass))
 
-    def devices_with_push():
-        push_devices = []
-        for key, device in DEVICES.items():
-            if device.get("pushId") is not None:
-                push_devices.append(device)
-        return push_devices
-
-    def stop_ios(event):
-        """Stop iOS service."""
-        for device in devices_with_push():
-            notify(title="Health Check", message="Home Assistant is shutting down now!",
-                   target=device.get("pushId"))
-
-    def start_ios(event):
-        """Start iOS service."""
-        for device in devices_with_push():
-            notify(title="Health Check", message="Home Assistant is starting up now!",
-                   target=device.get("pushId"))
-        hass.bus.listen_once(EVENT_HOMEASSISTANT_STOP, stop_ios)
-
-    if health_check:
-        hass.bus.listen_once(EVENT_HOMEASSISTANT_START, start_ios)
-
     def device_identified(event):
         print("DEVICE IDENTIFIED EVENT FIRED", event)
         permanentID = event.data.get("device").get("permanentID")
@@ -108,13 +84,6 @@ def setup(hass, config):
             _LOGGER.error("failed to save config file")
 
     hass.bus.listen(DEVICE_IDENTIFIED, device_identified)
-
-    # def ios_app_discovered(service, info):
-    #     """ Called when an iOS app/device has been discovered. """
-    #     print("Discovered a new iOS app/device: {}".format(info))
-
-    # discovery.listen(
-    #     hass, discovery.SERVICE_IOS_APP, ios_app_discovered)
 
     return True
 

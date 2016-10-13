@@ -1,6 +1,7 @@
 """
 iOS platform for notify component. Should be put into ~/.homeassistant/custom_components/notify/ios.py.
 
+(Yes, actually notify/ios.py, even though the filename on Gist is notify_ios.py).
 For more details about this platform, please refer to the documentation at
 https://home-assistant.io/components/notify.ios/
 """

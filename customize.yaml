@@ -122,13 +122,13 @@
        icon: mdi:thermometer-lines
      thermostat.upstairs:
        icon: mdi:thermometer-lines
-     sensor.downstairshumidity:
+     sensor.downstairs_humidity:
        icon: mdi:water-percent
      sensor.downstairsthermmode:
        icon: mdi:home
      sensor.downstairsthermoper:
        icon: mdi:fan
-     sensor.upstairshumidity:
+     sensor.upstairs_humidity:
        icon: mdi:water-percent
      sensor.upstairshermostatmode:
        icon: mdi:home

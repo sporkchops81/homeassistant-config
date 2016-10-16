@@ -51,12 +51,13 @@
   Thermostats:
     - climate.downstairs
     - sensor.downstairsthermoper
-    - sensor.downstairshumidity
+    - sensor.downstairs_humidity
     - sensor.living_room_temperature
     - input_boolean.thermo_away_main
     - climate.upstairs
     - sensor.upstairsthermostatoperation
-    - sensor.upstairshumidity
+    - sensor.upstairs_humidity
+    - sensor.upstairs_temperature
     - input_boolean.thermo_away_upstairs
     
   Household:

@@ -21,7 +21,10 @@
     - service: logbook.log
       data_template:
         name: "Alok away: "
-        message: "{{ trigger.entity_id }} turned from {{ trigger.from_state.state }} to {{ trigger.to_state.state }}"
+        message: >-
+          {%- for state in states.device_tracker if state.entity_id == trigger.entity_id -%}
+            {{ state.attributes.friendly_name }} is Away.
+          {%- endfor -%}   
 
 - alias: 'Rashmi Away'
   condition:
@@ -43,7 +46,10 @@
     - service: logbook.log
       data_template:
         name: "Rashmi away: "
-        message: "{{ trigger.entity_id }} turned from {{ trigger.from_state.state }} to {{ trigger.to_state.state }}"
+        message: >-
+          {%- for state in states.device_tracker if state.entity_id == trigger.entity_id -%}
+            {{ state.attributes.friendly_name }} is Away.
+          {%- endfor -%}
  
 
 - alias: 'Alok Home'
@@ -61,7 +67,10 @@
     - service: logbook.log
       data_template:
         name: "Alok home: "
-        message: "{{ trigger.entity_id }} turned from {{ trigger.from_state.state }} to {{ trigger.to_state.state }}"    
+        message: >-
+          {%- for state in states.device_tracker if state.entity_id == trigger.entity_id -%}
+            {{ state.attributes.friendly_name }} is Home.
+          {%- endfor -%}   
 
 - alias: 'Rashmi Home'
   condition:
@@ -78,7 +87,10 @@
     - service: logbook.log
       data_template:
         name: "Rashmi home: "
-        message: "{{ trigger.entity_id }} turned from {{ trigger.from_state.state }} to {{ trigger.to_state.state }}"     
+        message: >-
+          {%- for state in states.device_tracker if state.entity_id == trigger.entity_id -%}
+            {{ state.attributes.friendly_name }} is Home.
+          {%- endfor -%}   
      
 - alias: Heal Z-Wave Network
   trigger:

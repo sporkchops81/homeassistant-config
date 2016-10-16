@@ -170,6 +170,10 @@ notify:
   - platform: pushbullet
     api_key: !secret pushbullet_key
     name: pushbullet
+  - name: telegram
+    platform: telegram
+    api_key: !secret telegram_key
+    chat_id: !secret telegram_chatID_Alok
   - platform: ecobee
     name: ecobee  
   - platform: ios

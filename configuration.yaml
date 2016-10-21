@@ -51,6 +51,7 @@ logbook:
       - sensor.pws_pressure_in
       - sensor.pws_relative_humidity
       - binary_sensor.ars_bloom_rain
+      - binary_sensor.ars_bloom_night
       - sensor.ars_bloom_uvindex
       - sensor.pws_wind_dir
       - sensor.pws_wind_string
@@ -72,13 +73,15 @@ logbook:
       - sensor.upstairsthermostatoperation
       - group.abode_status
       - group.device_location
+      - group.information
       - group.thermostats
       - device_tracker.pi_alokphone
-      - device_tracker.myiphone
+      - device_tracker.myiphone 
       - device_tracker.alokiosiphone
       - device_tracker.pi_rashmiphone
       - device_tracker.rashmiappiphone
       - device_tracker.rashmisiphone
+      - device_tracker.unificloudkey
       
 zeroconf:
 recorder:
@@ -239,6 +242,14 @@ input_boolean:
     name: Upstairs Away Mode
     initial: off
     icon: mdi:home
+  alok360home:
+    name: Alok Life360 Home
+    initial: on
+    icon: mdi:cellphone-iphone
+  rashmi360home:
+    name: Rashmi Life360 Home
+    initial: on
+    icon: mdi:cellphone-iphone    
     
 switch:
  platform: command_line
@@ -288,3 +299,4 @@ group: !include groups.yaml
 script: !include scripts.yaml
 sensor: !include sensor.yaml
 binary_sensor: !include binary_sensor.yaml
+alexa: !include alexa.yaml

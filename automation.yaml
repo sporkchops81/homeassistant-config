@@ -49,8 +49,7 @@
         message: >-
           {%- for state in states.device_tracker if state.entity_id == trigger.entity_id -%}
             {{ state.attributes.friendly_name }} is Away.
-          {%- endfor -%}
- 
+          {%- endfor -%} 
 
 - alias: 'Alok Home'
   condition:
@@ -252,7 +251,7 @@
   action:
     service: notify.pushbullet
     data:
-      message: "HomeAssistant update available"
+      message: "HomeAssistant {{ states('updater.updater') }} is now available"
       title: "Update HASS"
 
 - alias: "Morning Commute"

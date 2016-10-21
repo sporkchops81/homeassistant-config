@@ -53,7 +53,7 @@
       bloomlastupdate:
         value_template: >-
            {% if states.sensor.ars_bloom_temperature != None %}
-             {{ relative_time(states.sensor.ars_bloom_temperature.last_updated) }}
+             {{ relative_time(states.sensor.ars_bloom_temperature.last_changed) }}
            {% else %}
              unknown
            {% endif %}
@@ -66,17 +66,6 @@
            {% else %}
              unknown
            {% endif %}
-      # downstairshumidity:
-        # friendly_name: "Downstairs Humidity"
-        # unit_of_measurement: "%"
-        # value_template: >-
-           # {% if states.climate.downstairs != None %}
-             # {{ states.climate.downstairs.attributes.actual_humidity }}
-           # {% else %}
-             # unknown
-           # {% endif %}
-        # entity_id: 
-          # - climate.downstairs  
       downstairsthermmode:
         friendly_name: "Downstairs Away mode"
         value_template: >-
@@ -100,17 +89,6 @@
            {% endif %}
         entity_id: 
           - climate.downstairs 
-      # upstairshumidity:
-        # friendly_name: "Upstairs Humidity"
-        # unit_of_measurement: "%"
-        # value_template: >-
-           # {% if states.climate.upstairs != None %}
-             # {{ states.climate.upstairs.attributes.actual_humidity }}
-           # {% else %}
-             # unknown
-           # {% endif %}
-        # entity_id: 
-          # - climate.upstairs 
       upstairshermostatmode:
         friendly_name: "Upstairs Away Mode"
         value_template: >-

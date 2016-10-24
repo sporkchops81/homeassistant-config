@@ -42,6 +42,7 @@
       - pressure_in
       - wind_string
       - relative_humidity
+      - alerts
   - platform: openexchangerates
     api_key: !secret openexchangerates_key
     base: USD

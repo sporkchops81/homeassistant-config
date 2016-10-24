@@ -50,6 +50,7 @@ logbook:
       - sensor.pws_temp_f
       - sensor.pws_pressure_in
       - sensor.pws_relative_humidity
+      - sensor.pws_alerts
       - binary_sensor.ars_bloom_rain
       - binary_sensor.ars_bloom_night
       - sensor.ars_bloom_uvindex
@@ -82,28 +83,6 @@ logbook:
       - device_tracker.rashmiappiphone
       - device_tracker.rashmisiphone
       - device_tracker.unificloudkey
-
-zeroconf:
-recorder:
-  purge_days: 7
-# Enables the frontend
-frontend:
-
-# Allows you to issue voice commands from the frontend
-conversation:
-
-# Discover some devices automatically
-discovery:
-wemo:
-updater:
-
-#Adds Amazon Echo support
-emulated_hue:
-  expose_by_default: false
-
-# Show links to resources in log and frontend
-#introduction:
-
 # Enables support for tracking state changes over time.
 history:
   include:
@@ -141,6 +120,23 @@ history:
       - sensor.upstairshermostatmode
       - sensor.upstairsthermostatoperation
       - switch.driveway
+zeroconf:
+recorder:
+  purge_days: 7
+# Enables the frontend
+frontend:
+
+# Allows you to issue voice commands from the frontend
+conversation:
+
+# Discover some devices automatically
+discovery:
+wemo:
+updater:
+
+#Adds Amazon Echo support
+emulated_hue:
+  expose_by_default: false
 
 # Track the sun
 sun:
@@ -215,11 +211,7 @@ notify:
   - platform: ecobee
     name: ecobee
   - platform: ios
-    name: ios_alok
-    target: !secret ios_alok_push
-  - platform: ios
-    name: ios_rashmi
-    target: !secret ios_rashmi_push
+
 mqtt:
   broker: 127.0.0.1
   port: 1883
@@ -326,7 +318,6 @@ ios:
           textInputPlaceholder: '...' # Only for iOS 10 when behavior is TextInput.
           parameters: # iOS 9 only. Use this dictionary to specify any behavior-specific data for the action. For example, if you set behavior to TextInput you can use the UIUserNotificationTextInputActionButtonTitleKey key, which lets you customize the title of the button displayed by the text input interface.
             UIUserNotificationTextInputActionButtonTitleKey: "Silencio!"
-
 
 automation: !include automation.yaml
 #automation persistence: !include mqtt_persistence.yaml

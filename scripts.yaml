@@ -14,13 +14,12 @@
       - service: climate.set_away_mode
         data:
           entity_id: climate.downstairs
-          away_mode: 'True'          
+          away_mode: 'True'
       - service: climate.set_away_mode
         data:
           entity_id: climate.upstairs
-          away_mode: 'True'     
+          away_mode: 'True'
 
-          
   abodehome:
     alias: 'Abode Home'
     sequence:
@@ -30,10 +29,7 @@
           option: 'home'
       - service: ifttt.trigger
         data: {"event":"AbodeHome", "value1":"Abode Home"}
-      # - service: input_boolean.turn_on
-        # data:
-          # entity_id: input_boolean.startrecording
-        
+
   abodestandby:
     alias: 'Abode Standby'
     sequence:
@@ -43,13 +39,10 @@
           option: 'standby'
       - service: ifttt.trigger
         data: {"event":"AbodeStandby", "value1":"Abode Standby"}
-#      - service: input_boolean.turn_off
-#        data:
-#          entity_id: input_boolean.startrecording
       - service: climate.set_away_mode
         data:
           entity_id: climate.upstairs
-          away_mode: 'False'     
+          away_mode: 'False'
       - service: climate.set_away_mode
         data:
           entity_id: climate.downstairs
@@ -73,3 +66,16 @@
           seconds: 3
       - service: media_player.sonos_restore
         entity_id: media_player.livingroomsonos
+
+  arm_security:
+    alias: 'Arm Security'
+    sequence:
+      - delay: 00:05:00
+      - service: homeassistant.turn_on
+        entity_id: script.abodeaway
+
+  disarm_security:
+    alias: 'Disarm Security'
+    sequence:
+      - service: homeassistant.turn_on
+        entity_id: script.abodestandby

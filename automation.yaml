@@ -9,12 +9,12 @@
   trigger:
     - platform: state
       entity_id: device_tracker.myiphone
-      state: 'not_home' 
+      state: 'not_home'
       for:
         minutes: 10
     - platform: state
       entity_id: device_tracker.pi_alokphone, device_tracker.alokiosiphone
-      state: 'not_home' 
+      state: 'not_home'
   action:
     - service: homeassistant.turn_off
       entity_id: input_boolean.alokhome
@@ -24,7 +24,7 @@
         message: >-
           {%- for state in states.device_tracker if state.entity_id == trigger.entity_id -%}
             {{ state.attributes.friendly_name }} is Away.
-          {%- endfor -%}   
+          {%- endfor -%}
 
 - alias: 'Rashmi Away'
   condition:
@@ -34,12 +34,12 @@
   trigger:
     - platform: state
       entity_id: device_tracker.rashmisiphone
-      state: 'not_home' 
+      state: 'not_home'
       for:
         minutes: 10
     - platform: state
       entity_id: device_tracker.pi_rashmiphone, device_tracker.rashmiappiphone
-      state: 'not_home' 
+      state: 'not_home'
   action:
     - service: homeassistant.turn_off
       entity_id: input_boolean.rashmihome
@@ -49,7 +49,7 @@
         message: >-
           {%- for state in states.device_tracker if state.entity_id == trigger.entity_id -%}
             {{ state.attributes.friendly_name }} is Away.
-          {%- endfor -%} 
+          {%- endfor -%}
 
 - alias: 'Alok Home'
   condition:
@@ -69,7 +69,7 @@
         message: >-
           {%- for state in states.device_tracker if state.entity_id == trigger.entity_id -%}
             {{ state.attributes.friendly_name }} is Home.
-          {%- endfor -%}   
+          {%- endfor -%}
 
 - alias: 'Rashmi Home'
   condition:
@@ -79,7 +79,7 @@
   trigger:
     - platform: state
       entity_id: device_tracker.rashmisiphone, device_tracker.pi_rashmiphone, device_tracker.rashmiappiphone
-      state: 'home' 
+      state: 'home'
   action:
     - service: homeassistant.turn_on
       entity_id: input_boolean.rashmihome
@@ -89,8 +89,8 @@
         message: >-
           {%- for state in states.device_tracker if state.entity_id == trigger.entity_id -%}
             {{ state.attributes.friendly_name }} is Home.
-          {%- endfor -%}   
-     
+          {%- endfor -%}
+
 - alias: Heal Z-Wave Network
   trigger:
     platform: time
@@ -109,7 +109,7 @@
      state: 'on'
   action:
      service: homeassistant.turn_on
-     entity_id: script.abodestandby   
+     entity_id: script.abodestandby
 
 - alias: 'Garage Door open'
   condition:
@@ -122,15 +122,15 @@
       state: 'home'
     - platform: state
       entity_id: input_select.abodestatus
-      state: 'away'      
+      state: 'away'
   action:
     - service: notify.pushbullet
       data:
         message: "Garage Door Open"
         title: "Garage Door Open"
     - service: homeassistant.turn_on
-      entity_id: script.garagedoornotification   
-      
+      entity_id: script.garagedoornotification
+
 - alias: 'Disarm Abode at night'
   condition:
     condition: state
@@ -142,8 +142,8 @@
      to: 'on'
   action:
     service: homeassistant.turn_on
-    entity_id: script.abodestandby  
-    
+    entity_id: script.abodestandby
+
 - alias: 'Abode Home from Standby'
   condition:
     condition: and
@@ -156,7 +156,7 @@
         - condition: time
           after: '22:15:00'
         - condition: time
-          before: '07:45:00'          
+          before: '07:45:00'
      - condition: state
        entity_id: input_boolean.abodeupdate
        state: 'on'
@@ -189,14 +189,14 @@
           state: 'home'
         - condition: state
           entity_id: input_select.abodestatus
-          state: 'away'  
+          state: 'away'
   trigger:
    - platform: time
      minutes: '/10'
   action:
      service: homeassistant.turn_on
      entity_id: script.abodestandby
-     
+
 - alias: 'Arm Abode'
   condition:
     condition: state
@@ -205,11 +205,11 @@
   trigger:
     - platform: state
       entity_id: group.household
-      state: 'off' 
+      state: 'off'
   action:
      service: homeassistant.turn_on
      entity_id: script.abodeaway
-     
+
 - alias: 'Abode Home at night'
   condition:
     condition: and
@@ -219,14 +219,14 @@
        state: 'on'
      - condition: state
        entity_id: group.household
-       state: 'on'              
+       state: 'on'
   trigger:
     platform: time
     after: '22:00:00'
   action:
      service: homeassistant.turn_on
      entity_id: script.abodehome
-     
+
 - alias: 'Disarm Abode in the morning'
   condition:
     condition: and
@@ -236,7 +236,7 @@
        state: 'on'
      - condition: state
        entity_id: input_boolean.abodeupdate
-       state: 'on'       
+       state: 'on'
   trigger:
     platform: time
     after: '08:00:00'
@@ -249,10 +249,18 @@
     platform: state
     entity_id: updater.updater
   action:
-    service: notify.pushbullet
-    data:
-      message: "HomeAssistant {{ states('updater.updater') }} is now available"
-      title: "Update HASS"
+    - service: notify.pushbullet
+      data:
+        message: "HomeAssistant {{ states('updater.updater') }} is now available"
+        title: "Update HASS"
+    - service: persistent_notification.create
+      data:
+        title: "Update Available"
+        message: >
+          Home Assistant {{ states('updater.updater') }} is available. - {{ as_timestamp(now()) | timestamp_custom('%I:%M:%S %p %d-%b-%Y', true) }}
+
+          [How-to Upgrade](https://home-assistant.io/getting-started/installation-raspberry-pi-all-in-one/#upgrading)
+        notification_id: “update_available”
 
 - alias: "Morning Commute"
   condition:
@@ -281,7 +289,7 @@
       message: Commute time is 43 minutes
       title: Leave for Work
       target: device/myiPhone
-      
+
 - alias: "Evening Commute"
   condition:
     condition: and
@@ -298,7 +306,7 @@
          - fri
      - condition: state
        entity_id: input_boolean.alokhome
-       state: 'off'    
+       state: 'off'
   trigger:
     platform: numeric_state
     entity_id: sensor.evening_commute
@@ -321,12 +329,12 @@
         {{ trigger.to_state.state }} people streaming
       title: Plex Streaming
       target: device/myiPhone
-      
+
 - alias: Enable Recording
   trigger:
     platform: state
     entity_id: input_boolean.startrecording
-    state: 'on'     
+    state: 'on'
   action:
     service: switch.turn_on
     entity_id: switch.foscam_record
@@ -335,7 +343,7 @@
   trigger:
     platform: state
     entity_id: input_boolean.startrecording
-    state: 'off'     
+    state: 'off'
   action:
     service: switch.turn_off
     entity_id: switch.foscam_record
@@ -353,11 +361,11 @@
       {% else %}
       {% endif %}
     entity_id: input_boolean.thermo_away_main
-    
+
 - alias: Change downstairs Thermostat mode
   condition:
     condition: template
-    value_template: '{{ (as_timestamp(now()) - as_timestamp(states.sensor.downstairsthermmode.last_changed)) > 60 }}'  
+    value_template: '{{ (as_timestamp(now()) - as_timestamp(states.sensor.downstairsthermmode.last_changed)) > 60 }}'
   trigger:
     platform: state
     entity_id: input_boolean.thermo_away_main
@@ -386,11 +394,11 @@
       {% else %}
       {% endif %}
     entity_id: input_boolean.thermo_away_upstairs
-    
+
 - alias: Change upstairs Thermostat mode
   condition:
     condition: template
-    value_template: '{{ (as_timestamp(now()) - as_timestamp(states.sensor.upstairshermostatmode.last_changed)) > 60 }}'  
+    value_template: '{{ (as_timestamp(now()) - as_timestamp(states.sensor.upstairshermostatmode.last_changed)) > 60 }}'
   trigger:
     platform: state
     entity_id: input_boolean.thermo_away_upstairs
@@ -422,4 +430,4 @@
     offset: "01:30:00"
   action:
     - service: switch.turn_off
-      entity_id: switch.driveway 
+      entity_id: switch.driveway

@@ -20,7 +20,7 @@
        friendly_name: Rashmi's iPhone
      device_tracker.pi_rashmiphone:
        icon: mdi:cellphone-iphone
-       friendly_name: Rashmi's iPhone MQTT  
+       friendly_name: Rashmi's iPhone MQTT
      device_tracker.alokdelllatitude:
        icon: mdi:laptop-windows
        friendly_name: Dell Laptop
@@ -29,7 +29,7 @@
        friendly_name: Ubiquiti Unifi
      device_tracker.harmonyhub:
        icon: mdi:remote
-       friendly_name: Logitech Harmony 
+       friendly_name: Logitech Harmony
      device_tracker.hpaio:
        icon: mdi:desktop-mac
        friendly_name: HP AIO
@@ -46,15 +46,15 @@
 #weather
      sensor.ars_bloom_voltage:
        friendly_name: 'BloomSky Voltage'
-       icon: mdi:battery     
+       icon: mdi:battery
      binary_sensor.ars_bloom_rain:
        friendly_name: 'BloomSky Rain'
      sensor.bloomlastupdate:
        friendly_name: 'BloomSky Update'
-       icon: mdi:refresh     
+       icon: mdi:refresh
      sensor.ars_bloom_humidity:
        friendly_name: 'BloomSky Humidity'
-       icon: mdi:water-percent     
+       icon: mdi:water-percent
      sensor.pws_pressure_in:
        friendly_name: 'Outdoor Pressure'
        icon: mdi:gauge
@@ -70,7 +70,7 @@
        friendly_name: 'Outdoor Temperature'
        icon: mdi:thermometer
      sensor.pws_weather:
-       friendly_name: 'Weather Summary'       
+       friendly_name: 'Weather Summary'
      sensor.pws_relative_humidity:
        icon: mdi:water-percent
        friendly_name: 'Outdoor Humidity'
@@ -81,23 +81,23 @@
      sensor.dark_sky_hourly_summary:
        friendly_name: 'Hourly Summary'
      group.weather:
-       icon: mdi:weather-pouring             
+       icon: mdi:weather-pouring
      group.information:
-       icon: mdi:information-outline       
-       
+       icon: mdi:information-outline
+
      sensor.battery_alok_phone:
        friendly_name: Alok's Phone Charge
        icon: mdi:battery
      sensor.battery_rashmi_phone:
        friendly_name: Rashmi's Phone Charge
-       icon: mdi:battery       
+       icon: mdi:battery
      sensor.usdinr:
        friendly_name: USD/INR
        icon: mdi:currency-inr
      sensor.usdeur:
        friendly_name: USD/EUR
        icon: mdi:currency-eur
-       
+
      sensor.google_travel_time:
        friendly_name: 'Morning Commute'
        icon: mdi:car
@@ -108,8 +108,8 @@
        friendly_name: 'Evening Commute'
        icon: mdi:car
      sensor.garagedoor:
-       icon: mdi:glassdoor         
-       
+       icon: mdi:glassdoor
+
      # media_player.livingroomsonos:
        # friendly_name: Sonos Play:5
      media_player.castlivingroom:

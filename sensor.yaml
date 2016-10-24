@@ -16,7 +16,7 @@
     host: 192.168.2.113
     port: 32400
     username: !secret plex_user
-    password: !secret plex_password    
+    password: !secret plex_password
 #Morning Commute Google Travel Time Sensor
   - platform: google_travel_time
     name: Morning Commute
@@ -24,16 +24,15 @@
     origin: !secret add_home
     destination: !secret add_buckhead
     options:
-      mode: driving 
-#Evening Commute Google Travel Time Sensor  
+      mode: driving
+#Evening Commute Google Travel Time Sensor
   - platform: google_travel_time
     name: Evening Commute
     api_key: !secret google_key
     origin: !secret add_buckhead
     destination: !secret add_home
     options:
-      mode: driving  
-
+      mode: driving
   - platform: wunderground
     api_key: !secret wunderground_key
     pws_id: !secret wunderground_pws
@@ -61,8 +60,8 @@
         friendly_name: "Garage Door Sensor Battery"
         unit_of_measurement: "%"
         value_template: >-
-           {% if states.sensor.garage_door_tilt_sensor_alarm_level_5 != None %}
-             {{ states.sensor.garage_door_tilt_sensor_alarm_level_5.attributes.battery_level }}
+           {% if states.binary_sensor.garage_door_tilt_sensor_sensor_5_0 != None %}
+             {{ states.binary_sensor.garage_door_tilt_sensor_sensor_5_0.attributes.battery_level }}
            {% else %}
              unknown
            {% endif %}
@@ -76,9 +75,6 @@
            {% elif states.climate.downstairs != None %}
               unknown
            {% endif %}
-
-        entity_id: 
-          - climate.downstairs 
       downstairsthermoper:
         friendly_name: "Downstairs Thermostat"
         value_template: >-
@@ -87,8 +83,6 @@
            {% else %}
              unknown
            {% endif %}
-        entity_id: 
-          - climate.downstairs 
       upstairshermostatmode:
         friendly_name: "Upstairs Away Mode"
         value_template: >-
@@ -99,8 +93,6 @@
            {% elif states.climate.upstairs != None %}
               unknown
            {% endif %}
-        entity_id: 
-          - climate.upstairs
       upstairsthermostatoperation:
         friendly_name: "Upstairs Thermostat"
         value_template: >-
@@ -109,8 +101,6 @@
            {% else %}
              unknown
            {% endif %}
-        entity_id: 
-          - climate.upstairs
       phonebatteryalok:
         friendly_name: "Battery Alok Phone"
         unit_of_measurement: "%"
@@ -119,7 +109,7 @@
              {{ states.device_tracker.alokiosiphone.attributes.battery }}
            {% else %}
              unknown
-           {% endif %}       
+           {% endif %}
       phonebatteryrashmi:
         friendly_name: "Battery Rashmi Phone"
         unit_of_measurement: "%"
@@ -129,13 +119,6 @@
            {% else %}
              unknown
            {% endif %}
-      # bloomrain:
-        # value_template: >-
-           # {%- if is_state("binary_sensor.ars_bloom_rain", "off") -%}
-             # Clear
-           # {% else %}
-             # Rain
-           # {% endif %}        
       # garagedoor:
         # friendly_name: "Garage Door"
         # value_template: >-
@@ -145,49 +128,11 @@
               # Closed
            # {% elif states.sensor.garage_door_tilt_sensor_alarm_level_5 != None %}
               # unknown
-           # {% endif %}           
-      # upstairsoccupancy:
-        # friendly_name: "Upstairs Occupancy"
-        # value_template: >-
-           # {% if  states.binary_sensor.upstairs_occupancy.state == "off" %}
-              # Unoccupied
-           # {% elif states.binary_sensor.upstairs_occupancy.state == "on" %}
-              # Occupied
-           # {% elif states.binary_sensor.upstairs_occupancy != None %}
-              # unknown
            # {% endif %}
-        # entity_id: 
-          # - binary_sensor.upstairs_occupancy
-      # downstairsoccupancy:
-        # friendly_name: "Downstairs Occupancy"
-        # value_template: >-
-           # {% if  states.binary_sensor.downstairs_occupancy.state == "off" %}
-              # Unoccupied
-           # {% elif states.binary_sensor.downstairs_occupancy.state == "on" %}
-              # Occupied
-           # {% elif states.binary_sensor.downstairs_occupancy != None %}
-              # unknown
-           # {% endif %}
-        # entity_id: 
-          # - binary_sensor.downstairs_occupancy
-      # livingroomoccupancy:
-        # friendly_name: "Living Room Occupancy"
-        # value_template: >-
-           # {% if  states.binary_sensor.living_room_occupancy.state == "off" %}
-              # Unoccupied
-           # {% elif states.binary_sensor.living_room_occupancy.state == "on" %}
-              # Occupied
-           # {% elif states.binary_sensor.living_room_occupancy != None %}
-              # unknown
-           # {% endif %}
-        # entity_id: 
-          # - binary_sensor.living_room_occupancy
 #      bloomsky_last_update:
 #        value_template: '{{ states.sensor.ars_bloom_temperature.last_updated.strftime("%H:%M, %Y-%m-%d") }} '
 #      timeutcnow:
 #        value_template: '{{ utcnow.strftime("%H:%M, %Y-%m-%d") }}'
-#      usdeur:        
-#        value_template: ' {{ states.sensor.exchange_rates.attributes.EUR }}'      
 #  - platform: currencylayer
 #    api_key: !secret currencylayer_key
 #    base: USD

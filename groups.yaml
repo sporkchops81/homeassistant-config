@@ -7,9 +7,8 @@
     icon: mdi:home
     entities:
       - group.abode_status
-      - group.weather     
+      - group.weather
       - group.device_location
-      - group.update
       - group.information
       - group.thermostats
 
@@ -23,7 +22,7 @@
 #      - camera.door_camera
 #      - camera.door_camera_2
 #      - camera.door_camera_3
-  
+
   media:
     name: Media
     view: yes
@@ -31,7 +30,7 @@
     entities:
       - group.media_player
       - group.all_automations
-      
+
   update:
     - updater.updater
 
@@ -46,7 +45,7 @@
     - sensor.dark_sky_cloud_coverage
     - sensor.dark_sky_hourly_summary
     - sensor.dark_sky_daily_summary
-    
+
 
   Thermostats:
     - climate.downstairs
@@ -59,10 +58,10 @@
     - sensor.upstairs_humidity
     - sensor.upstairs_temperature
     - input_boolean.thermo_away_upstairs
-    
+
   Household:
     - input_boolean.alokhome
-    - input_boolean.rashmihome    
+    - input_boolean.rashmihome
 
   Information:
     - sensor.time__date
@@ -93,5 +92,5 @@
 
   Device Location:
     - input_boolean.alokhome
-    - input_boolean.rashmihome 
-    - device_tracker.toshibaaio    
+    - input_boolean.rashmihome
+    - device_tracker.toshibaaio

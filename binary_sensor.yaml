@@ -3,10 +3,9 @@
       garagedoor:
         friendly_name: Garage Door Open
         sensor_class: opening
-#        value_template: "{{ is_state('sensor.garage_door_tilt_sensor_alarm_level_5', '255') }}"
-        value_template: >-       
-           {% if states.sensor.garage_door_tilt_sensor_alarm_level_5 != None %}
-             {{ is_state('sensor.garage_door_tilt_sensor_alarm_level_5', '255') }}
+        value_template: >-
+           {% if states.sensor.garage_door_tilt_sensor_alarm_level_5_1 != None %}
+             {{ is_state('sensor.garage_door_tilt_sensor_alarm_level_5_1', '255') }}
            {% else %}
              unknown
-           {% endif %}        
+           {% endif %}

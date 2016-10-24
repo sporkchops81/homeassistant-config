@@ -26,7 +26,7 @@ zone 2:
   latitude: !secret latitude_buckhead
   longitude: !secret longitude_buckhead
   icon: mdi:school
-  
+
 zone 3:
   name: Downtown
   latitude: !secret latitude_downtown
@@ -37,14 +37,14 @@ http:
   api_password: !secret http_password
   ssl_certificate: !secret ssl_certificate
   ssl_key: !secret ssl_key
-  approved_ips:
+  trusted_networks:
     - 192.168.2.104
-    
+
 # View all events in a logbook
 logbook:
   exclude:
     domains:
-      - sun  
+      - sun
     entities:
       - sensor.pws_weather
       - sensor.pws_temp_f
@@ -61,10 +61,10 @@ logbook:
       - sensor.dark_sky_daily_summary
       - sensor.time__date
       - sensor.bloomlastupdate
-      - sensor.garage_door_tilt_sensor_alarm_level_5
-      - sensor.garage_door_tilt_sensor_alarm_type_5
-      - sensor.garage_door_tilt_sensor_burglar_5
-      - sensor.garage_door_tilt_sensor_sourcenodeid_5
+      - sensor.garage_door_tilt_sensor_alarm_level_5_1
+      - sensor.garage_door_tilt_sensor_alarm_type_5_0
+      - sensor.garage_door_tilt_sensor_burglar_5_10
+      - sensor.garage_door_tilt_sensor_sourcenodeid_5_2
       - sensor.garagedoorbattery
       - sensor.phonebatteryalok
       - sensor.phonebatteryrashmi
@@ -76,13 +76,13 @@ logbook:
       - group.information
       - group.thermostats
       - device_tracker.pi_alokphone
-      - device_tracker.myiphone 
+      - device_tracker.myiphone
       - device_tracker.alokiosiphone
       - device_tracker.pi_rashmiphone
       - device_tracker.rashmiappiphone
       - device_tracker.rashmisiphone
       - device_tracker.unificloudkey
-      
+
 zeroconf:
 recorder:
   purge_days: 7
@@ -106,6 +106,41 @@ emulated_hue:
 
 # Enables support for tracking state changes over time.
 history:
+  include:
+    entities:
+      - binary_sensor.downstairs_occupancy
+      - binary_sensor.garagedoor
+      - binary_sensor.living_room_occupancy
+      - binary_sensor.upstairs_occupancy
+      - device_tracker.alokiosiphone
+      - device_tracker.myiphone
+      - device_tracker.pi_alokphone
+      - device_tracker.pi_rashmiphone
+      - device_tracker.rashmiappiphone
+      - device_tracker.rashmisiphone
+      - input_boolean.alokhome
+      - input_boolean.rashmihome
+      - input_boolean.thermo_away_main
+      - input_boolean.thermo_away_upstairs
+      - input_select.abodestatus
+      - media_player.livingroomsonos
+      - media_player.panasonic_viera_tv
+      - media_player.shield_android_tv
+      - sensor.ars_bloom_temperature
+      - sensor.ars_bloom_voltage
+      - sensor.downstairs_humidity
+      - sensor.downstairs_temperature
+      - sensor.downstairsthermmode
+      - sensor.downstairsthermoper
+      - sensor.evening_commute
+      - sensor.living_room_temperature
+      - sensor.morning_commute
+      - sensor.plexspy
+      - sensor.upstairs_humidity
+      - sensor.upstairs_temperature
+      - sensor.upstairshermostatmode
+      - sensor.upstairsthermostatoperation
+      - switch.driveway
 
 # Track the sun
 sun:
@@ -147,10 +182,10 @@ camera:
     name: Door Camera
     port: 88
     username: !secret foscam_username
-    password: !secret foscam_password    
-  - platform: bloomsky  
+    password: !secret foscam_password
+  - platform: bloomsky
   - platform: generic
-    still_image_url: https://radblast.wunderground.com/cgi-bin/radar/WUNIDS_map?station=FFC&brand=wui&num=1&delay=100&type=NTP&frame=0&scale=1&noclutter=0&showstorms=5&mapx=400&mapy=240&centerx=400&centery=240&transx=0&transy=0&showlabels=1&severe=0&rainsnow=0&lightning=0&smooth=0&rand=24427697&lat=0&lon=0&label=you  
+    still_image_url: https://radblast.wunderground.com/cgi-bin/radar/WUNIDS_map?station=FFC&brand=wui&num=1&delay=100&type=NTP&frame=0&scale=1&noclutter=0&showstorms=5&mapx=400&mapy=240&centerx=400&centery=240&transx=0&transy=0&showlabels=1&severe=0&rainsnow=0&lightning=0&smooth=0&rand=24427697&lat=0&lon=0&label=you
     name: RadarGA
 ifttt:
   key: !secret ifttt_key
@@ -163,7 +198,7 @@ device_tracker:
     username: !secret asus_username
     password: !secret asus_password
   - platform: owntracks
-    max_gps_accuracy: 200 
+    max_gps_accuracy: 200
   - platform: unifi
     host: 192.168.2.161
     username: !secret unifi_username
@@ -178,33 +213,33 @@ notify:
     api_key: !secret telegram_key
     chat_id: !secret telegram_chatID_Alok
   - platform: ecobee
-    name: ecobee  
+    name: ecobee
   - platform: ios
     name: ios_alok
-    target: !secret ios_alok_push   
+    target: !secret ios_alok_push
   - platform: ios
     name: ios_rashmi
-    target: !secret ios_rashmi_push 
+    target: !secret ios_rashmi_push
 mqtt:
   broker: 127.0.0.1
   port: 1883
   client_id: home-assistant-1
   username: pi
   password: raspberry
-  
+
 bloomsky:
   api_key: !secret bloomsky_key
 
 ecobee:
   api_key: !secret ecobee_key
-  hold_temp: True 
- 
+  hold_temp: True
+
 logger:
-  default: error 
-#  default: warning  
+  default: error
+#  default: warning
 #  logs:
 #    homeassistant.components.notify: info
-#    homeassistant.components.automation: info    
+#    homeassistant.components.automation: info
 #    homeassistant.components.mqtt: debug
 
 input_select:
@@ -249,8 +284,8 @@ input_boolean:
   rashmi360home:
     name: Rashmi Life360 Home
     initial: on
-    icon: mdi:cellphone-iphone    
-    
+    icon: mdi:cellphone-iphone
+
 switch:
  platform: command_line
  switches:

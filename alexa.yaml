@@ -18,9 +18,9 @@
         content: Ask Home Assistant about where everyone is
     LocateIntent:
       action:
-        service: notify.telegram
-        data_template:
-          message: The location of {{ User }} has been queried via Alexa.
+        - service: logbook.log
+          data_template:
+            message: The location has been queried via Alexa.
       speech:
         type: plaintext
         text: >
@@ -40,6 +40,10 @@
         type: plaintext
         text: >
           The fastest route to office takes about {{ states("sensor.morning_commute") }} minutes.
+      card:
+        type: simple
+        title: Traffic Conditions
+        content: Ask Home Assistant about current traffic conditions
     RunScriptIntent:
       action:
         service: script.turn_on

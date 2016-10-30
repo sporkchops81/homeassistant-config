@@ -73,6 +73,7 @@
     - binary_sensor.garagedoor
     - sensor.ars_bloom_voltage
     - switch.driveway
+    - switch.garage_relay_switch_8_0
 
   Media Player:
     - media_player.castlivingroom

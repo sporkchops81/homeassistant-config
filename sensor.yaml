@@ -42,7 +42,6 @@
       - pressure_in
       - wind_string
       - relative_humidity
-      - alerts
   - platform: openexchangerates
     api_key: !secret openexchangerates_key
     base: USD
@@ -99,24 +98,6 @@
         value_template: >-
            {% if states.climate.upstairs != None %}
              {{ states.climate.upstairs.attributes.operation }}
-           {% else %}
-             unknown
-           {% endif %}
-      phonebatteryalok:
-        friendly_name: "Battery Alok Phone"
-        unit_of_measurement: "%"
-        value_template: >-
-           {% if states.device_tracker.alokiosiphone != None %}
-             {{ states.device_tracker.alokiosiphone.attributes.battery }}
-           {% else %}
-             unknown
-           {% endif %}
-      phonebatteryrashmi:
-        friendly_name: "Battery Rashmi Phone"
-        unit_of_measurement: "%"
-        value_template: >-
-           {% if states.device_tracker.rashmiappiphone != None %}
-             {{ states.device_tracker.rashmiappiphone.attributes.battery }}
            {% else %}
              unknown
            {% endif %}

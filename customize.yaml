@@ -85,12 +85,7 @@
      group.information:
        icon: mdi:information-outline
 
-     sensor.battery_alok_phone:
-       friendly_name: Alok's Phone Charge
-       icon: mdi:battery
-     sensor.battery_rashmi_phone:
-       friendly_name: Rashmi's Phone Charge
-       icon: mdi:battery
+
      sensor.usdinr:
        friendly_name: USD/INR
        icon: mdi:currency-inr
@@ -134,7 +129,7 @@
        icon: mdi:home
      sensor.upstairsthermostatoperation:
        icon: mdi:fan
-
+#Emulated_Hue Devices
      input_boolean.abodeupdate:
        emulated_hue: true
      input_boolean.startrecording:
@@ -143,15 +138,13 @@
        emulated_hue: true
      input_boolean.rashmihome:
        emulated_hue: true
-     input_boolean.thermo_away_main:
-       emulated_hue: true
-       emulated_hue_name: "Downstairs thermostat"
-     input_boolean.thermo_away_upstairs:
-       emulated_hue: true
-       emulated_hue_name: "Upstairs thermostat"
      switch.driveway:
        emulated_hue: true
        emulated_hue_name: "Driveway Light"
+     switch.garage_relay_switch_8_0:
+       emulated_hue: true
+       emulated_hue_name: "Garage Door"
+       friendly_name: Garage Door Switch
 
      climate.ecobee:
        max_temp: 90

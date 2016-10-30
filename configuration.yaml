@@ -136,8 +136,8 @@ mqtt:
   broker: 127.0.0.1
   port: 1883
   client_id: home-assistant-1
-  username: pi
-  password: raspberry
+  username: !secret mqtt_username
+  password: !secret mqtt_password
 
 bloomsky:
   api_key: !secret bloomsky_key
@@ -299,20 +299,15 @@ history:
       - input_select.abodestatus
       - media_player.livingroomsonos
       - media_player.panasonic_viera_tv
-      - media_player.shield_android_tv
       - sensor.ars_bloom_temperature
       - sensor.ars_bloom_voltage
-      - sensor.downstairs_humidity
       - sensor.downstairs_temperature
-      - sensor.downstairsthermmode
       - sensor.downstairsthermoper
       - sensor.evening_commute
       - sensor.living_room_temperature
       - sensor.morning_commute
       - sensor.plexspy
-      - sensor.upstairs_humidity
       - sensor.upstairs_temperature
-      - sensor.upstairshermostatmode
       - sensor.upstairsthermostatoperation
       - switch.driveway
 

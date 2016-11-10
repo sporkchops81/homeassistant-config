@@ -84,12 +84,13 @@
        icon: mdi:weather-pouring
      group.information:
        icon: mdi:information-outline
+     group.all_automations:
+       hidden: false 
 
-
-     sensor.usdinr:
+     sensor.usd_inr:
        friendly_name: USD/INR
        icon: mdi:currency-inr
-     sensor.usdeur:
+     sensor.usd_eur:
        friendly_name: USD/EUR
        icon: mdi:currency-eur
 

@@ -68,7 +68,8 @@
     - sensor.morning_commute
     - sensor.evening_commute
     - sensor.plexspy
-    - sensor.usdinr
+    - sensor.usd_inr
+    - sensor.usd_eur
     - sensor.bloomlastupdate
     - binary_sensor.garagedoor
     - sensor.ars_bloom_voltage

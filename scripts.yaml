@@ -48,7 +48,7 @@
           entity_id: climate.downstairs
           away_mode: 'False'
 
-  garagedoornotification:
+  notificationgaragedoor:
     alias: 'Garage Door Open'
     sequence:
       - service: media_player.sonos_snapshot
@@ -67,6 +67,44 @@
       - service: media_player.sonos_restore
         entity_id: media_player.livingroomsonos
 
+  notificationleavework:
+    alias: 'Leave for Work'
+    sequence:
+      - service: media_player.sonos_snapshot
+        entity_id: media_player.livingroomsonos
+      - service: media_player.volume_set
+        entity_id: media_player.livingroomsonos
+        data:
+          volume_level: .5
+      - service: media_player.play_media
+        entity_id: media_player.livingroomsonos
+        data:
+          media_content_id: 'https://dl.dropboxusercontent.com/u/7457/HASS/Traffic_cleared_leave_for_work.mp3'
+          media_content_type: 'music'
+      - delay:
+          seconds: 6
+      - service: media_player.sonos_restore
+        entity_id: media_player.livingroomsonos
+
+  notificationalarm:
+    alias: 'Notify that sensors changed when nobody is home'
+    sequence:
+      - service: media_player.sonos_snapshot
+        entity_id: media_player.livingroomsonos
+      - service: media_player.volume_set
+        entity_id: media_player.livingroomsonos
+        data:
+          volume_level: .9
+      - service: media_player.play_media
+        entity_id: media_player.livingroomsonos
+        data:
+          media_content_id: 'https://dl.dropboxusercontent.com/u/7457/HASS/Burglar_Alarm.mp3'
+          media_content_type: 'music'
+      - delay:
+          seconds: 90
+      - service: media_player.sonos_restore
+        entity_id: media_player.livingroomsonos
+        
   arm_security:
     alias: 'Arm Security'
     sequence:

@@ -1,4 +1,9 @@
-
+  - platform: currencylayer
+    api_key: !secret currencylayer_key
+    base: USD #optional
+    quote:
+      - EUR
+      - INR
 #Forecast.io weather sensors
   - platform: darksky
     api_key: !secret darksky_key
@@ -42,11 +47,6 @@
       - pressure_in
       - wind_string
       - relative_humidity
-  - platform: openexchangerates
-    api_key: !secret openexchangerates_key
-    base: USD
-    quote: INR
-    name: USDINR
   - platform: template
     sensors:
       bloomlastupdate:

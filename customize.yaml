@@ -85,7 +85,11 @@
      group.information:
        icon: mdi:information-outline
      group.all_automations:
-       hidden: false 
+       hidden: false
+     group.all_scripts:
+       hidden: false
+     group.all_devices:
+       hidden: false
 
      sensor.usd_inr:
        friendly_name: USD/INR

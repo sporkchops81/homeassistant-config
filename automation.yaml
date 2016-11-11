@@ -324,12 +324,25 @@
     platform: state
     entity_id: sensor.plexspy
   action:
-    service: notify.pushbullet
-    data_template:
-      message: >
-        {{ trigger.to_state.state }} people streaming
-      title: Plex Streaming
-      target: device/myiPhone
+    - service: notify.pushbullet
+      data_template:
+        message: >
+          {% for attr in states.sensor.plexspy.attributes %}
+           {%- if not attr=="friendly_name" and not attr=="unit_of_measurement" -%}
+            {{attr}} is watching {{states.sensor.plexspy.attributes[attr]}}
+           {%- endif %}
+          {%- endfor -%}
+        title: "Plex {{ trigger.to_state.state }} people streaming. "
+        target: device/myiPhone
+    - service: logbook.log
+      data_template:
+        name: "Plex {{ trigger.to_state.state }} people streaming. "
+        message: >
+          {% for attr in states.sensor.plexspy.attributes %}
+           {%- if not attr=="friendly_name" and not attr=="unit_of_measurement" -%}
+            {{attr}} is watching {{states.sensor.plexspy.attributes[attr]}}
+           {%- endif %}
+          {%- endfor -%}
 
 - alias: Enable Recording
   trigger:

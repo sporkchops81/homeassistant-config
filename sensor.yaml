@@ -115,10 +115,3 @@
 #        value_template: '{{ states.sensor.ars_bloom_temperature.last_updated.strftime("%H:%M, %Y-%m-%d") }} '
 #      timeutcnow:
 #        value_template: '{{ utcnow.strftime("%H:%M, %Y-%m-%d") }}'
-#  - platform: currencylayer
-#    api_key: !secret currencylayer_key
-#    base: USD
-#    quote:
-#      - INR
-#      - EUR
-#      - GBP

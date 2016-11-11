@@ -6,6 +6,7 @@
     view: yes
     icon: mdi:home
     entities:
+      - persistent_notification.update_available
       - group.abode_status
       - group.weather
       - group.device_location
@@ -29,10 +30,15 @@
     icon: mdi:play-circle-outline
     entities:
       - group.media_player
-      - group.all_automations
 
-  update:
-    - updater.updater
+  settings:
+    name: Settings
+    view: yes
+    icon: mdi:settings
+    entities:
+      - group.all_devices
+      - group.all_scripts
+      - group.all_automations
 
   Weather:
     - sensor.pws_weather

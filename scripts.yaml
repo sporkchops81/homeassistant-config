@@ -117,3 +117,31 @@
     sequence:
       - service: homeassistant.turn_on
         entity_id: script.abodestandby
+
+  playradio:
+    alias: 'Play Radio on Sonos'
+    sequence:
+      - service: media_player.play_media
+        data_template:
+          entity_id: media_player.livingroomsonos
+          media_content_id: >-
+            {% if station == 'golden_oldies' %}
+              x-sonosapi-radio:STATION%3afeatured%5e-%5eGolden%20Oldies%5e-%5ehindi?sid=164&flags=8236&sn=29
+            {% elif station == 'party' %}
+              x-sonosapi-radio:STATION%3afeatured%5e-%5eParty%5e-%5ehindi?sid=164&flags=8236&sn=29
+            {% elif station == 'chartbusters' %}
+              x-sonosapi-radio:STATION%3afeatured%5e-%5eChartbusters%5e-%5ehindi?sid=164&flags=8236&sn=29
+            {% elif station == 'flashback' %}
+              x-sonosapi-radio:STATION%3afeatured%5e-%5eFlashback%5e-%5ehindi?sid=164&flags=8236&sn=29
+            {% elif station == 'bollywood_instrumental' %}
+              x-rincon-mp3radio://123.176.41.8:8532
+            {% elif station == 'bollywood_radio_and_beyond' %}
+              x-rincon-mp3radio://96.31.83.86:8084
+            {% elif station == 'npr' %}
+              x-rincon-mp3radio://nprdmp-live01-mp3.akacast.akamaistream.net/7/998/364916/v1/npr.akacast.akamaistream.net/nprdmp_live01_mp3
+            {% elif station == 'wabe_news' %}
+              x-rincon-mp3radio://pba-ice.streamguys.org:80/news
+            {% elif station == 'wabe' %}
+              x-rincon-mp3radio://pba-ice.streamguys.org:80/wabe
+            {% endif %}
+          media_content_type: "MUSIC"

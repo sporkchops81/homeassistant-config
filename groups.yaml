@@ -7,6 +7,7 @@
     icon: mdi:home
     entities:
       - persistent_notification.update_available
+      - persistent_notification.invalid_config
       - group.abode_status
       - group.weather
       - group.device_location

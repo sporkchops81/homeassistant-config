@@ -258,7 +258,7 @@
       data:
         title: "Update Available"
         message: >
-          Home Assistant [update](https://home-assistant.io/getting-started/installation-raspberry-pi-all-in-one/#upgrading) {{ states('updater.updater') }} is available. - {{ as_timestamp(now()) | timestamp_custom('%I:%M:%S %p %d-%b-%Y', true) }}
+          Home Assistant {{ states('updater.updater') }} is available, please [update](https://home-assistant.io/getting-started/installation-raspberry-pi-all-in-one/#upgrading).
         notification_id: "update_available"
 
 - alias: "Morning Commute"
@@ -458,20 +458,20 @@
     - service: switch.turn_off
       entity_id: switch.garage_relay_switch_8_0
 
-- alias: 'Open Garage door when Alok home'
+- alias: 'Open Garage door when someone home'
   condition:
    - condition: state
      entity_id: binary_sensor.garagedoor
      state: 'off'
   trigger:
    - platform: state
-     entity_id: input_boolean.alokhome
+     entity_id: input_boolean.alokhome, input_boolean.rashmihome
      to: 'on'
   action:
     - service: switch.turn_on
       entity_id: switch.garage_relay_switch_8_0
 
-- alias: 'Notify if sensors change when nobody is home'
+- alias: 'Sensors changed when nobody is home'
   condition:
     condition: state
     entity_id: input_select.abodestatus
@@ -485,6 +485,6 @@
     - service: notify.pushbullet
       data_template:
         title: "Alarm!"
-        message: "The {{ trigger.to_state.name }} was changed to {{ trigger.to_state.state }} while no one is home. - {{ as_timestamp(now()) | timestamp_custom('%I:%M:%S %p %d%b%Y', true) }}"
+        message: "The {{ trigger.to_state.name }} was changed to {{ trigger.to_state.state }} while no one is home - {{ as_timestamp(now()) | timestamp_custom('%I:%M:%S %p %d-%b-%Y', true) }}"
     - service: homeassistant.turn_on
       entity_id: script.notificationalarm

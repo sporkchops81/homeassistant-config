@@ -7,8 +7,8 @@
                  is_state('input_boolean.rashmihome', 'on') -%}
             You are both home, you silly
           {%- else -%}
-            Rashmi is at {{ states("device_tracker.rashmiappiphone") }}
-            and Alok is at {{ states("device_tracker.alokiosiphone") }}
+            Rashmi is at {{ states.device_tracker.rashmiappiphone.state.replace('_', ' ') }}.
+            and Alok is at {{ states.device_tracker.alokiosiphone.state.replace('_', ' ') }}.
           {% endif %}
       card:
         type: simple
@@ -22,17 +22,15 @@
       speech:
         type: plaintext
         text: >
-          {%- for state in states.device_tracker -%}
-            {%- if state.name.lower() == User.lower() -%}
-              {{ state.name }} is at {{ state.state }}
-            {%- endif -%}
-          {%- else -%}
-            I am sorry, I do not know where {{ User }} is.
-          {%- endfor -%}
+          {%- if User == "Alok" -%}
+            Alok is at {{ states.device_tracker.alokiosiphone.state.replace('_', ' ') }}.
+          {%- elif User == "Rashmi" -%}
+            Rashmi is at {{ states.device_tracker.rashmiappiphone.state.replace('_', ' ') }}.
+          {%- endif -%}
       card:
         type: simple
-        title: Sample title
-        content: Some more content
+        title: Location queried
+        content: Ask Home Assitant about user location
     HowIsTheTrafficIntent:
       speech:
         type: plaintext
@@ -54,3 +52,32 @@
         type: simple
         title: Run Script
         content: Ask Home Assistant to run Script.
+    PlayRadioIntent:
+      action:
+        service: media_player.play_media
+        data_template:
+          entity_id: media_player.livingroomsonos
+          media_content_id: >-
+            {% if Station == 'Golden Oldies' %}
+              x-sonosapi-radio:STATION%3afeatured%5e-%5eGolden%20Oldies%5e-%5ehindi?sid=164&flags=8236&sn=29
+            {% elif Station == 'Party' %}
+              x-sonosapi-radio:STATION%3afeatured%5e-%5eParty%5e-%5ehindi?sid=164&flags=8236&sn=29
+            {% elif Station == 'Chartbusters' %}
+              x-sonosapi-radio:STATION%3afeatured%5e-%5eChartbusters%5e-%5ehindi?sid=164&flags=8236&sn=29
+            {% elif Station == 'Flashback' %}
+              x-sonosapi-radio:STATION%3afeatured%5e-%5eFlashback%5e-%5ehindi?sid=164&flags=8236&sn=29
+            {% elif Station == 'Bollywood Instrumental' %}
+              x-rincon-mp3radio://123.176.41.8:8532
+            {% elif Station == 'Bollywood Radio and Beyond' %}
+              x-rincon-mp3radio://96.31.83.86:8084
+            {% elif Station == 'NPR' %}
+              x-rincon-mp3radio://nprdmp-live01-mp3.akacast.akamaistream.net/7/998/364916/v1/npr.akacast.akamaistream.net/nprdmp_live01_mp3
+            {% elif Station == 'WABE News' %}
+              x-rincon-mp3radio://pba-ice.streamguys.org:80/news
+            {% elif Station == 'WABE' %}
+              x-rincon-mp3radio://pba-ice.streamguys.org:80/wabe
+            {% endif %}
+          media_content_type: "MUSIC"
+      speech:
+        type: plaintext
+        text: OK

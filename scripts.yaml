@@ -104,7 +104,7 @@
           seconds: 90
       - service: media_player.sonos_restore
         entity_id: media_player.livingroomsonos
-        
+
   arm_security:
     alias: 'Arm Security'
     sequence:

@@ -51,6 +51,7 @@ __pycache__
 *.sqlite
 *.xml
 *.backup
+*.token
 .HA_VERSION
 home-assistant.env
 home-assistant.*

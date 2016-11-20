@@ -51,6 +51,7 @@ __pycache__
 *.sqlite
 *.xml
 *.backup
+*.google.token
 .google.token
 .HA_VERSION
 home-assistant.env

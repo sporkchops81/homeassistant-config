@@ -8,6 +8,7 @@
     entities:
       - persistent_notification.update_available
       - persistent_notification.invalid_config
+      - persistent_notification.google_calendar_notification
       - group.abode_status
       - group.weather
       - group.device_location

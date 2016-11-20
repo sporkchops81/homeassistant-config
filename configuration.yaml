@@ -110,11 +110,11 @@ ifttt:
   key: !secret ifttt_key
 
 device_tracker:
-  - platform: asuswrt
-    host: 192.168.2.1
-    protocol: telnet
-    username: !secret asus_username
-    password: !secret asus_password
+  # - platform: asuswrt
+  #   host: 192.168.2.1
+  #   protocol: telnet
+  #   username: !secret asus_username
+  #   password: !secret asus_password
   - platform: owntracks
     max_gps_accuracy: 200
   - platform: unifi
@@ -140,6 +140,12 @@ mqtt:
   client_id: home-assistant-1
   username: !secret mqtt_username
   password: !secret mqtt_password
+
+# Google Calendar
+google:
+  client_id: !secret gcal_client_id
+  client_secret: !secret gcal_client_secret
+  track_new_calendar: no
 
 bloomsky:
   api_key: !secret bloomsky_key

@@ -56,6 +56,7 @@ home-assistant.env
 home-assistant.*
 known_devices.yaml
 secrets.yaml
+google_calendars.yaml
 components
 deps
 www

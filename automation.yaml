@@ -60,7 +60,7 @@
     state: 'off'
   trigger:
     - platform: state
-      entity_id: device_tracker.alokphone, device_tracker.pi_alokphone, device_tracker.alokiosiphone
+      entity_id: device_tracker.alokphone, device_tracker.pi_alokphone, device_tracker.alokiosiphone, device_tracker.elantrase
       state: 'home'
   action:
     - service: homeassistant.turn_on

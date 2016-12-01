@@ -22,9 +22,9 @@
     entities:
       - camera.ars_bloom
       - camera.radarga
-#      - camera.door_camera
-#      - camera.door_camera_2
-#      - camera.door_camera_3
+      - camera.door_camera
+      - camera.door_camera_2
+      - camera.door_camera_3
 
   media:
     name: Media

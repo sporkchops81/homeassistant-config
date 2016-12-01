@@ -19,6 +19,8 @@
         data:
           entity_id: climate.upstairs
           away_mode: 'True'
+      - service: homeassistant.turn_on
+        entity_id: input_boolean.startrecording
 
   abodehome:
     alias: 'Abode Home'
@@ -47,6 +49,8 @@
         data:
           entity_id: climate.downstairs
           away_mode: 'False'
+      - service: homeassistant.turn_off
+        entity_id: input_boolean.startrecording
 
   notificationgaragedoor:
     alias: 'Garage Door Open'

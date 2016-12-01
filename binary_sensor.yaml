@@ -9,3 +9,13 @@
            {% else %}
              unknown
            {% endif %}
+  - platform: mqtt
+    name: aloklife360
+    state_topic: smartthings/Alok Life360/presence
+    payload_on: 'present'
+    payload_off: 'not present'
+  - platform: mqtt
+    name: rashmilife360
+    state_topic: smartthings/Alok Life360/presence
+    payload_on: 'present'
+    payload_off: 'not present'

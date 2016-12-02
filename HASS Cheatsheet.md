@@ -28,7 +28,8 @@ I am using the default AIO username/password, replace them with yours
 
 # Backing up Configurations on Github
 Thanks to @daleh for assistance with these instructions.
-1. Install `git` using `sudo apt-get install git`.
+
+1. Install `git` using `sudo apt-get install git`
 2. Go to https://github.com/new and create a new repository. I named mine `homeassistant-config`. Initialize with `readme: no` and `.gitignore: none`.
 3. Navigate to your `.homeassistant` directory. For AIO, it should be `/home/hass/.homeassistant`, and for HASSbian, it is `/home/homeassistant/.homeassistant`.
 4. Run `sudo su -s /bin/bash hass` for AIO and `sudo su -s /bin/bash homeassistant` for HASSbian.

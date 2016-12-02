@@ -19,7 +19,7 @@ I am using the default AIO username/password, replace them with yours.
 3. To publish use `mosquitto_pub -u 'pi' -P 'raspberry' -t 'smartthings/Driveway/switch'  -m 'on'`
 
 # HASS operations
-1. To check realtime logs `sudo journalctl -fu home-assistant.service`
+1. To check realtime logs `sudo journalctl -fu home-assistant.service`.
 2. To restart HA `sudo systemctl restart home-assistant.service`
 3. To check logs `sudo systemctl status -l home-assistant.service`
 4. To stop HA `sudo systemctl stop home-assistant.service`

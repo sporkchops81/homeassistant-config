@@ -14,12 +14,12 @@ Default AIO installation does not allow editing the configuration files in WinSC
 
 # Mosquitto operations
 I am using the default AIO username/password, replace them with yours.
-1. You can remove a topic from Mosquitto using `mosquitto_pub -r -n -u 'pi' -P 'raspberry' -t 'owntracks/arsaboo/mqttrpi'`
-2. To subscribe to all the topics use `mosquitto_sub -h 192.168.2.199 -u 'pi' -P 'raspberry' -v -t '#'`
-3. To publish use `mosquitto_pub -u 'pi' -P 'raspberry' -t 'smartthings/Driveway/switch'  -m 'on'`
+1. You can remove a topic from Mosquitto using `mosquitto_pub -r -n -u 'pi' -P 'raspberry' -t 'owntracks/arsaboo/mqttrpi'`.
+2. To subscribe to all the topics use `mosquitto_sub -h 192.168.2.199 -u 'pi' -P 'raspberry' -v -t '#'`.
+3. To publish use `mosquitto_pub -u 'pi' -P 'raspberry' -t 'smartthings/Driveway/switch'  -m 'on'`.
 
 # HASS operations
-1. To check realtime logs `sudo journalctl -fu home-assistant.service`.
+1. To check realtime logs `sudo journalctl -fu home-assistant.service`
 2. To restart HA `sudo systemctl restart home-assistant.service`
 3. To check logs `sudo systemctl status -l home-assistant.service`
 4. To stop HA `sudo systemctl stop home-assistant.service`

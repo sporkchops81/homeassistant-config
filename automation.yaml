@@ -46,7 +46,7 @@
       entity_id: device_tracker.pi_rashmiphone, device_tracker.rashmiappiphone
       state: 'not_home'
     - platform: state
-      entity_id: binary_sensor.rashmilife360
+      entity_id: binary_sensor.rashmilife360, binary_sensor.rashmilife3602
       state: 'off'
   action:
     - service: homeassistant.turn_off
@@ -94,7 +94,7 @@
       entity_id: device_tracker.rashmiphone, device_tracker.pi_rashmiphone, device_tracker.rashmiappiphone
       state: 'home'
     - platform: state
-      entity_id: binary_sensor.rashmilife360
+      entity_id: binary_sensor.rashmilife360, binary_sensor.rashmilife360
       state: 'on'
   action:
     - service: homeassistant.turn_on

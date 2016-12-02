@@ -60,6 +60,7 @@ Thanks to @daleh for assistance with these instructions.
 
 # Integrating HASS (AIO) with Smartthings using Mosquitto
 If you are using AIO (which has Mosquitto pre-installed), you can use the following to integrate Smartthings and HA.
+
 1. Install node.js, and pm2
     ```
     sudo apt-get update

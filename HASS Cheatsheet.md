@@ -13,9 +13,12 @@ Default AIO installation does not allow editing the configuration files in WinSC
 2. Now, set the sftp server to: `sudo su -c /usr/lib/openssh/sftp-server` (note that the `/usr/lib/openssh/sftp-server` is the same path obtained from the previous step) and set Shell to `sudo -s`.
 
 # Mosquitto operations
-I am using the default AIO username/password, replace them with yours.
-1. You can remove a topic from Mosquitto using `mosquitto_pub -r -n -u 'pi' -P 'raspberry' -t 'owntracks/arsaboo/mqttrpi'`.
-2. To subscribe to all the topics use `mosquitto_sub -h 192.168.2.199 -u 'pi' -P 'raspberry' -v -t '#'`.
+I am using the default AIO username/password, replace them with yours
+
+1. You can remove a topic from Mosquitto using `mosquitto_pub -r -n -u 'pi' -P 'raspberry' -t 'owntracks/arsaboo/mqttrpi'`
+
+2. To subscribe to all the topics use `mosquitto_sub -h 192.168.2.199 -u 'pi' -P 'raspberry' -v -t '#'`
+
 3. To publish use `mosquitto_pub -u 'pi' -P 'raspberry' -t 'smartthings/Driveway/switch'  -m 'on'`.
 
 # HASS operations

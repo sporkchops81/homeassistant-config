@@ -24,7 +24,7 @@ Default AIO installation does not allow editing the configuration files in WinSC
 5. To start HA `sudo systemctl start home-assistant.service`
 
 # Backing up configurations on Github
-TODO - add instructions for linking HA and Github
+TODO - add instructions for linking HA and Github.
 `cd /home/hass/.homeassistant`
 `sudo su -s /bin/bash hass`
 `git add .`

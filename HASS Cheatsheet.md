@@ -28,8 +28,8 @@ I am using the default AIO username/password, replace them with yours.
 # Backing up Configurations on Github
 TODO - Add instructions for linking HASS and Github.
 
-`cd /home/hass/.homeassistant`
-`sudo su -s /bin/bash hass`
-`git add .`
-`git commit -m 'your commit message'`
-`git push origin master`
+1. `cd /home/hass/.homeassistant`
+2. `sudo su -s /bin/bash hass`
+3. `git add .`
+4. `git commit -m 'your commit message'`
+5. `git push origin master`

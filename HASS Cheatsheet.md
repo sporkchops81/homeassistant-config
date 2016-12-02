@@ -27,7 +27,7 @@ I am using the default AIO username/password, replace them with yours
 5. To start HA `sudo systemctl start home-assistant.service`
 
 # Backing up Configurations on Github
-Thanks to @daleh for assistance with these instructions.
+Thanks to @dale3h for assistance with these instructions.
 
 1. Install `git` using `sudo apt-get install git`
 2. Go to https://github.com/new and create a new repository. I named mine `homeassistant-config`. Initialize with `readme: no` and `.gitignore: none`.

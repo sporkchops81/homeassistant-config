@@ -57,7 +57,8 @@ hass@raspberrypi:~/.homeassistant$ git remote -v
 origin  git@github.com:arsaboo/homeassistant-config.git (fetch)
 origin  git@github.com:arsaboo/homeassistant-config.git (push)
 ```
-    * Finally, run `git push origin master`
+    * Finally, run `git push origin master`.
+
 10. For subsequent updates:
     * `cd /home/hass/.homeassistant`
     * `sudo su -s /bin/bash hass`

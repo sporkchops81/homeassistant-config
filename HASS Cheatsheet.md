@@ -7,11 +7,13 @@ FallbackNTP=0.arch.pool.ntp.org 1.arch.pool.ntp.org 2.arch.pool.ntp.org 3.arch.p
 ```
 
 # Configuring WinSCP to edit HASS files
-Default AIO installation does not allow editing the configuration files in WinSCP. To enable the same, you will need to change the SFTP server (in Advanced settings -> Environment -> SFTP)
-1. Obtain the SFTP by running `grep sftp /etc/ssh/sshd_config` at the `pi` shell. You will get something like, `Subsystem sftp /usr/lib/openssh/sftp-server`.
-2. Now, set the sftp server to: `sudo su -c /usr/lib/openssh/sftp-server` (note that the `/usr/lib/openssh/sftp-server` is the same path obtained from the previous step) and set Shell to `sudo -s`
+Default AIO installation does not allow editing the configuration files in WinSCP. To enable the same, you will need to change the SFTP server (in Advanced settings -> Environment -> SFTP).
 
-# Mosquitto operations (I am using the default username/password, replace them)
+1. Obtain the SFTP by running `grep sftp /etc/ssh/sshd_config` at the `pi` shell. You will get something like, `Subsystem sftp /usr/lib/openssh/sftp-server`.
+2. Now, set the sftp server to: `sudo su -c /usr/lib/openssh/sftp-server` (note that the `/usr/lib/openssh/sftp-server` is the same path obtained from the previous step) and set Shell to `sudo -s`.
+
+# Mosquitto operations
+I am using the default AIO username/password, replace them with yours.
 1. You can remove a topic from Mosquitto using `mosquitto_pub -r -n -u 'pi' -P 'raspberry' -t 'owntracks/arsaboo/mqttrpi'`
 2. To subscribe to all the topics use `mosquitto_sub -h 192.168.2.199 -u 'pi' -P 'raspberry' -v -t '#'`
 3. To publish use `mosquitto_pub -u 'pi' -P 'raspberry' -t 'smartthings/Driveway/switch'  -m 'on'`
@@ -23,8 +25,9 @@ Default AIO installation does not allow editing the configuration files in WinSC
 4. To stop HA `sudo systemctl stop home-assistant.service`
 5. To start HA `sudo systemctl start home-assistant.service`
 
-# Backing up configurations on Github
-TODO - add instructions for linking HA and Github.
+# Backing up Configurations on Github
+TODO - Add instructions for linking HASS and Github.
+
 `cd /home/hass/.homeassistant`
 `sudo su -s /bin/bash hass`
 `git add .`

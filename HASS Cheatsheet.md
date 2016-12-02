@@ -27,10 +27,72 @@ I am using the default AIO username/password, replace them with yours
 5. To start HA `sudo systemctl start home-assistant.service`
 
 # Backing up Configurations on Github
-TODO - Add instructions for linking HASS and Github.
+Thanks to @daleh for assistance with these instructions.
+1. Install `git` using `sudo apt-get install git`.
+2. Go to https://github.com/new and create a new repository. I named mine `homeassistant-config`. Initialize with `readme: no` and `.gitignore: none`.
+3. Navigate to your `.homeassistant` directory. For AIO, it should be `/home/hass/.homeassistant`, and for HASSbian, it is `/home/homeassistant/.homeassistant`.
+4. Run `sudo su -s /bin/bash hass` for AIO and `sudo su -s /bin/bash homeassistant` for HASSbian.
+5. Run `wget https://raw.githubusercontent.com/arsaboo/homeassistant-config/master/.gitignore` to get the `.gitignore` file from your repo (replace the link to match your repository). You can add things to your `.gitignore` file that you do not want to be uploaded.
+6. Next, we need to add SSH keys to your Github account.
+    * Navigate to `cd /home/hass/.ssh` (for AIO). If you don't have `.ssh`, create one and change the permission `chmod 700 ~/.ssh`.
+    * Run `ssh-keygen -t rsa -b 4096 -C "homeassistant@pi"`. If you want to enter a passphrase, that's up to you. If you do, you'll have to enter that passphrase any time you want to update your changes to github. If you do not want a passphrase, leave it blank and just hit `Enter`.
+    * Save the key in the default location (press `Enter` when it prompts for location).
+    * When you're finished, run `ls -al ~/.ssh` to confirm that you have both `id_rsa` and `id_rsa.pub` files.
+    * Go to https://github.com/settings/keys and click `New SSH key` button at top right. Title: `homeassistant@pi` (or whatever you want, really...it's just for you to know which key it is)
+    * Run `cat id_rsa.pub` in the SSH session and copy/paste the output to that github page.
+    * Then click `Add SSH key` button.
+7. Go back to your repo page on GitHub. It'll be something like https://github.com/yourusernamehere/homeassistant-config. Click the green `Clone or download` button, and then click `Use SSH`.
+8. You should see something like this in the textbox: `git@github.com:yourusername/homeassistant-config.git`. Copy that to your clipboard.
+9. Now you are ready to upload the files to GitHub.
+    * Navigate to `cd ~/.homeassistant`
+    * `git init`
+    * `git add .`
+    * `git commit -m 'initial commit'`
+    * If you get an error about `*** Please tell me who you are.`, run `git config --global user.email "your@email.here"` and `git config --global user.name "Your Name"`
+    * `git push origin master`
+10. For subsequent updates:
+    * `cd /home/hass/.homeassistant`
+    * `sudo su -s /bin/bash hass`
+    * `git add .`
+    * `git commit -m 'your commit message'`
+    * `git push origin master`
 
-1. `cd /home/hass/.homeassistant`
-2. `sudo su -s /bin/bash hass`
-3. `git add .`
-4. `git commit -m 'your commit message'`
-5. `git push origin master`
+# Integrating HASS (AIO) with Smartthings using Mosquitto
+If you are using AIO (which has Mosquitto pre-installed), you can use the following to integrate Smartthings and HA.
+1. Install node.js, and pm2
+    ```
+    sudo apt-get update
+    sudo apt-get upgrade
+    curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+    sudo apt-get install -y nodejs
+    sudo npm install -g pm2
+    sudo su -c "env PATH=$PATH:/usr/local/bin pm2 startup systemd -u pi --hp /user/pi"
+    ```
+2. Install the [SmartThings MQTT Bridge](https://github.com/stjohnjohnson/smartthings-mqtt-bridge)
+    ```
+    $ sudo npm install -g smartthings-mqtt-bridge
+    ```
+3. Add details of your Mosquitto to `config.yml`. For the default AIO username password, your file should look something like:
+
+    ```
+    ---
+    mqtt:
+        # Specify your MQTT Broker's hostname or IP address here
+        host: mqtt://192.168.2.199
+        # Preface for the topics $PREFACE/$DEVICE_NAME/$PROPERTY
+        preface: smartthings
+
+        # Suffix for the state topics $PREFACE/$DEVICE_NAME/$PROPERTY/$STATE_SUFFIX
+        # state_suffix: state
+        # Suffix for the command topics $PREFACE/$DEVICE_NAME/$PROPERTY/$COMMAND_SUFFIX
+        # command_suffix: cmd
+
+        # Other optional settings from https://www.npmjs.com/package/mqtt#mqttclientstreambuilder-options
+        username: pi
+        password: raspberry
+
+    # Port number to listen on
+    port: 8080
+    ```
+4. Start ST-MQTT bridge `pm2 start smartthings-mqtt-bridge`
+5. Follow the rest of the instructions (from step 2) listed [here](https://github.com/stjohnjohnson/smartthings-mqtt-bridge#usage).

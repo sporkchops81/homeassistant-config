@@ -50,7 +50,14 @@ Thanks to @daleh for assistance with these instructions.
     * `git add .`
     * `git commit -m 'initial commit'`
     * If you get an error about `*** Please tell me who you are.`, run `git config --global user.email "your@email.here"` and `git config --global user.name "Your Name"`
-    * `git push origin master`
+    * After that commit succeeds, run: `git remote add origin git@github.com:yourusername/homeassistant-config.git` (make sure you enter the correct repo URL here)
+    * Just to confirm everything is right, run `git remote -v` and you should see:
+```
+hass@raspberrypi:~/.homeassistant$ git remote -v
+origin  git@github.com:arsaboo/homeassistant-config.git (fetch)
+origin  git@github.com:arsaboo/homeassistant-config.git (push)
+```
+    * Finally, run `git push origin master`
 10. For subsequent updates:
     * `cd /home/hass/.homeassistant`
     * `sudo su -s /bin/bash hass`

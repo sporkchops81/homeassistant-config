@@ -11,16 +11,13 @@
            {% endif %}
   - platform: mqtt
     name: aloklife360
+    friendly_name: Alok Life360
     state_topic: "smartthings/Alok Life360/presence"
     payload_on: 'present'
     payload_off: 'not present'
   - platform: mqtt
     name: rashmilife360
+    friendly_name: Rashmi Life360
     state_topic: "smartthings/Rashmi_Life360/presence"
-    payload_on: 'present'
-    payload_off: 'not present'
-  - platform: mqtt
-    name: rashmilife3602
-    state_topic: "smartthings/Rashmi's Life360/presence"
     payload_on: 'present'
     payload_off: 'not present'

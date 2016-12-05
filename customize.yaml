@@ -90,6 +90,8 @@
        hidden: false
      group.all_devices:
        hidden: false
+     group.all_lights:
+       hidden: false
 
      sensor.usd_inr:
        friendly_name: USD/INR

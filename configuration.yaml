@@ -41,7 +41,8 @@ http:
   ssl_key: !secret ssl_key
   trusted_networks:
     - 192.168.2.0/24
-
+light:
+  - platform: lifx
 zeroconf:
 recorder:
   purge_days: 7
@@ -87,24 +88,24 @@ camera:
   - platform: generic
     still_image_url: https://radblast.wunderground.com/cgi-bin/radar/WUNIDS_map?station=FFC&brand=wui&num=1&delay=100&type=NTP&frame=0&scale=1&noclutter=0&showstorms=5&mapx=400&mapy=240&centerx=400&centery=240&transx=0&transy=0&showlabels=1&severe=0&rainsnow=0&lightning=0&smooth=0&rand=24427697&lat=0&lon=0&label=you
     name: RadarGA
-  - platform: foscam
-    ip: 192.168.2.224
-    name: Door Camera
-    port: 88
-    username: !secret foscam_username
-    password: !secret foscam_password
-  - platform: foscam
-    ip: 192.168.2.173
-    name: Door Camera
-    port: 88
-    username: !secret foscam_username
-    password: !secret foscam_password
-  - platform: foscam
-    ip: 192.168.2.49
-    name: Door Camera
-    port: 88
-    username: !secret foscam_username
-    password: !secret foscam_password
+  # - platform: foscam
+  #   ip: 192.168.2.224
+  #   name: Door Camera
+  #   port: 88
+  #   username: !secret foscam_username
+  #   password: !secret foscam_password
+  # - platform: foscam
+  #   ip: 192.168.2.173
+  #   name: Door Camera
+  #   port: 88
+  #   username: !secret foscam_username
+  #   password: !secret foscam_password
+  # - platform: foscam
+  #   ip: 192.168.2.49
+  #   name: Door Camera
+  #   port: 88
+  #   username: !secret foscam_username
+  #   password: !secret foscam_password
 
 ifttt:
   key: !secret ifttt_key
@@ -197,23 +198,40 @@ input_boolean:
     name: Upstairs Away Mode
     initial: off
     icon: mdi:home
+  tv:
+    name: TV
+    initial: off
+    icon: mdi:television
 
-switch:
- platform: command_line
- switches:
-   #Switch for Foscam Motion Detection
-   foscam_record:
-     command_on: 'curl -k "http://192.168.2.173:88/cgi-bin/CGIProxy.fcgi?cmd=setMotionDetectConfig&isEnable=1&linkage=8&snapInterval=5&sensitivity=2&triggerInterval=10&isMovAlarmEnable=1&isPirAlarmEnable=1&schedule0=281474976710655&schedule1=281474976710655&schedule2=281474976710655&schedule3=281474976710655&schedule4=281474976710655&schedule5=281474976710655&schedule6=281474976710655&area0=1023&area1=1023&area2=1023=&area3=1023&area4=1023&area5=1023&area6=1023&area7=1023&area8=1023&area9=1023&usr=arsaboo&pwd=alok18"'
-     command_off: 'curl -k "http://192.168.2.173:88/cgi-bin/CGIProxy.fcgi?cmd=setMotionDetectConfig&isEnable=0&linkage=8&snapInterval=5&sensitivity=2&triggerInterval=10&isMovAlarmEnable=0&isPirAlarmEnable=0&schedule0=281474976710655&schedule1=281474976710655&schedule2=281474976710655&schedule3=281474976710655&schedule4=281474976710655&schedule5=281474976710655&schedule6=281474976710655&area0=1023&area1=1023&area2=1023=&area3=1023&area4=1023&area5=1023&area6=1023&area7=1023&area8=1023&area9=1023&usr=arsaboo&pwd=alok18"'
-     value_template: ''
-   foscam_record2:
-     command_on: 'curl -k "http://192.168.2.224:88/cgi-bin/CGIProxy.fcgi?cmd=setMotionDetectConfig&isEnable=1&linkage=8&snapInterval=5&sensitivity=2&triggerInterval=10&isMovAlarmEnable=1&isPirAlarmEnable=1&schedule0=281474976710655&schedule1=281474976710655&schedule2=281474976710655&schedule3=281474976710655&schedule4=281474976710655&schedule5=281474976710655&schedule6=281474976710655&area0=1023&area1=1023&area2=1023=&area3=1023&area4=1023&area5=1023&area6=1023&area7=1023&area8=1023&area9=1023&usr=arsaboo&pwd=alok18"'
-     command_off: 'curl -k "http://192.168.2.224:88/cgi-bin/CGIProxy.fcgi?cmd=setMotionDetectConfig&isEnable=0&linkage=8&snapInterval=5&sensitivity=2&triggerInterval=10&isMovAlarmEnable=0&isPirAlarmEnable=0&schedule0=281474976710655&schedule1=281474976710655&schedule2=281474976710655&schedule3=281474976710655&schedule4=281474976710655&schedule5=281474976710655&schedule6=281474976710655&area0=1023&area1=1023&area2=1023=&area3=1023&area4=1023&area5=1023&area6=1023&area7=1023&area8=1023&area9=1023&usr=arsaboo&pwd=alok18"'
-     value_template: ''
-   foscam_record3:
-     command_on: 'curl -k "http://192.168.2.49:88/cgi-bin/CGIProxy.fcgi?cmd=setMotionDetectConfig&isEnable=1&linkage=8&snapInterval=5&sensitivity=2&triggerInterval=10&isMovAlarmEnable=1&isPirAlarmEnable=1&schedule0=281474976710655&schedule1=281474976710655&schedule2=281474976710655&schedule3=281474976710655&schedule4=281474976710655&schedule5=281474976710655&schedule6=281474976710655&area0=1023&area1=1023&area2=1023=&area3=1023&area4=1023&area5=1023&area6=1023&area7=1023&area8=1023&area9=1023&usr=arsaboo&pwd=alok18"'
-     command_off: 'curl -k "http://192.168.2.49:88/cgi-bin/CGIProxy.fcgi?cmd=setMotionDetectConfig&isEnable=0&linkage=8&snapInterval=5&sensitivity=2&triggerInterval=10&isMovAlarmEnable=0&isPirAlarmEnable=0&schedule0=281474976710655&schedule1=281474976710655&schedule2=281474976710655&schedule3=281474976710655&schedule4=281474976710655&schedule5=281474976710655&schedule6=281474976710655&area0=1023&area1=1023&area2=1023=&area3=1023&area4=1023&area5=1023&area6=1023&area7=1023&area8=1023&area9=1023&usr=arsaboo&pwd=alok18"'
-     value_template: ''
+input_slider:
+  harmonyvolume:
+    name: Volume
+    initial: 30
+    min: 1
+    max: 100
+    step: 1
+
+remote:
+  - platform: harmony
+    name: livingroom
+    host: 192.168.2.152
+
+# switch:
+#  platform: command_line
+#  switches:
+#    #Switch for Foscam Motion Detection
+#    foscam_record:
+#      command_on: 'curl -k "http://192.168.2.173:88/cgi-bin/CGIProxy.fcgi?cmd=setMotionDetectConfig&isEnable=1&linkage=8&snapInterval=5&sensitivity=2&triggerInterval=10&isMovAlarmEnable=1&isPirAlarmEnable=1&schedule0=281474976710655&schedule1=281474976710655&schedule2=281474976710655&schedule3=281474976710655&schedule4=281474976710655&schedule5=281474976710655&schedule6=281474976710655&area0=1023&area1=1023&area2=1023=&area3=1023&area4=1023&area5=1023&area6=1023&area7=1023&area8=1023&area9=1023&usr=arsaboo&pwd=alok18"'
+#      command_off: 'curl -k "http://192.168.2.173:88/cgi-bin/CGIProxy.fcgi?cmd=setMotionDetectConfig&isEnable=0&linkage=8&snapInterval=5&sensitivity=2&triggerInterval=10&isMovAlarmEnable=0&isPirAlarmEnable=0&schedule0=281474976710655&schedule1=281474976710655&schedule2=281474976710655&schedule3=281474976710655&schedule4=281474976710655&schedule5=281474976710655&schedule6=281474976710655&area0=1023&area1=1023&area2=1023=&area3=1023&area4=1023&area5=1023&area6=1023&area7=1023&area8=1023&area9=1023&usr=arsaboo&pwd=alok18"'
+#      value_template: ''
+#    foscam_record2:
+#      command_on: 'curl -k "http://192.168.2.224:88/cgi-bin/CGIProxy.fcgi?cmd=setMotionDetectConfig&isEnable=1&linkage=8&snapInterval=5&sensitivity=2&triggerInterval=10&isMovAlarmEnable=1&isPirAlarmEnable=1&schedule0=281474976710655&schedule1=281474976710655&schedule2=281474976710655&schedule3=281474976710655&schedule4=281474976710655&schedule5=281474976710655&schedule6=281474976710655&area0=1023&area1=1023&area2=1023=&area3=1023&area4=1023&area5=1023&area6=1023&area7=1023&area8=1023&area9=1023&usr=arsaboo&pwd=alok18"'
+#      command_off: 'curl -k "http://192.168.2.224:88/cgi-bin/CGIProxy.fcgi?cmd=setMotionDetectConfig&isEnable=0&linkage=8&snapInterval=5&sensitivity=2&triggerInterval=10&isMovAlarmEnable=0&isPirAlarmEnable=0&schedule0=281474976710655&schedule1=281474976710655&schedule2=281474976710655&schedule3=281474976710655&schedule4=281474976710655&schedule5=281474976710655&schedule6=281474976710655&area0=1023&area1=1023&area2=1023=&area3=1023&area4=1023&area5=1023&area6=1023&area7=1023&area8=1023&area9=1023&usr=arsaboo&pwd=alok18"'
+#      value_template: ''
+#    foscam_record3:
+#      command_on: 'curl -k "http://192.168.2.49:88/cgi-bin/CGIProxy.fcgi?cmd=setMotionDetectConfig&isEnable=1&linkage=8&snapInterval=5&sensitivity=2&triggerInterval=10&isMovAlarmEnable=1&isPirAlarmEnable=1&schedule0=281474976710655&schedule1=281474976710655&schedule2=281474976710655&schedule3=281474976710655&schedule4=281474976710655&schedule5=281474976710655&schedule6=281474976710655&area0=1023&area1=1023&area2=1023=&area3=1023&area4=1023&area5=1023&area6=1023&area7=1023&area8=1023&area9=1023&usr=arsaboo&pwd=alok18"'
+#      command_off: 'curl -k "http://192.168.2.49:88/cgi-bin/CGIProxy.fcgi?cmd=setMotionDetectConfig&isEnable=0&linkage=8&snapInterval=5&sensitivity=2&triggerInterval=10&isMovAlarmEnable=0&isPirAlarmEnable=0&schedule0=281474976710655&schedule1=281474976710655&schedule2=281474976710655&schedule3=281474976710655&schedule4=281474976710655&schedule5=281474976710655&schedule6=281474976710655&area0=1023&area1=1023&area2=1023=&area3=1023&area4=1023&area5=1023&area6=1023&area7=1023&area8=1023&area9=1023&usr=arsaboo&pwd=alok18"'
+#      value_template: ''
 
 ios:
   push:

@@ -101,6 +101,16 @@
            {% else %}
              unknown
            {% endif %}
+  - platform: template
+    sensors:
+      living_room:
+        value_template: >-
+          {% if states.states.remote.livingroom != None %}
+            {{ states.remote.livingroom.attributes.current_activity }}
+           {% else %}
+             NA
+           {% endif %}
+        friendly_name: 'Living Room Harmony'
       # garagedoor:
         # friendly_name: "Garage Door"
         # value_template: >-

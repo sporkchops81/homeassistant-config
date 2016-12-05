@@ -6,9 +6,6 @@
     view: yes
     icon: mdi:home
     entities:
-      - persistent_notification.update_available
-      - persistent_notification.invalid_config
-      - persistent_notification.google_calendar_notification
       - group.abode_status
       - group.weather
       - group.device_location
@@ -31,6 +28,7 @@
     view: yes
     icon: mdi:play-circle-outline
     entities:
+      - group.entertainment
       - group.media_player
 
   settings:
@@ -40,7 +38,7 @@
     entities:
       - group.all_devices
       - group.all_scripts
-      - group.all_automations
+      - group.all_lights
 
   Weather:
     - sensor.pws_weather
@@ -104,3 +102,13 @@
     - input_boolean.alokhome
     - input_boolean.rashmihome
     - device_tracker.toshibaaio
+
+  living_room_lights:
+    - light.lifx3
+    - light.lifxnrguest
+    - light.lifxnrkitchen
+
+  Entertainment:
+    - input_slider.harmonyvolume
+    - remote.livingroom
+    - input_boolean.tv

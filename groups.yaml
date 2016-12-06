@@ -109,6 +109,7 @@
     - light.lifxnrkitchen
 
   Entertainment:
+    - input_select.livingroomharmony
     - input_slider.harmonyvolume
     - remote.livingroom
     - input_boolean.tv

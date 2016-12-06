@@ -172,7 +172,18 @@ input_select:
      - away
     initial: standby
     icon: mdi:security
-
+  livingroomharmony:
+    name: Harmony status
+    options:
+     - PowerOff
+     - Watch Fire TV
+     - Chromecast
+     - Youtube
+     - SATV
+     - Watch TV
+    initial: PowerOff
+    icon: mdi:remote
+    
 input_boolean:
   abodeupdate:
     name: Abode Updates
@@ -205,6 +216,7 @@ input_boolean:
 
 input_slider:
   harmonyvolume:
+    icon: mdi:volume-high
     name: Volume
     initial: 30
     min: 1

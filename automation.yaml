@@ -639,6 +639,11 @@
   action:
     - service: homeassistant.turn_on
       entity_id: input_boolean.tv
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.livingroomharmony
+        option: >
+          {{ states.remote.livingroom.attributes.current_activity }}
     - service: input_slider.select_value
       data_template:
         entity_id: input_slider.harmonyvolume
@@ -648,26 +653,22 @@
           {% else %}
             {{ states.media_player.livingroomsonos.attributes.volume_level * 100 }}
           {% endif %}
-- alias: Turn off TV
+- alias: Update TV status in HA
+  trigger:
+    platform: state
+    entity_id: media_player.panasonic_viera_tv
+  action:
+    - service_template: "homeassistant.turn_{{ 'on' if trigger.to_state.state == 'on' else 'off' }}"
+      data:
+        entity_id: input_boolean.tv
+- alias: Turn TV on/off
   trigger:
     platform: state
     entity_id: input_boolean.tv
-    state: 'off'
   action:
     service: remote.send_command
-    data:
-      command: PowerOff
-      device: 31747892
-      entity_id: remote.livingroom
-- alias: Turn on TV
-  trigger:
-    platform: state
-    entity_id: input_boolean.tv
-    state: 'on'
-  action:
-    service: remote.send_command
-    data:
-      command: PowerOn
+    data_template:
+      command: "{{ 'PowerOff' if trigger.to_state.state == 'off' else 'PowerOn' }}"
       device: 31747892
       entity_id: remote.livingroom
 - alias: "Set Volume"
@@ -691,3 +692,13 @@
           {{states.input_slider.harmonyvolume.state | int / 100}}
     - service: remote.harmony_sync
       entity_id: remote.livingroom
+
+- alias: "Start Harmony activity from input_select"
+  trigger:
+    platform: state
+    entity_id: input_select.livingroomharmony
+  action:
+  - service: remote.turn_on
+    data_template:
+      entity_id: remote.livingroom
+      activity: "{{trigger.to_state.state}}"

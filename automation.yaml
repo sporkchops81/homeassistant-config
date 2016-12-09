@@ -690,8 +690,6 @@
           {% endif %}
         volume_level: >
           {{states.input_slider.harmonyvolume.state | int / 100}}
-    - service: remote.harmony_sync
-      entity_id: remote.livingroom
 
 - alias: "Start Harmony activity from input_select"
   trigger:
@@ -702,3 +700,27 @@
     data_template:
       entity_id: remote.livingroom
       activity: "{{trigger.to_state.state}}"
+
+- alias: "Update HA if Harmony activity changes"
+  trigger:
+    platform: state
+    entity_id: sensor.living_room
+  action:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.livingroomharmony
+        option: "{{trigger.to_state.state}}"
+- alias: Update HA after startup
+  trigger:
+    platform: event
+    event_type: homeassistant_start
+  action:
+    - delay:
+        minutes: 5
+    - service_template: "homeassistant.turn_{{ 'on' if states.media_player.panasonic_viera_tv.state == 'on' else 'off' }}"
+      entity_id:
+        - input_boolean.tv
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.livingroomharmony
+        option: "{{states.sensor.living_room.state}}"

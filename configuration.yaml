@@ -74,7 +74,7 @@ media_player:
     host: http://192.168.2.28
     port: 8080
     name: Kodi NSTV
-    user: !secret kodi_username
+    username: !secret kodi_username
     password: !secret kodi_password
   - platform: panasonic_viera
     host: 192.168.2.129
@@ -173,7 +173,7 @@ input_select:
     initial: standby
     icon: mdi:security
   livingroomharmony:
-    name: Harmony status
+    name: Harmony Activity
     options:
      - PowerOff
      - Watch Fire TV
@@ -181,9 +181,10 @@ input_select:
      - Youtube
      - SATV
      - Watch TV
+     - Watch Apple TV
     initial: PowerOff
     icon: mdi:remote
-    
+
 input_boolean:
   abodeupdate:
     name: Abode Updates

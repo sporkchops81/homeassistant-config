@@ -45,7 +45,7 @@ light:
   - platform: lifx
 zeroconf:
 recorder:
-  purge_days: 7
+  purge_days: 3
 # Enables the frontend
 frontend:
 

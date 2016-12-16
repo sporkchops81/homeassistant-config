@@ -628,6 +628,20 @@
     - service: light.turn_off
       data:
         entity_id: group.living_room_lights
+- alias: Turn Christmas Lights On At Sunset
+  trigger:
+    platform: sun
+    event: sunset
+  action:
+    service: homeassistant.turn_on
+    entity_id: switch.wemoswitch
+- alias: Turn Christmas Lights Off At Midnight
+  trigger:
+    platform: time
+    after: '23:30:00'
+  action:
+    service: homeassistant.turn_off
+    entity_id: switch.wemoswitch
 #################################################################
 ## Harmony Remote
 #################################################################
@@ -716,7 +730,7 @@
     event_type: homeassistant_start
   action:
     - delay:
-        minutes: 5
+        minutes: 1
     - service_template: "homeassistant.turn_{{ 'on' if states.media_player.panasonic_viera_tv.state == 'on' else 'off' }}"
       entity_id:
         - input_boolean.tv

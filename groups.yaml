@@ -80,6 +80,7 @@
     - binary_sensor.garagedoor
     - sensor.ars_bloom_voltage
     - switch.driveway
+    - switch.wemoswitch
     - switch.garage_relay_switch_8_0
 
   Media Player:
@@ -109,7 +110,7 @@
     - light.lifxnrkitchen
 
   Entertainment:
+    - sensor.living_room
     - input_select.livingroomharmony
     - input_slider.harmonyvolume
-    - remote.livingroom
     - input_boolean.tv

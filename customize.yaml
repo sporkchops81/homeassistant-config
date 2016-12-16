@@ -96,6 +96,9 @@
      remote.livingroom:
        friendly_name: 'Livingroom Remote'
        icon: mdi:remote
+     sensor.living_room:
+       friendly_name: 'Harmony Activity'
+       entity_picture: /local/Harmony.png
      sensor.usd_inr:
        friendly_name: USD/INR
        icon: mdi:currency-inr

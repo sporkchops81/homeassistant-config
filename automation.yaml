@@ -675,11 +675,7 @@
       data_template:
         entity_id: input_slider.harmonyvolume
         value: >
-          {% if states.remote.livingroom.attributes.current_activity == "Watch TV" %}
-            {{ (states.media_player.panasonic_viera_tv.attributes.volume_level * 100) | int }}
-          {% else %}
             {{ (states.media_player.livingroomsonos.attributes.volume_level * 100) | int }}
-          {% endif %}
 
 - alias: Update TV status in HA
   trigger:
@@ -710,12 +706,7 @@
   action:
     - service: media_player.volume_set
       data_template:
-        entity_id: >
-          {% if states.remote.livingroom.attributes.current_activity == "Watch TV" %}
-            media_player.panasonic_viera_tv
-          {% else %}
-            media_player.livingroomsonos
-          {% endif %}
+        entity_id: media_player.livingroomsonos
         volume_level: >
           {{states.input_slider.harmonyvolume.state | int / 100}}
 - alias: "Update Volume Slider"
@@ -727,11 +718,8 @@
       data_template:
         entity_id: input_slider.harmonyvolume
         value: >
-          {% if states.remote.livingroom.attributes.current_activity == "Watch TV" %}
-            {{ states.media_player.panasonic_viera_tv.attributes.volume_level * 100 }}
-          {% else %}
             {{ states.media_player.livingroomsonos.attributes.volume_level * 100 }}
-          {% endif %}
+
 - alias: "Start Harmony activity from input_select"
   trigger:
     platform: state

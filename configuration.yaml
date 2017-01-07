@@ -179,7 +179,6 @@ input_select:
      - Chromecast
      - Youtube
      - SATV
-     - Watch TV
      - Watch Apple TV
     initial: PowerOff
     icon: mdi:remote
@@ -307,8 +306,13 @@ logbook:
       - group.information
       - group.thermostats
       - group.media_player
+      - group.weather
+      - group.all_lights
+      - group.entertainment
       - device_tracker.unificloudkey
       - media_player.unnamed_device
+      - media_player.plex_web_chrome_2
+      - media_player.plex_web_chrome
       - automation.update_volume_slider
       - automation.heal_zwave_network
       - automation.set_volume

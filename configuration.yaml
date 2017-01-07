@@ -39,11 +39,12 @@ http:
   api_password: !secret http_password
   ssl_certificate: !secret ssl_certificate
   ssl_key: !secret ssl_key
+  base_url: !secret base_url
   trusted_networks:
     - 192.168.2.0/24
 light:
   - platform: lifx
-zeroconf:
+#zeroconf:
 recorder:
   purge_days: 3
 # Enables the frontend
@@ -66,7 +67,11 @@ sun:
 zwave:
   usb_path: /dev/ttyACM0
   config_path: /srv/hass/hass_venv/lib/python3.4/site-packages/libopenzwave-0.3.1-py3.4-linux-armv7l.egg/config
-
+tts:
+  - platform: google
+    cache: true
+    cache_dir: /home/hass/.homeassistant/tts
+    time_memory: 300
 media_player:
   - platform: sonos
     hosts: 192.168.2.150
@@ -142,12 +147,6 @@ mqtt:
   username: !secret mqtt_username
   password: !secret mqtt_password
 
-# Google Calendar
-google:
-  client_id: !secret gcal_client_id
-  client_secret: !secret gcal_client_secret
-  track_new_calendar: no
-
 bloomsky:
   api_key: !secret bloomsky_key
 
@@ -196,6 +195,10 @@ input_boolean:
     icon: mdi:record-rec
   alokhome:
     name: Alok Home
+    initial: on
+    icon: mdi:cellphone-iphone
+  alok360home:
+    name: Alok Life360
     initial: on
     icon: mdi:cellphone-iphone
   rashmihome:
@@ -296,6 +299,7 @@ logbook:
       - sensor.phonebatteryrashmi
       - sensor.usd_inr
       - sensor.usd_eur
+      - sensor.sonos_volume
       - sensor.downstairsthermoper
       - sensor.upstairsthermostatoperation
       - group.abode_status
@@ -305,6 +309,10 @@ logbook:
       - group.media_player
       - device_tracker.unificloudkey
       - media_player.unnamed_device
+      - automation.update_volume_slider
+      - automation.heal_zwave_network
+      - automation.set_volume
+      - input_slider.harmonyvolume
 # Enables support for tracking state changes over time.
 history:
   include:

@@ -49,6 +49,8 @@
         data:
           entity_id: climate.downstairs
           away_mode: 'False'
+      - service: light.turn_off
+        entity_id: group.living_room_lights
       # - service: homeassistant.turn_off
       #   entity_id: input_boolean.startrecording
 
@@ -61,11 +63,10 @@
         entity_id: media_player.livingroomsonos
         data:
           volume_level: .7
-      - service: media_player.play_media
+      - service: tts.google_say
         entity_id: media_player.livingroomsonos
         data:
-          media_content_id: 'https://dl.dropboxusercontent.com/u/7457/HASS/Garage_Door_open.mp3'
-          media_content_type: 'music'
+          message: 'Garage door is open, please check!'
       - delay:
           seconds: 3
       - service: media_player.sonos_restore
@@ -80,11 +81,10 @@
         entity_id: media_player.livingroomsonos
         data:
           volume_level: .5
-      - service: media_player.play_media
+      - service: tts.google_say
         entity_id: media_player.livingroomsonos
         data:
-          media_content_id: 'https://dl.dropboxusercontent.com/u/7457/HASS/Traffic_cleared_leave_for_work.mp3'
-          media_content_type: 'music'
+          message: 'Traffic has cleared, you can leave for work.'
       - delay:
           seconds: 6
       - service: media_player.sonos_restore

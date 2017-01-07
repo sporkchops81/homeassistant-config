@@ -18,7 +18,7 @@
       entity_id: device_tracker.pi_alokphone, device_tracker.alokiosiphone
       state: 'not_home'
     - platform: state
-      entity_id: binary_sensor.aloklife360
+      entity_id: binary_sensor.aloklife360, input_boolean.alok360home
       state: 'off'
   action:
     - service: homeassistant.turn_off
@@ -73,7 +73,7 @@
       entity_id: device_tracker.alokphone, device_tracker.pi_alokphone, device_tracker.alokiosiphone, device_tracker.elantrase
       state: 'home'
     - platform: state
-      entity_id: binary_sensor.aloklife360
+      entity_id: binary_sensor.aloklife360, input_boolean.alok360home
       state: 'on'
   action:
     - service: homeassistant.turn_on
@@ -531,6 +531,18 @@
   action:
     - service: switch.turn_off
       entity_id: switch.driveway
+- alias: Driveway light Off during the day
+  trigger:
+    platform: state
+    entity_id: switch.driveway
+    state: 'on'
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: 'above_horizon'
+  action:
+    - service: switch.turn_off
+      entity_id: switch.driveway
 
 - alias: 'Reset Garage Relay'
   trigger:
@@ -628,6 +640,7 @@
     - service: light.turn_off
       data:
         entity_id: group.living_room_lights
+
 - alias: Turn Christmas Lights On At Sunset
   trigger:
     platform: sun
@@ -663,10 +676,11 @@
         entity_id: input_slider.harmonyvolume
         value: >
           {% if states.remote.livingroom.attributes.current_activity == "Watch TV" %}
-            {{ states.media_player.panasonic_viera_tv.attributes.volume_level * 100 }}
+            {{ (states.media_player.panasonic_viera_tv.attributes.volume_level * 100) | int }}
           {% else %}
-            {{ states.media_player.livingroomsonos.attributes.volume_level * 100 }}
+            {{ (states.media_player.livingroomsonos.attributes.volume_level * 100) | int }}
           {% endif %}
+
 - alias: Update TV status in HA
   trigger:
     platform: state
@@ -704,7 +718,20 @@
           {% endif %}
         volume_level: >
           {{states.input_slider.harmonyvolume.state | int / 100}}
-
+- alias: "Update Volume Slider"
+  trigger:
+    platform: state
+    entity_id: sensor.sonos_volume
+  action:
+    - service: input_slider.select_value
+      data_template:
+        entity_id: input_slider.harmonyvolume
+        value: >
+          {% if states.remote.livingroom.attributes.current_activity == "Watch TV" %}
+            {{ states.media_player.panasonic_viera_tv.attributes.volume_level * 100 }}
+          {% else %}
+            {{ states.media_player.livingroomsonos.attributes.volume_level * 100 }}
+          {% endif %}
 - alias: "Start Harmony activity from input_select"
   trigger:
     platform: state

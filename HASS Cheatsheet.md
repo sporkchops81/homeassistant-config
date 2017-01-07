@@ -106,3 +106,12 @@ If you are using AIO (which has Mosquitto pre-installed), you can use the follow
     ```
 4. Start ST-MQTT bridge `pm2 start smartthings-mqtt-bridge`
 5. Follow the rest of the instructions (from step 2) listed [here](https://github.com/stjohnjohnson/smartthings-mqtt-bridge#usage).
+
+# To upgrade the All-In-One setup manually (using this as I am using the older version of AIO):
+
+*  Login to Raspberry Pi `ssh pi@your_raspberry_pi_ip`
+*  Change to homeassistant user `sudo su -s /bin/bash hass`
+*  Change to virtual enviroment `source /srv/hass/hass_venv/bin/activate`
+*  Update HA `pip3 install --upgrade homeassistant`
+*  Type `exit` to logout the hass user and return to the `pi` user.
+*  Restart the Home-Assistant Service `sudo systemctl restart home-assistant.service`

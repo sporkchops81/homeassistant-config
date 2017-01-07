@@ -101,8 +101,6 @@
            {% else %}
              unknown
            {% endif %}
-  - platform: template
-    sensors:
       living_room:
         value_template: >-
           {% if states.states.remote.livingroom != None %}
@@ -110,7 +108,10 @@
            {% else %}
              NA
            {% endif %}
-
+      sonos_volume:
+        value_template: >-
+          {{ (states.media_player.livingroomsonos.attributes.volume_level * 100) |int }}
+        friendly_name: 'Sonos Volume'
       # garagedoor:
         # friendly_name: "Garage Door"
         # value_template: >-

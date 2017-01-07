@@ -6,13 +6,12 @@
     view: yes
     icon: mdi:home
     entities:
+      - group.all_lights
+      - group.all_switches
       - group.abode_status
       - group.weather
-      - group.device_location
-      - group.information
       - group.thermostats
-      - group.all_lights
-      - group.switches
+      - group.information
 
   cameras:
     name: Cameras
@@ -40,6 +39,7 @@
     entities:
       - group.all_devices
       - group.all_scripts
+      - group.device_location
 
   Weather:
     - sensor.pws_weather
@@ -65,10 +65,6 @@
     - sensor.upstairs_temperature
     - input_boolean.thermo_away_upstairs
 
-  Household:
-    - input_boolean.alokhome
-    - input_boolean.rashmihome
-
   Information:
     - sensor.time__date
     - sensor.morning_commute
@@ -79,10 +75,6 @@
     - sensor.bloomlastupdate
     - binary_sensor.garagedoor
     - sensor.ars_bloom_voltage
-  Switches:
-    - switch.driveway
-    - switch.wemoswitch
-    - switch.garage_relay_switch_8_0
 
   Media Player:
     - media_player.castlivingroom

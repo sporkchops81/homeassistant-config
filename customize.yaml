@@ -92,7 +92,8 @@
        hidden: false
      group.all_lights:
        hidden: false
-
+     group.all_switches:
+       hidden: false
      remote.livingroom:
        friendly_name: 'Livingroom Remote'
        icon: mdi:remote

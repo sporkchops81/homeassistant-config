@@ -61,5 +61,6 @@ secrets.yaml
 google_calendars.yaml
 components
 deps
+tts
 www
 icloud

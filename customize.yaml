@@ -49,9 +49,6 @@
        icon: mdi:battery
      binary_sensor.ars_bloom_rain:
        friendly_name: 'BloomSky Rain'
-     sensor.bloomlastupdate:
-       friendly_name: 'BloomSky Update'
-       icon: mdi:refresh
      sensor.ars_bloom_humidity:
        friendly_name: 'BloomSky Humidity'
        icon: mdi:water-percent

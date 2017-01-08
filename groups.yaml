@@ -39,7 +39,7 @@
     entities:
       - group.all_devices
       - group.all_scripts
-      - group.device_location
+      - group.household
 
   Weather:
     - sensor.pws_weather
@@ -72,7 +72,6 @@
     - sensor.plexspy
     - sensor.usd_inr
     - sensor.usd_eur
-    - sensor.bloomlastupdate
     - binary_sensor.garagedoor
     - sensor.ars_bloom_voltage
 
@@ -92,11 +91,6 @@
     - binary_sensor.living_room_occupancy
     - binary_sensor.upstairs_occupancy
 
-  Device Location:
-    - input_boolean.alokhome
-    - input_boolean.rashmihome
-    - device_tracker.toshibaaio
-
   living_room_lights:
     - light.lifx3
     - light.lifxnrguest
@@ -107,3 +101,7 @@
     - input_select.livingroomharmony
     - input_slider.harmonyvolume
     - input_boolean.tv
+
+  Household:
+    - input_boolean.alokhome
+    - input_boolean.rashmihome

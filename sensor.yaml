@@ -49,13 +49,6 @@
       - relative_humidity
   - platform: template
     sensors:
-      bloomlastupdate:
-        value_template: >-
-           {% if states.sensor.ars_bloom_temperature != None %}
-             {{ relative_time(states.sensor.ars_bloom_temperature.last_changed) }}
-           {% else %}
-             unknown
-           {% endif %}
       garagedoorbattery:
         friendly_name: "Garage Door Sensor Battery"
         unit_of_measurement: "%"

@@ -1,0 +1,15 @@
+## Automate Christmas Lights
+- alias: Turn Christmas Lights On At Sunset
+  trigger:
+    platform: sun
+    event: sunset
+  action:
+    service: homeassistant.turn_on
+    entity_id: switch.wemoswitch
+- alias: Turn Christmas Lights Off At Midnight
+  trigger:
+    platform: time
+    after: '23:30:00'
+  action:
+    service: homeassistant.turn_off
+    entity_id: switch.wemoswitch

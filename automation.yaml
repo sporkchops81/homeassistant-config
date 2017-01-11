@@ -647,16 +647,27 @@
 
 ## Humidifier
 - alias: Turn on humidifier
+  condition:
+     - condition: time
+       after: '08:15:00'
+       before: '21:45:00'
+     - condition: template
+       value_template: '{{ states.climate.downstairs.attributes.actual_humidity | int < 30 }}'
   trigger:
-    platform: template
-    value_template: "{{ states.climate.downstairs.attributes.actual_humidity | int < 30 }}"
+   - platform: time
+     minutes: '/10'
   action:
     service: homeassistant.turn_on
     entity_id: switch.wemoswitch
+
 - alias: Turn off humidifier
+  condition:
+    - condition: state
+      entity_id: switch.wemoswitch
+      state: 'on'
   trigger:
     platform: template
-    value_template: "{{ states.climate.downstairs.attributes.actual_humidity | int > 30 }}"
+    value_template: "{{ states.climate.downstairs.attributes.actual_humidity | int >= 30 }}"
   action:
     service: homeassistant.turn_off
     entity_id: switch.wemoswitch

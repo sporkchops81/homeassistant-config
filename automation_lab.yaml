@@ -1,3 +1,7 @@
+#################################################################
+## Unused automations
+#################################################################
+
 ## Automate Christmas Lights
 - alias: Turn Christmas Lights On At Sunset
   trigger:
@@ -13,3 +17,7 @@
   action:
     service: homeassistant.turn_off
     entity_id: switch.wemoswitch
+
+#################################################################
+## Unused Sensors
+#################################################################

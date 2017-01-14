@@ -429,10 +429,10 @@
     - service: notify.pushbullet
       data_template:
         message: >
-          {% for attr in states.sensor.plexspy.attributes %}
+          {%- for attr in states.sensor.plexspy.attributes -%}
            {%- if not attr=="friendly_name" and not attr=="unit_of_measurement" -%}
             {{attr}} is watching {{states.sensor.plexspy.attributes[attr]}}
-           {%- endif %}
+           {%- endif -%}
           {%- endfor -%}
         title: "Plex {{ trigger.to_state.state }} people streaming. "
         target: device/myiPhone
@@ -440,10 +440,10 @@
       data_template:
         name: "Plex {{ trigger.to_state.state }} people streaming. "
         message: >
-          {% for attr in states.sensor.plexspy.attributes %}
+          {%- for attr in states.sensor.plexspy.attributes -%}
            {%- if not attr=="friendly_name" and not attr=="unit_of_measurement" -%}
             {{attr}} is watching {{states.sensor.plexspy.attributes[attr]}}
-           {%- endif %}
+           {%- endif -%}
           {%- endfor -%}
 
 #################################################################
@@ -456,12 +456,12 @@
     entity_id: sensor.downstairsthermmode
   action:
     service_template: >
-      {% if is_state('sensor.downstairsthermmode', 'Home') %}
+      {%- if is_state('sensor.downstairsthermmode', 'Home') -%}
         homeassistant.turn_off
-      {% elif is_state('sensor.downstairsthermmode', 'Away') %}
+      {%- elif is_state('sensor.downstairsthermmode', 'Away') -%}
         homeassistant.turn_on
-      {% else %}
-      {% endif %}
+      {%- else -%}
+      {%- endif -%}
     entity_id: input_boolean.thermo_away_main
 
 - alias: Change downstairs Thermostat mode
@@ -476,12 +476,12 @@
      entity_id: climate.downstairs
      data_template:
        away_mode: >
-         {% if is_state('input_boolean.thermo_away_main', 'off') %}
+         {%- if is_state('input_boolean.thermo_away_main', 'off') -%}
            off
-         {% elif is_state('input_boolean.thermo_away_main', 'on') %}
+         {%- elif is_state('input_boolean.thermo_away_main', 'on') -%}
            on
-         {% else %}
-         {% endif %}
+         {%- else -%}
+         {%- endif -%}
 
 - alias: Upstairs thermostat to Input_Boolean
   trigger:
@@ -489,12 +489,12 @@
     entity_id: sensor.upstairshermostatmode
   action:
     service_template: >
-      {% if is_state('sensor.upstairshermostatmode', 'Home') %}
+      {%- if is_state('sensor.upstairshermostatmode', 'Home') -%}
         homeassistant.turn_off
-      {% elif is_state('sensor.upstairshermostatmode', 'Away') %}
+      {%- elif is_state('sensor.upstairshermostatmode', 'Away') -%}
         homeassistant.turn_on
-      {% else %}
-      {% endif %}
+      {%- else -%}
+      {%- endif -%}
     entity_id: input_boolean.thermo_away_upstairs
 
 - alias: Change upstairs Thermostat mode
@@ -509,12 +509,12 @@
     entity_id: climate.upstairs
     data_template:
       away_mode: >
-        {% if is_state('input_boolean.thermo_away_upstairs', 'off') %}
+        {%- if is_state('input_boolean.thermo_away_upstairs', 'off') -%}
           off
-        {% elif is_state('input_boolean.thermo_away_upstairs', 'on') %}
+        {%- elif is_state('input_boolean.thermo_away_upstairs', 'on') -%}
           on
-        {% else %}
-        {% endif %}
+        {%- else -%}
+        {%- endif -%}
 
 - alias: Driveway light at night
   trigger:
@@ -580,11 +580,11 @@
      state: 'on'
    - condition: template
      value_template: >
-       {% if states.automation.close_garage_door_when_abode_is_home_or_away.attributes.last_triggered  %}
+       {%- if states.automation.close_garage_door_when_abode_is_home_or_away.attributes.last_triggered  -%}
          {{(as_timestamp(now()) - as_timestamp(states.automation.close_garage_door_when_abode_is_home_or_away.attributes.last_triggered)) > 60}}
-       {% else %}
+       {%- else -%}
          true
-       {% endif %}
+       {%- endif -%}
    - condition: or
      conditions:
       - condition: state

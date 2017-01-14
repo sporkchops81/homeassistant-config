@@ -53,54 +53,54 @@
         friendly_name: "Garage Door Sensor Battery"
         unit_of_measurement: "%"
         value_template: >-
-           {% if states.binary_sensor.garage_door_tilt_sensor_sensor_5_0 != None %}
+           {%- if states.binary_sensor.garage_door_tilt_sensor_sensor_5_0 != None -%}
              {{ states.binary_sensor.garage_door_tilt_sensor_sensor_5_0.attributes.battery_level }}
-           {% else %}
+           {%- else -%}
              unknown
-           {% endif %}
+           {%- endif -%}
       downstairsthermmode:
         friendly_name: "Downstairs Away mode"
         value_template: >-
-           {% if  states.climate.downstairs.attributes.away_mode == 'off' %}
+           {%- if  states.climate.downstairs.attributes.away_mode == 'off' -%}
               Home
-           {% elif states.climate.downstairs.attributes.away_mode == 'on' %}
+           {%- elif states.climate.downstairs.attributes.away_mode == 'on' -%}
               Away
-           {% elif states.climate.downstairs != None %}
+           {%- elif states.climate.downstairs != None -%}
               unknown
-           {% endif %}
+           {%- endif -%}
       downstairsthermoper:
         friendly_name: "Downstairs Thermostat"
         value_template: >-
-           {% if states.climate.downstairs != None %}
+           {%- if states.climate.downstairs != None -%}
              {{ states.climate.downstairs.attributes.operation }}
-           {% else %}
+           {%- else -%}
              unknown
-           {% endif %}
+           {%- endif -%}
       upstairshermostatmode:
         friendly_name: "Upstairs Away Mode"
         value_template: >-
-           {% if  states.climate.upstairs.attributes.away_mode == 'off' %}
+           {%- if  states.climate.upstairs.attributes.away_mode == 'off' -%}
               Home
-           {% elif states.climate.upstairs.attributes.away_mode == 'on' %}
+           {%- elif states.climate.upstairs.attributes.away_mode == 'on' -%}
               Away
-           {% elif states.climate.upstairs != None %}
+           {%- elif states.climate.upstairs != None -%}
               unknown
-           {% endif %}
+           {%- endif -%}
       upstairsthermostatoperation:
         friendly_name: "Upstairs Thermostat"
         value_template: >-
-           {% if states.climate.upstairs != None %}
+           {%- if states.climate.upstairs != None -%}
              {{ states.climate.upstairs.attributes.operation }}
-           {% else %}
+           {%- else -%}
              unknown
-           {% endif %}
+           {%- endif -%}
       living_room:
         value_template: >-
-          {% if states.states.remote.livingroom != None %}
+          {%- if states.states.remote.livingroom != None -%}
             {{ states.remote.livingroom.attributes.current_activity }}
-           {% else %}
-             NA
-           {% endif %}
+          {%- else -%}
+            NA
+          {%- endif -%}
       sonos_volume:
         value_template: >-
           {{ (states.media_player.livingroomsonos.attributes.volume_level * 100) |int }}

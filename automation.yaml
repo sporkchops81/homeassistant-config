@@ -578,6 +578,13 @@
    - condition: state
      entity_id: binary_sensor.garagedoor
      state: 'on'
+   - condition: template
+     value_template: >
+       {% if states.automation.close_garage_door_when_abode_is_home_or_away.attributes.last_triggered  %}
+         {{(as_timestamp(now()) - as_timestamp(states.automation.close_garage_door_when_abode_is_home_or_away.attributes.last_triggered)) > 60}}
+       {% else %}
+         true
+       {% endif %}
    - condition: or
      conditions:
       - condition: state
@@ -653,6 +660,9 @@
        before: '21:45:00'
      - condition: template
        value_template: '{{ states.climate.downstairs.attributes.actual_humidity | int < 30 }}'
+     - condition: state
+       entity_id: switch.wemoswitch
+       state: 'off'
   trigger:
    - platform: time
      minutes: '/10'

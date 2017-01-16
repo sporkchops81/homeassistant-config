@@ -7,7 +7,12 @@
       entity_id: input_boolean.alokhome
       state: 'on'
     - condition: template
-      value_template: '{{ (as_timestamp(now()) - as_timestamp(states.input_boolean.alokhome.last_changed)) > 300 }}'
+      value_template: >
+        {%- if states.input_boolean.alokhome.last_changed -%}
+          {{ (as_timestamp(now()) - as_timestamp(states.input_boolean.alokhome.last_changed)) > 300 }}
+        {%- else -%}
+          true
+        {%- endif -%}
   trigger:
     - platform: state
       entity_id: device_tracker.alokphone
@@ -37,7 +42,12 @@
       entity_id: input_boolean.rashmihome
       state: 'on'
     - condition: template
-      value_template: '{{ (as_timestamp(now()) - as_timestamp(states.input_boolean.rashmihome.last_changed)) > 300 }}'
+      value_template: >
+        {%- if states.input_boolean.rashmihome.last_changed -%}
+          {{ (as_timestamp(now()) - as_timestamp(states.input_boolean.rashmihome.last_changed)) > 300 }}
+        {%- else -%}
+          true
+        {%- endif -%}
   trigger:
     - platform: state
       entity_id: device_tracker.rashmiphone
@@ -67,7 +77,12 @@
       entity_id: input_boolean.alokhome
       state: 'off'
     - condition: template
-      value_template: '{{ (as_timestamp(now()) - as_timestamp(states.input_boolean.alokhome.last_changed)) > 300 }}'
+      value_template: >
+        {%- if states.input_boolean.alokhome.last_changed -%}
+          {{ (as_timestamp(now()) - as_timestamp(states.input_boolean.alokhome.last_changed)) > 300 }}
+        {%- else -%}
+          true
+        {%- endif -%}
   trigger:
     - platform: state
       entity_id: device_tracker.alokphone, device_tracker.pi_alokphone, device_tracker.alokiosiphone, device_tracker.elantrase
@@ -92,7 +107,12 @@
       entity_id: input_boolean.rashmihome
       state: 'off'
     - condition: template
-      value_template: '{{ (as_timestamp(now()) - as_timestamp(states.input_boolean.rashmihome.last_changed)) > 300 }}'
+      value_template: >
+        {%- if states.input_boolean.rashmihome.last_changed -%}
+          {{ (as_timestamp(now()) - as_timestamp(states.input_boolean.rashmihome.last_changed)) > 300 }}
+        {%- else -%}
+          true
+        {%- endif -%}
   trigger:
     - platform: state
       entity_id: device_tracker.rashmiphone, device_tracker.pi_rashmiphone, device_tracker.rashmiappiphone
@@ -195,7 +215,12 @@
        entity_id: input_boolean.abodeupdate
        state: 'on'
      - condition: template
-       value_template: '{{ (as_timestamp(now()) - as_timestamp(states.input_select.abodestatus.last_changed)) > 300 }}'
+       value_template: >
+         {%- if states.input_select.abodestatus.last_changed -%}
+           {{ (as_timestamp(now()) - as_timestamp(states.input_select.abodestatus.last_changed)) > 300 }}
+         {%- else -%}
+           true
+         {%- endif -%}
   trigger:
    - platform: time
      minutes: '/10'
@@ -217,7 +242,12 @@
        entity_id: input_boolean.abodeupdate
        state: 'on'
      - condition: template
-       value_template: '{{ (as_timestamp(now()) - as_timestamp(states.input_select.abodestatus.last_changed)) > 300 }}'
+       value_template: >
+         {%- if states.input_select.abodestatus.last_changed -%}
+           {{ (as_timestamp(now()) - as_timestamp(states.input_select.abodestatus.last_changed)) > 300 }}
+         {%- else -%}
+           true
+         {%- endif -%}
      - condition: or
        conditions:
         - condition: state
@@ -467,7 +497,12 @@
 - alias: Change downstairs Thermostat mode
   condition:
     condition: template
-    value_template: '{{ (as_timestamp(now()) - as_timestamp(states.sensor.downstairsthermmode.last_changed)) > 60 }}'
+    value_template: >
+      {%- if states.sensor.downstairsthermmode.last_changed -%}
+        {{ (as_timestamp(now()) - as_timestamp(states.sensor.downstairsthermmode.last_changed)) > 60 }}
+      {%- else -%}
+        true
+      {%- endif -%}
   trigger:
     platform: state
     entity_id: input_boolean.thermo_away_main
@@ -500,7 +535,12 @@
 - alias: Change upstairs Thermostat mode
   condition:
     condition: template
-    value_template: '{{ (as_timestamp(now()) - as_timestamp(states.sensor.upstairshermostatmode.last_changed)) > 60 }}'
+    value_template: >
+      {%- if states.sensor.upstairshermostatmode.last_changed -%}
+        {{ (as_timestamp(now()) - as_timestamp(states.sensor.upstairshermostatmode.last_changed)) > 60 }}
+      {%- else -%}
+        true
+      {%- endif -%}
   trigger:
     platform: state
     entity_id: input_boolean.thermo_away_upstairs
@@ -564,7 +604,12 @@
      entity_id: binary_sensor.garagedoor
      state: 'off'
    - condition: template
-     value_template: '{{ (as_timestamp(now()) - as_timestamp(states.binary_sensor.garagedoor.last_changed)) > 120 }}'
+     value_template: >
+       {%- if states.binary_sensor.garagedoor.last_changed -%}
+         {{ (as_timestamp(now()) - as_timestamp(states.binary_sensor.garagedoor.last_changed)) > 120 }}
+       {%- else -%}
+         true
+       {%- endif -%}
   trigger:
    - platform: state
      entity_id: input_boolean.alokhome, input_boolean.rashmihome

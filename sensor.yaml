@@ -105,6 +105,32 @@
         value_template: >-
           {{ (states.media_player.livingroomsonos.attributes.volume_level * 100) |int }}
         friendly_name: 'Sonos Volume'
+      leeotemp:
+        friendly_name: "Leeo Temperature"
+        value_template: >-
+          {%- if states.input_slider.leeotemperature.state != None -%}
+            {{ states.input_slider.leeotemperature.state }}
+          {%- else -%}
+            NA
+          {%- endif -%}
+      leeohumid:
+        friendly_name: "Leeo Humidity"
+        value_template: >-
+          {%- if states.input_slider.leeohumidity.state != None -%}
+            {{ states.input_slider.leeohumidity.state }}
+          {%- else -%}
+            NA
+          {%- endif -%}
+      leeoalarmstatus:
+        friendly_name: "Leeo Alarm"
+        value_template: >-
+           {%- if  states.input_boolean.leeoalarm.state == 'off' -%}
+              Off
+           {%- elif states.input_boolean.leeoalarm.state == 'on' -%}
+              Active
+           {%- elif states.input_boolean.leeoalarm.state != None -%}
+              unknown
+           {%- endif -%}
       # garagedoor:
         # friendly_name: "Garage Door"
         # value_template: >-

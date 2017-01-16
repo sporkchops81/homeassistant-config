@@ -77,7 +77,7 @@
 
   Media Player:
     - media_player.livingroomsonos
-    - media_player.kodi_nstv    
+    - media_player.kodi_nstv
     - media_player.google_home
     - media_player.panasonic_viera_tv
     - media_player.shield
@@ -88,9 +88,9 @@
     - input_select.abodestatus
     - input_boolean.abodeupdate
     - input_boolean.startrecording
-    - binary_sensor.downstairs_occupancy
-    - binary_sensor.living_room_occupancy
-    - binary_sensor.upstairs_occupancy
+    - sensor.leeoalarmstatus
+    - sensor.leeotemp
+    - sensor.leeohumid
 
   living_room_lights:
     - light.lifx3

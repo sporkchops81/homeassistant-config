@@ -216,6 +216,10 @@ input_boolean:
     name: TV
     initial: off
     icon: mdi:television
+  leeoalarm:
+    name: Leeo Alarm
+    initial: off
+    icon: mdi:fire
 
 input_slider:
   harmonyvolume:
@@ -223,6 +227,20 @@ input_slider:
     name: Volume
     initial: 30
     min: 1
+    max: 100
+    step: 1
+  leeotemperature:
+    icon: mdi:thermometer-lines
+    name: Leeo Temperature
+    initial: 60
+    min: 20
+    max: 120
+    step: 0.1
+  leeohumidity:
+    icon: mdi:water-percent
+    name: Leeo Humidity
+    initial: 50
+    min: 0
     max: 100
     step: 1
 
@@ -317,6 +335,9 @@ logbook:
       - automation.heal_zwave_network
       - automation.set_volume
       - input_slider.harmonyvolume
+      - input_slider.leeotemperature
+      - input_slider.leeohumidity
+      - input_boolean.leeoalarm
 # Enables support for tracking state changes over time.
 history:
   include:
@@ -342,7 +363,6 @@ history:
       - sensor.plexspy
       - sensor.upstairs_temperature
       - switch.driveway
-
 automation: !include automation.yaml
 group: !include groups.yaml
 script: !include scripts.yaml

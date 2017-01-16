@@ -61,6 +61,12 @@
      sensor.pws_wind_string:
        friendly_name: 'Wind Summary'
        icon: mdi:weather-windy
+     sensor.leeotemp:
+       icon: mdi:thermometer-lines
+     sensor.leeohumid:
+       icon: mdi:water-percent
+     sensor.leeoalarmstatus:
+       icon: mdi:fire
      sensor.ars_bloom_temperature:
        friendly_name: 'BloomSky Temperature'
      sensor.pws_temp_f:

@@ -124,11 +124,11 @@
       leeoalarmstatus:
         friendly_name: "Leeo Alarm"
         value_template: >-
-           {%- if  states.input_boolean.leeoalarm.state == 'off' -%}
+           {%- if states.input_boolean.leeoalarm.state == 'off' -%}
               Off
            {%- elif states.input_boolean.leeoalarm.state == 'on' -%}
               Active
-           {%- elif states.input_boolean.leeoalarm.state != None -%}
+           {%- elif states.input_boolean.leeoalarm.state == None -%}
               unknown
            {%- endif -%}
       # garagedoor:

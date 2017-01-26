@@ -89,14 +89,19 @@
        icon: mdi:information-outline
      group.all_automations:
        hidden: false
+       friendly_name: 'Automations'
      group.all_scripts:
        hidden: false
+       friendly_name: 'Scripts'
      group.all_devices:
        hidden: false
+       friendly_name: 'Devices'
      group.all_lights:
        hidden: false
+       friendly_name: 'Lights'
      group.all_switches:
        hidden: false
+       friendly_name: 'Switches'
      remote.livingroom:
        friendly_name: 'Livingroom Remote'
        icon: mdi:remote

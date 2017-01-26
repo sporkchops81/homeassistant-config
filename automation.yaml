@@ -224,6 +224,7 @@
   trigger:
    - platform: time
      minutes: '/10'
+     seconds: 00
   action:
      service: homeassistant.turn_on
      entity_id: script.abodehome
@@ -259,6 +260,7 @@
   trigger:
    - platform: time
      minutes: '/10'
+     seconds: 00
   action:
      service: homeassistant.turn_on
      entity_id: script.abodestandby
@@ -286,6 +288,7 @@
   trigger:
    - platform: time
      minutes: '/10'
+     seconds: 00
   action:
      - service: climate.set_away_mode
        data:
@@ -479,6 +482,21 @@
 #################################################################
 ## Home Automation Related
 #################################################################
+- alias: 'Change Leeo color'
+  condition:
+    - condition: state
+      entity_id: device_tracker.leeoalert
+      state: 'home'
+    - condition: time
+      after: '19:15:00'
+      before: '07:45:00'
+  trigger:
+   - platform: time
+     minutes: '/20'
+     seconds: 00
+  action:
+     service: ifttt.trigger
+     data_template: {"event":"leeocolor", "value1":"{{ '{:02x}{:02x}{:02x}'.format(range(0, 255) | random, range(0, 255) | random, range(0, 255) | random) }}"}
 
 - alias: Downstairs thermostat to Input_Boolean
   trigger:
@@ -658,7 +676,7 @@
   action:
     - service: light.turn_on
       data:
-        entity_id: group.living_room_lights
+        entity_id: group.all_lights
     - service: notify.pushbullet
       data_template:
         title: "Alarm!"
@@ -704,13 +722,14 @@
        after: '08:15:00'
        before: '21:45:00'
      - condition: template
-       value_template: '{{ states.climate.downstairs.attributes.actual_humidity | int < 30 }}'
+       value_template: '{{ states.sensor.leeohumid.state | int < 30 }}'
      - condition: state
        entity_id: switch.wemoswitch
        state: 'off'
   trigger:
    - platform: time
      minutes: '/10'
+     seconds: 00
   action:
     service: homeassistant.turn_on
     entity_id: switch.wemoswitch
@@ -722,7 +741,7 @@
       state: 'on'
   trigger:
     platform: template
-    value_template: "{{ states.climate.downstairs.attributes.actual_humidity | int >= 30 }}"
+    value_template: '{{ states.sensor.leeohumid.state | int >= 30 }}'
   action:
     service: homeassistant.turn_off
     entity_id: switch.wemoswitch

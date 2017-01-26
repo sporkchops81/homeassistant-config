@@ -8,7 +8,7 @@
     entities:
       - group.all_lights
       - group.all_switches
-      - group.abode_status
+      - group.home_security
       - group.weather
       - group.thermostats
       - group.information
@@ -84,7 +84,7 @@
     - media_player.shield_android_tv
     - media_player.castlivingroom
 
-  Abode Status:
+  Home Security:
     - input_select.abodestatus
     - input_boolean.abodeupdate
     - input_boolean.startrecording

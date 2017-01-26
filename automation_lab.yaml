@@ -18,6 +18,27 @@
     service: homeassistant.turn_off
     entity_id: switch.wemoswitch
 
+- alias: 'Switch turned on when nobody is home'
+  condition:
+    condition: state
+    entity_id: input_select.abodestatus
+    state: 'away'
+  trigger:
+    - platform: state
+      entity_id:
+        - group.all_switches
+      to: 'on'
+  action:
+    - service: notify.pushbullet
+      data_template:
+        message: >
+          {% for entity in states.group.all_switches.attributes.entity_id %}
+            {%- if is_state(entity, 'off') %}
+              {{ states[entity.split('.')[0]][entity.split('.')[1]].name }}
+            {%- endif %}
+          {%- endfor %}
+        title: "Switch turned on"
+        target: device/myiPhone
 #################################################################
 ## Unused Sensors
 #################################################################

@@ -67,8 +67,8 @@
         entity_id: media_player.livingroomsonos
         data:
           message: 'Garage door is open, please check!'
-      - delay:
-          seconds: 3
+      # - delay:
+      #     seconds: 3
       - service: media_player.sonos_restore
         entity_id: media_player.livingroomsonos
 
@@ -85,8 +85,8 @@
         entity_id: media_player.livingroomsonos
         data:
           message: 'Traffic has cleared, you can leave for work.'
-      - delay:
-          seconds: 6
+      # - delay:
+      #     seconds: 6
       - service: media_player.sonos_restore
         entity_id: media_player.livingroomsonos
 
@@ -104,8 +104,8 @@
         data:
           media_content_id: 'https://dl.dropboxusercontent.com/u/7457/HASS/Burglar_Alarm.mp3'
           media_content_type: 'music'
-      - delay:
-          seconds: 90
+      # - delay:
+      #     seconds: 90
       - service: media_player.sonos_restore
         entity_id: media_player.livingroomsonos
 

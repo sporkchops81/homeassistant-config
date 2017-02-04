@@ -107,6 +107,7 @@
         friendly_name: 'Sonos Volume'
       leeotemp:
         friendly_name: "Leeo Temperature"
+        unit_of_measurement: '°F'
         value_template: >-
           {%- if states.input_slider.leeotemperature.state != None -%}
             {{ states.input_slider.leeotemperature.state }}
@@ -115,6 +116,7 @@
           {%- endif -%}
       leeohumid:
         friendly_name: "Leeo Humidity"
+        unit_of_measurement: '%'
         value_template: >-
           {%- if states.input_slider.leeohumidity.state != None -%}
             {{ states.input_slider.leeohumidity.state }}

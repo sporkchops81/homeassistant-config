@@ -490,9 +490,12 @@
     - condition: time
       after: '19:15:00'
       before: '07:45:00'
+    - condition: state
+      entity_id: binary_sensor.living_room_occupancy
+      state: 'on'
   trigger:
    - platform: time
-     minutes: '/20'
+     minutes: '/15'
      seconds: 00
   action:
      service: ifttt.trigger

@@ -37,7 +37,7 @@
     view: yes
     icon: mdi:settings
     entities:
-      - group.all_devices
+      - group.devices
       - group.all_scripts
       - group.household
 
@@ -106,3 +106,11 @@
   Household:
     - input_boolean.alokhome
     - input_boolean.rashmihome
+
+  Devices:
+    - device_tracker.pi_rashmiphone
+    - device_tracker.rashmiappiphone
+    - device_tracker.rashmiphone
+    - device_tracker.pi_alokphone
+    - device_tracker.alokiosiphone
+    - device_tracker.alokphone

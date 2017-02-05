@@ -86,6 +86,9 @@ tts:
     cache: true
     cache_dir: /home/hass/.homeassistant/tts
     time_memory: 300
+  - platform: voicerss
+    api_key: !secret voicerss_key
+
 media_player:
   - platform: sonos
     hosts: 192.168.2.150

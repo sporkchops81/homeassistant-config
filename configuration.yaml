@@ -86,8 +86,7 @@ tts:
     cache: true
     cache_dir: /home/hass/.homeassistant/tts
     time_memory: 300
-  - platform: voicerss
-    api_key: !secret voicerss_key
+
 
 media_player:
   - platform: sonos
@@ -99,12 +98,14 @@ media_player:
     username: !secret kodi_username
     password: !secret kodi_password
   - platform: panasonic_viera
-    host: 192.168.2.129
+    host: 192.168.2.128
     port: 55000
     name: Panasonic Viera TV
   - platform: plex
     host: 192.168.2.113
-
+  - platform: apple_tv
+    host: 192.168.2.90
+    login_id: !secret apple_hsgid
 camera:
   - platform: bloomsky
   - platform: generic
@@ -141,7 +142,7 @@ device_tracker:
   - platform: owntracks
     max_gps_accuracy: 200
   - platform: unifi
-    host: 192.168.2.161
+    host: 192.168.2.163
     username: !secret unifi_username
     password: !secret unifi_password
 
@@ -264,7 +265,7 @@ input_slider:
 remote:
   - platform: harmony
     name: livingroom
-    host: 192.168.2.152
+    host: 192.168.2.153
 
 
 # switch:
@@ -298,6 +299,7 @@ logbook:
       - sensor.pws_relative_humidity
       - binary_sensor.ars_bloom_rain
       - binary_sensor.ars_bloom_night
+      - binary_sensor.garage_door_tilt_sensor_sensor_5_0
       - sensor.ars_bloom_uvindex
       - sensor.pws_wind_dir
       - sensor.pws_wind_string
@@ -325,7 +327,9 @@ logbook:
       - group.thermostats
       - group.media_player
       - group.weather
+      - group.devices
       - group.all_lights
+      - group.household
       - group.entertainment
       - device_tracker.unificloudkey
       - media_player.unnamed_device

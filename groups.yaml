@@ -83,6 +83,7 @@
     - media_player.shield
     - media_player.shield_android_tv
     - media_player.castlivingroom
+    - media_player.apple_tv
 
   Home Security:
     - input_select.abodestatus

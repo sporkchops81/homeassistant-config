@@ -298,8 +298,6 @@
        data:
          entity_id: climate.upstairs
          away_mode: 'False'
-    #  - service: homeassistant.turn_off
-    #    entity_id: input_boolean.startrecording
 
 - alias: 'Arm Abode'
   condition:
@@ -462,9 +460,10 @@
     - service: notify.pushbullet
       data_template:
         message: >
+          {% set space = joiner(' ') %}
           {%- for attr in states.sensor.plexspy.attributes -%}
            {%- if not attr=="friendly_name" and not attr=="unit_of_measurement" -%}
-            {{attr}} is watching {{states.sensor.plexspy.attributes[attr]}}
+            {{space()}}{{attr}} is watching {{states.sensor.plexspy.attributes[attr]}}.
            {%- endif -%}
           {%- endfor -%}
         title: "Plex {{ trigger.to_state.state }} people streaming. "
@@ -473,9 +472,10 @@
       data_template:
         name: "Plex {{ trigger.to_state.state }} people streaming. "
         message: >
+          {% set space = joiner(' ') %}
           {%- for attr in states.sensor.plexspy.attributes -%}
            {%- if not attr=="friendly_name" and not attr=="unit_of_measurement" -%}
-            {{attr}} is watching {{states.sensor.plexspy.attributes[attr]}}
+            {{space()}}{{attr}} is watching {{states.sensor.plexspy.attributes[attr]}}.
            {%- endif -%}
           {%- endfor -%}
 
@@ -790,10 +790,6 @@
       device: 31747892
       entity_id: remote.livingroom
 - alias: "Set Volume"
-  condition:
-    condition: state
-    entity_id: remote.livingroom
-    state: 'on'
   trigger:
     platform: state
     entity_id: input_slider.harmonyvolume

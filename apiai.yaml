@@ -16,9 +16,11 @@
                  is_state('input_boolean.rashmihome', 'on') -%}
             You are both home, you silly
           {%- else -%}
-            Rashmi is at {{ states.device_tracker.rashmiappiphone.state.replace('_', ' ') }}.
-            and Alok is at {{ states.device_tracker.alokiosiphone.state.replace('_', ' ') }}.
+            Rashmi is at {{ states.device_tracker.rashmiappiphone.state.replace('_', ' ') }} and Alok is at {{ states.device_tracker.alokiosiphone.state.replace('_', ' ') }}.
           {% endif %}
+    HowIsTheTrafficIntent:
+      speech: >
+          Your commute to work is about {{ states.sensor.morning_commute.state }} minutes and to home is {{ states.sensor.evening_commute.state }} minutes.
     TurnLights:
       speech: Turning {{ Room }} lights {{ OnOff }}
       action:
@@ -28,9 +30,9 @@
             message: Someone asked to turn {{ Room }} lights {{ OnOff }}
         - service_template: >
             {%- if OnOff == 'on' -%}
-              switch.turn_on
+              light.turn_on
             {%- else -%}
-              switch.turn_off
+              light.turn_off
             {%- endif -%}
           data_template:
             entity_id: >

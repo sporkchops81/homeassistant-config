@@ -60,7 +60,7 @@ light:
     qos: 0
 #zeroconf:
 recorder:
-  purge_days: 3
+  purge_days: 2
 # Enables the frontend
 frontend:
 
@@ -293,6 +293,7 @@ logbook:
   exclude:
     domains:
       - sun
+      - automation
     entities:
       - sensor.pws_weather
       - sensor.pws_temp_f
@@ -334,11 +335,16 @@ logbook:
       - group.entertainment
       - device_tracker.unificloudkey
       - media_player.unnamed_device
+      - media_player.livingroomsonos
       - media_player.plex_web_chrome_2
       - media_player.plex_web_chrome
       - automation.update_volume_slider
       - automation.heal_zwave_network
       - automation.set_volume
+      - automation.turn_tv_onoff
+      - automation.start_harmony_activity_from_input_select
+      - automation.update_ha_if_harmony_activity_changes
+      - automation.update_tv_status_in_ha
       - input_slider.harmonyvolume
       - input_slider.leeotemperature
       - input_slider.leeohumidity

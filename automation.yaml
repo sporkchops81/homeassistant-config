@@ -482,6 +482,18 @@
 #################################################################
 ## Home Automation Related
 #################################################################
+
+- alias: 'Kitchen light brightness'
+  trigger:
+   - platform: state
+     entity_id: light.kitchen_lights
+     state: 'on'
+  action:
+     service: light.turn_on
+     data:
+       entity_id: light.kitchen_lights
+       brightness: 240
+
 - alias: 'Change Leeo color'
   condition:
     - condition: state

@@ -68,7 +68,14 @@
           {% endfor %}
         title: "Switch turned on"
         target: device/myiPhone
-
+- alias: 'Change Lifx color'
+  trigger:
+   - platform: time
+     minutes: '/1'
+     seconds: 00
+  action:
+     service: ifttt.trigger
+     data_template: {"event":"lifxcolor", "value1":"{{ '{:02x}{:02x}{:02x}'.format(range(0, 255) | random, range(0, 255) | random, range(0, 255) | random) }}"}
 #################################################################
 ## Unused Sensors
 #################################################################

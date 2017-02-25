@@ -687,6 +687,9 @@
     - platform: state
       entity_id:
         - binary_sensor.garagedoor
+        - binary_sensor.downstairs_occupancy
+        - binary_sensor.living_room_occupancy
+        - binary_sensor.upstairs_occupancy
       to: 'on'
   action:
     - service: light.turn_on

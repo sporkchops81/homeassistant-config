@@ -349,31 +349,6 @@ logbook:
       - input_slider.leeotemperature
       - input_slider.leeohumidity
       - input_boolean.leeoalarm
-# Enables support for tracking state changes over time.
-history:
-  include:
-    entities:
-      - binary_sensor.garagedoor
-      - device_tracker.alokiosiphone
-      - device_tracker.myiphone
-      - device_tracker.pi_alokphone
-      - device_tracker.pi_rashmiphone
-      - device_tracker.rashmiappiphone
-      - device_tracker.rashmisiphone
-      - input_boolean.alokhome
-      - input_boolean.rashmihome
-      - input_select.abodestatus
-      - media_player.livingroomsonos
-      - media_player.panasonic_viera_tv
-      - sensor.ars_bloom_temperature
-      - sensor.ars_bloom_voltage
-      - sensor.downstairs_temperature
-      - sensor.evening_commute
-      - sensor.living_room_temperature
-      - sensor.morning_commute
-      - sensor.plexspy
-      - sensor.upstairs_temperature
-      - switch.driveway
 automation: !include automation.yaml
 group: !include groups.yaml
 script: !include scripts.yaml

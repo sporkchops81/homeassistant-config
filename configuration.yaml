@@ -201,6 +201,14 @@ input_select:
      - Watch Apple TV
     initial: PowerOff
     icon: mdi:remote
+  hdmiswitcher:
+    name: HDMI Switcher
+    options:
+     - AppleTV
+     - FireTV
+     - Shield
+    initial: Shield
+    icon: mdi:remote
 
 input_boolean:
   abodeupdate:

@@ -1,140 +1,171 @@
 #################################################################
 ## Customize
 #################################################################
-    - entity_id: climate.downstairs
-      friendly_name: EcobeeDown
-      entity_picture: /local/Ecobee.png
-    - entity_id: climate.upstairs
-      friendly_name: EcobeeUp
-      entity_picture: /local/Ecobee.png
+     climate.downstairs:
+       friendly_name: EcobeeDown
+       entity_picture: /local/Ecobee.png
+     climate.upstairs:
+       friendly_name: EcobeeUp
+       entity_picture: /local/Ecobee.png
 #devices
-    - entity_id: device_tracker.myiphone
-      icon: mdi:cellphone-iphone
-      friendly_name: Alok's iPhone
-    - entity_id: device_tracker.pi_alokphone
-      icon: mdi:cellphone-iphone
-      friendly_name: Alok's iPhone MQTT
-    - entity_id: device_tracker.rashmisiphone
-      icon: mdi:cellphone-iphone
-      friendly_name: Rashmi's iPhone
-    - entity_id: device_tracker.pi_rashmiphone
-      icon: mdi:cellphone-iphone
-      friendly_name: Rashmi's iPhone MQTT
-    - entity_id: sensor.ars_bloom_voltage
-      friendly_name: 'BloomSky Voltage'
-      icon: mdi:battery
-    - entity_id: binary_sensor.ars_bloom_rain
-      friendly_name: 'BloomSky Rain'
-    - entity_id: sensor.ars_bloom_humidity
-      friendly_name: 'BloomSky Humidity'
-      icon: mdi:water-percent
-    - entity_id: sensor.pws_pressure_in
-      friendly_name: 'Outdoor Pressure'
-      icon: mdi:gauge
-    - entity_id: sensor.pws_wind_dir
-      friendly_name: 'Wind Direction'
-      icon: mdi:compass-outline
-    - entity_id: sensor.pws_wind_string
-      friendly_name: 'Wind Summary'
-      icon: mdi:weather-windy
-    - entity_id: sensor.leeotemp
-      icon: mdi:thermometer-lines
-    - entity_id: sensor.leeohumid
-      icon: mdi:water-percent
-    - entity_id: sensor.leeoalarmstatus
-      icon: mdi:fire
-    - entity_id: sensor.ars_bloom_temperature
-      friendly_name: 'BloomSky Temperature'
-    - entity_id: sensor.pws_temp_f
-      friendly_name: 'Outdoor Temperature'
-      icon: mdi:thermometer
-    - entity_id: sensor.pws_weather
-      friendly_name: 'Weather Summary'
-    - entity_id: sensor.pws_relative_humidity
-      icon: mdi:water-percent
-      friendly_name: 'Outdoor Humidity'
-    - entity_id: sensor.dark_sky_cloud_coverage
-      friendly_name: 'Cloud Coverage'
-    - entity_id: sensor.dark_sky_daily_summary
-      friendly_name: 'Daily Summary'
-    - entity_id: sensor.dark_sky_hourly_summary
-      friendly_name: 'Hourly Summary'
-    - entity_id: group.weather
-      icon: mdi:weather-pouring
-    - entity_id: group.information
-      icon: mdi:information-outline
-    - entity_id: group.all_automations
-      hidden: false
-      friendly_name: 'Automations'
-    - entity_id: group.all_scripts
-      hidden: false
-      friendly_name: 'Scripts'
-    - entity_id: group.all_devices
-      hidden: false
-      friendly_name: 'Devices'
-    - entity_id: group.all_lights
-      hidden: false
-      friendly_name: 'Lights'
-    - entity_id: group.all_switches
-      hidden: false
-      friendly_name: 'Switches'
-    - entity_id: remote.livingroom
-      friendly_name: 'Livingroom Remote'
-      icon: mdi:remote
-    - entity_id: sensor.living_room
-      friendly_name: 'Harmony Activity'
-      entity_picture: /local/Harmony.png
-    - entity_id: sensor.usd_inr
-      friendly_name: USD/INR
-      icon: mdi:currency-inr
-    - entity_id: sensor.usd_eur
-      friendly_name: USD/EUR
-      icon: mdi:currency-eur
 
-    - entity_id: sensor.morning_commute
-      friendly_name: 'Morning Commute'
-      icon: mdi:car
-    - entity_id: sensor.evening_commute
-      friendly_name: 'Evening Commute'
-      icon: mdi:car
-    - entity_id: sensor.garagedoor
-      icon: mdi:glassdoor
+     device_tracker.myiphone:
+       icon: mdi:cellphone-iphone
+       friendly_name: Alok's iPhone
+     device_tracker.pi_alokphone:
+       icon: mdi:cellphone-iphone
+       friendly_name: Alok's iPhone MQTT
+     device_tracker.rashmisiphone:
+       icon: mdi:cellphone-iphone
+       friendly_name: Rashmi's iPhone
+     device_tracker.pi_rashmiphone:
+       icon: mdi:cellphone-iphone
+       friendly_name: Rashmi's iPhone MQTT
+     device_tracker.alokdelllatitude:
+       icon: mdi:laptop-windows
+       friendly_name: Dell Laptop
+     device_tracker.gameroom:
+       icon: mdi:access-point-network
+       friendly_name: Ubiquiti Unifi
+     device_tracker.harmonyhub:
+       icon: mdi:remote
+       friendly_name: Logitech Harmony
+     device_tracker.hpaio:
+       icon: mdi:desktop-mac
+       friendly_name: HP AIO
+     device_tracker.toshibaaio:
+       icon: mdi:desktop-mac
+       friendly_name: Toshiba AIO
+     device_tracker.44650d8ae465:
+       friendly_name: Echo Dot
+       icon: mdi:amazon
+     device_tracker.94a1a273348b:
+       friendly_name: BloomSky
+       icon: mdi:compass-outline
 
-     # media_player.livingroomsonos:
-       # friendly_name: Sonos Play:5
-    - entity_id: media_player.castlivingroom
-      friendly_name: Chromecast
-    - entity_id: media_player.shieldtv
-      friendly_name: ShieldTV Cast
-    - entity_id: media_player.my_shield_android_tv
-      friendly_name: Shield TV
-    - entity_id: thermostat.main_floor
-      icon: mdi:thermometer-lines
-    - entity_id: thermostat.upstairs
-      icon: mdi:thermometer-lines
-    - entity_id: sensor.downstairs_humidity
-      icon: mdi:water-percent
-    - entity_id: sensor.downstairsthermmode
-      icon: mdi:home
-    - entity_id: sensor.downstairsthermoper
-      icon: mdi:fan
-    - entity_id: sensor.upstairs_humidity
-      icon: mdi:water-percent
-    - entity_id: sensor.upstairshermostatmode
-      icon: mdi:home
-    - entity_id: sensor.upstairsthermostatoperation
-      icon: mdi:fan
-#Emulated_Hue Devices
-    - entity_id: input_boolean.abodeupdate, input_boolean.startrecording, input_boolean.alokhome, input_boolean.rashmihome
-      emulated_hue: true
-    - entity_id: switch.driveway
-      emulated_hue: true
-      emulated_hue_name: "Driveway Light"
-    - entity_id: switch.garage_relay_switch_8_0
-      emulated_hue: true
-      emulated_hue_name: "Garage Door"
-      friendly_name: Garage Door Switch
+ #weather
+     sensor.ars_bloom_voltage:
+       friendly_name: 'BloomSky Voltage'
+       icon: mdi:battery
+     binary_sensor.ars_bloom_rain:
+       friendly_name: 'BloomSky Rain'
+     sensor.ars_bloom_humidity:
+       friendly_name: 'BloomSky Humidity'
+       icon: mdi:water-percent
+     sensor.pws_pressure_in:
+       friendly_name: 'Outdoor Pressure'
+       icon: mdi:gauge
+     sensor.pws_wind_dir:
+       friendly_name: 'Wind Direction'
+       icon: mdi:compass-outline
+     sensor.pws_wind_string:
+       friendly_name: 'Wind Summary'
+       icon: mdi:weather-windy
+     sensor.leeotemp:
+       icon: mdi:thermometer-lines
+     sensor.leeohumid:
+       icon: mdi:water-percent
+     sensor.leeoalarmstatus:
+       icon: mdi:fire
+     sensor.ars_bloom_temperature:
+       friendly_name: 'BloomSky Temperature'
+     sensor.pws_temp_f:
+       friendly_name: 'Outdoor Temperature'
+       icon: mdi:thermometer
+     sensor.pws_weather:
+       friendly_name: 'Weather Summary'
+     sensor.pws_relative_humidity:
+       icon: mdi:water-percent
+       friendly_name: 'Outdoor Humidity'
+     sensor.dark_sky_cloud_coverage:
+       friendly_name: 'Cloud Coverage'
+     sensor.dark_sky_daily_summary:
+       friendly_name: 'Daily Summary'
+     sensor.dark_sky_hourly_summary:
+       friendly_name: 'Hourly Summary'
+     group.weather:
+       icon: mdi:weather-pouring
+     group.information:
+       icon: mdi:information-outline
+     group.all_automations:
+       hidden: false
+       friendly_name: 'Automations'
+     group.all_scripts:
+       hidden: false
+       friendly_name: 'Scripts'
+     group.all_devices:
+       hidden: false
+       friendly_name: 'Devices'
+     group.all_lights:
+       hidden: false
+       friendly_name: 'Lights'
+     group.all_switches:
+       hidden: false
+       friendly_name: 'Switches'
+     remote.livingroom:
+       friendly_name: 'Livingroom Remote'
+       icon: mdi:remote
+     sensor.living_room:
+       friendly_name: 'Harmony Activity'
+       entity_picture: /local/Harmony.png
+     sensor.usd_inr:
+       friendly_name: USD/INR
+       icon: mdi:currency-inr
+     sensor.usd_eur:
+       friendly_name: USD/EUR
+       icon: mdi:currency-eur
 
-    - entity_id: climate.ecobee
-      max_temp: 90
-      min_temp: 55
+     sensor.google_travel_time:
+       friendly_name: 'Morning Commute'
+       icon: mdi:car
+     sensor.morning_commute:
+       friendly_name: 'Morning Commute'
+       icon: mdi:car
+     sensor.evening_commute:
+       friendly_name: 'Evening Commute'
+       icon: mdi:car
+     sensor.garagedoor:
+       icon: mdi:glassdoor
+
+     media_player.castlivingroom:
+       friendly_name: Chromecast
+     media_player.shieldtv:
+       friendly_name: ShieldTV Cast
+     media_player.my_shield_android_tv:
+       friendly_name: Shield TV
+     thermostat.main_floor:
+       icon: mdi:thermometer-lines
+     thermostat.upstairs:
+       icon: mdi:thermometer-lines
+     sensor.downstairs_humidity:
+       icon: mdi:water-percent
+     sensor.downstairsthermmode:
+       icon: mdi:home
+     sensor.downstairsthermoper:
+       icon: mdi:fan
+     sensor.upstairs_humidity:
+       icon: mdi:water-percent
+     sensor.upstairshermostatmode:
+       icon: mdi:home
+     sensor.upstairsthermostatoperation:
+       icon: mdi:fan
+ #Emulated_Hue Devices
+     input_boolean.abodeupdate:
+       emulated_hue: true
+     input_boolean.startrecording:
+       emulated_hue: true
+     input_boolean.alokhome:
+       emulated_hue: true
+     input_boolean.rashmihome:
+       emulated_hue: true
+     switch.driveway:
+       emulated_hue: true
+       emulated_hue_name: "Driveway Light"
+     switch.garage_relay_switch_8_0:
+       emulated_hue: true
+       emulated_hue_name: "Garage Door"
+       friendly_name: Garage Door Switch
+
+     climate.ecobee:
+       max_temp: 90
+       min_temp: 55

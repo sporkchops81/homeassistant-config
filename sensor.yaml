@@ -38,7 +38,7 @@
     name: Alok to Home
     api_key: !secret google_key
     origin: device_tracker.alokiosiphone
-    destination: !secret add_home    
+    destination: !secret add_home
   - platform: wunderground
     api_key: !secret wunderground_key
     pws_id: !secret wunderground_pws
@@ -77,6 +77,14 @@
            {%- else -%}
              unknown
            {%- endif -%}
+        icon_template: >-
+          {%- if states.climate.downstairs.attributes.operation == "heat" -%}
+            mdi:fire
+          {%- elif states.climate.downstairs.attributes.operation == "cool" -%}
+            mdi:snowflake
+          {%- else -%}
+            mdi:fan
+          {%- endif -%}
       upstairshermostatmode:
         friendly_name: "Upstairs Away Mode"
         value_template: >-
@@ -95,6 +103,14 @@
            {%- else -%}
              unknown
            {%- endif -%}
+        icon_template: >-
+          {%- if states.climate.upstairs.attributes.operation == "heat" -%}
+            mdi:fire
+          {%- elif states.climate.upstairs.attributes.operation ==  "cool" -%}
+            mdi:snowflake
+          {%- else -%}
+            mdi:fan
+          {%- endif -%}
       living_room:
         value_template: >-
           {%- if states.states.remote.livingroom != None -%}

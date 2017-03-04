@@ -101,6 +101,7 @@
   Entertainment:
     - sensor.living_room
     - input_select.livingroomharmony
+    - input_select.hdmiswitcher
     - input_slider.harmonyvolume
     - input_boolean.tv
 

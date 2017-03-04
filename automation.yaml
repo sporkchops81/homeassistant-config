@@ -636,10 +636,13 @@
    - condition: state
      entity_id: binary_sensor.garagedoor
      state: 'off'
+   - condition: state
+     entity_id: input_boolean.abodeupdate
+     state: 'on'
    - condition: template
      value_template: >
-       {%- if states.binary_sensor.garagedoor.last_changed -%}
-         {{ (as_timestamp(now()) - as_timestamp(states.binary_sensor.garagedoor.last_changed)) > 120 }}
+       {%- if states.automation.open_garage_door_when_someone_home.last_triggered -%}
+         {{ (as_timestamp(now()) - as_timestamp(states.automation.open_garage_door_when_someone_home.last_triggered)) > 30 }}
        {%- else -%}
          true
        {%- endif -%}
@@ -767,7 +770,7 @@
 #################################################################
 ## Harmony Remote
 #################################################################
-- alias: "Set Volume Slider on Harmony Start"
+- alias: "Set initial values on Harmony Start"
   trigger:
     platform: state
     entity_id: remote.livingroom
@@ -785,6 +788,17 @@
         entity_id: input_slider.harmonyvolume
         value: >
             {{ (states.media_player.livingroomsonos.attributes.volume_level * 100) | int }}
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.hdmiswitcher
+        option: >
+          {%- if states.remote.livingroom.attributes.current_activity == "Watch Apple TV" -%}
+            AppleTV
+          {%- elif states.remote.livingroom.attributes.current_activity == "Watch Fire TV" -%}
+            FireTV
+          {%- elif states.remote.livingroom.attributes.current_activity == "SATV" -%}
+            Shield
+          {%- endif -%}
 
 - alias: Update TV status in HA
   trigger:
@@ -844,6 +858,18 @@
       data_template:
         entity_id: input_select.livingroomharmony
         option: "{{trigger.to_state.state}}"
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.hdmiswitcher
+        option: >
+          {%- if trigger.to_state.state == "Watch Apple TV" -%}
+            AppleTV
+          {%- elif trigger.to_state.state == "Watch Fire TV" -%}
+            FireTV
+          {%- else -%}
+            Shield
+          {%- endif -%}
+
 - alias: Update HA after startup
   trigger:
     platform: event
@@ -858,3 +884,31 @@
       data_template:
         entity_id: input_select.livingroomharmony
         option: "{{states.sensor.living_room.state}}"
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.hdmiswitcher
+        option: >
+          {%- if states.remote.livingroom.attributes.current_activity == "Watch Apple TV" -%}
+            AppleTV
+          {%- elif states.remote.livingroom.attributes.current_activity == "Watch Fire TV" -%}
+            FireTV
+          {%- else -%}
+            Shield
+          {%- endif -%}
+- alias: "Change HDMI Switcher"
+  trigger:
+    platform: state
+    entity_id: input_select.hdmiswitcher
+  action:
+  - service: remote.send_command
+    data_template:
+      command: >-
+        {%- if trigger.to_state.state == "AppleTV" -%}
+          Input1
+        {%- elif trigger.to_state.state == "FireTV" -%}
+          Input2
+        {%- elif trigger.to_state.state == "Shield" -%}
+          Input3
+        {%- endif -%}
+      device: 31766668
+      entity_id: remote.livingroom

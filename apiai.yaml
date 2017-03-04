@@ -46,3 +46,23 @@
               {%- elif Room.lower() in ['living room'] -%}
                 living_room_lights
               {%- endif -%}
+    TurnDeviceIntent:
+      speech: Turning {{ Devices }} {{ OnOff }}
+      action:
+        - service: logbook.log
+          data_template:
+            name: 'Api.AI: '
+            message: Someone asked to turn {{ Devices }} {{ OnOff }}
+        - service: remote.turn_on
+          data_template:
+            entity_id: remote.livingroom
+            activity: >
+              {%- if Devices.lower() in ['television', 'plex', 'shield','tv'] and OnOff == 'on'-%}
+                18032761
+              {%- elif Devices.lower() in ['apple tv'] and OnOff == 'on' -%}
+                23043915
+              {%- elif Devices.lower() in ['fire tv', 'amazon fire', 'amazon fire tv'] and OnOff == 'on' -%}
+                17230861
+              {%- elif OnOff == 'off' -%}
+                -1
+              {%- endif -%}

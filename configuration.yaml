@@ -104,9 +104,9 @@ media_player:
     name: Panasonic Viera TV
   - platform: plex
     host: 192.168.2.113
-  - platform: apple_tv
-    host: 192.168.2.90
-    login_id: !secret apple_hsgid
+  # - platform: apple_tv
+  #   host: 192.168.2.90
+  #   login_id: !secret apple_hsgid
 camera:
   - platform: bloomsky
   - platform: generic

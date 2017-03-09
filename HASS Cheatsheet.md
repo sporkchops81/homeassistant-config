@@ -71,8 +71,7 @@ If you are using AIO (which has Mosquitto pre-installed), you can use the follow
 
 1. Install node.js, and pm2
 ```
-    sudo apt-get update
-    sudo apt-get upgrade
+    sudo apt-get update && sudo apt-get upgrade -y
     curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
     sudo apt-get install -y nodejs
     sudo npm install -g pm2

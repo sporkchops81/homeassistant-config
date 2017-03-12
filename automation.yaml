@@ -460,24 +460,28 @@
     - service: notify.pushbullet
       data_template:
         message: >
-          {% set space = joiner(' ') %}
-          {%- for attr in states.sensor.plexspy.attributes -%}
-           {%- if not attr=="friendly_name" and not attr=="unit_of_measurement" -%}
-            {{space()}}{{attr}} is watching {{states.sensor.plexspy.attributes[attr]}}.
-           {%- endif -%}
-          {%- endfor -%}
+          {%- if states.sensor.plexspy.attributes -%}
+            {% set space = joiner(' ') %}
+            {%- for attr in states.sensor.plexspy.attributes -%}
+             {%- if not attr=="friendly_name" and not attr=="unit_of_measurement" -%}
+              {{space()}}{{attr}} is watching {{states.sensor.plexspy.attributes[attr]}}.
+             {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
         title: "Plex {{ trigger.to_state.state }} people streaming. "
         target: device/myiPhone
     - service: logbook.log
       data_template:
         name: "Plex {{ trigger.to_state.state }} people streaming. "
         message: >
-          {% set space = joiner(' ') %}
-          {%- for attr in states.sensor.plexspy.attributes -%}
-           {%- if not attr=="friendly_name" and not attr=="unit_of_measurement" -%}
-            {{space()}}{{attr}} is watching {{states.sensor.plexspy.attributes[attr]}}.
-           {%- endif -%}
-          {%- endfor -%}
+          {%- if states.sensor.plexspy.attributes -%}
+            {% set space = joiner(' ') %}
+            {%- for attr in states.sensor.plexspy.attributes -%}
+             {%- if not attr=="friendly_name" and not attr=="unit_of_measurement" -%}
+              {{space()}}{{attr}} is watching {{states.sensor.plexspy.attributes[attr]}}.
+             {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
 
 #################################################################
 ## Home Automation Related
@@ -523,7 +527,6 @@
         homeassistant.turn_off
       {%- elif is_state('sensor.downstairsthermmode', 'Away') -%}
         homeassistant.turn_on
-      {%- else -%}
       {%- endif -%}
     entity_id: input_boolean.thermo_away_main
 
@@ -548,7 +551,6 @@
            off
          {%- elif is_state('input_boolean.thermo_away_main', 'on') -%}
            on
-         {%- else -%}
          {%- endif -%}
 
 - alias: Upstairs thermostat to Input_Boolean
@@ -561,7 +563,6 @@
         homeassistant.turn_off
       {%- elif is_state('sensor.upstairshermostatmode', 'Away') -%}
         homeassistant.turn_on
-      {%- else -%}
       {%- endif -%}
     entity_id: input_boolean.thermo_away_upstairs
 
@@ -586,7 +587,6 @@
           off
         {%- elif is_state('input_boolean.thermo_away_upstairs', 'on') -%}
           on
-        {%- else -%}
         {%- endif -%}
 
 - alias: Driveway light at night
@@ -828,16 +828,6 @@
         entity_id: media_player.livingroomsonos
         volume_level: >
           {{states.input_slider.harmonyvolume.state | int / 100}}
-- alias: "Update Volume Slider"
-  trigger:
-    platform: state
-    entity_id: sensor.sonos_volume
-  action:
-    - service: input_slider.select_value
-      data_template:
-        entity_id: input_slider.harmonyvolume
-        value: >
-            {{ states.media_player.livingroomsonos.attributes.volume_level * 100 }}
 
 - alias: "Start Harmony activity from input_select"
   trigger:
@@ -912,3 +902,13 @@
         {%- endif -%}
       device: 31766668
       entity_id: remote.livingroom
+- alias: "Update Volume Slider"
+  trigger:
+    - platform: state
+      entity_id: sensor.sonos_volume
+  action:
+    - service: input_slider.select_value
+      data_template:
+        entity_id: input_slider.harmonyvolume
+        value: >-
+          {{ (states.media_player.livingroomsonos.attributes|default({})).volume_level|default(0) * 100 }}

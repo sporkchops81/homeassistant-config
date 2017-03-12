@@ -60,7 +60,8 @@ light:
     qos: 0
 #zeroconf:
 recorder:
-  purge_days: 2
+  purge_days: 3
+  db_url: !secret recorder_db_url
 # Enables the frontend
 frontend:
 
@@ -146,6 +147,7 @@ device_tracker:
     host: 192.168.2.163
     username: !secret unifi_username
     password: !secret unifi_password
+    verify_ssl: False
 
 notify:
   - platform: ios

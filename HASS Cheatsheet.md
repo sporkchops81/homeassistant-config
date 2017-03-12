@@ -114,3 +114,43 @@ If you are using AIO (which has Mosquitto pre-installed), you can use the follow
 *  Update HA `pip3 install --upgrade homeassistant`
 *  Type `exit` to logout the hass user and return to the `pi` user.
 *  Restart the Home-Assistant Service `sudo systemctl restart home-assistant.service`
+
+# Setting up MySQL
+Follow the instructions [here](https://community.home-assistant.io/t/large-homeassistant-database-files/4201/124) to set-up MySQL.
+```
+sudo apt-get update && sudo apt-get upgrade -y
+sudo apt-get install mysql-server && sudo apt-get install mysql-client
+sudo apt-get install libmysqlclient-dev
+sudo apt-get install python-dev python3-dev
+sudo pip3 install --upgrade mysql-connector
+sudo pip3 install mysqlclient
+```
+Create homeassistant database and grant privileges:
+```
+mysql -u root -p
+CREATE DATABASE homeassistant;
+CREATE USER 'hass'@'localhost' IDENTIFIED BY 'PASSWORD';
+GRANT ALL PRIVILEGES ON homeassistant.* TO 'hass'@'localhost';
+FLUSH PRIVILEGES;
+exit;
+```
+Test if user works:
+```
+mysql -u hass homeassistant -p
+exit;
+```
+Switch to homeassistant user:
+```
+sudo su -s /bin/bash hass
+source /srv/hass/hass_venv/bin/activate
+pip3 install --upgrade mysqlclient
+exit
+```
+Add to configuration.yaml and restart HA.
+```
+recorder:
+  db_url: mysql://hass:********@127.0.0.1/homeassistant?charset=utf8
+```  
+Some useful commands:
+* Use `mysqlshow -h localhost -u hass -p homeassistant` to show the tables that are created.
+* To delete all tables and start from scratch, run `DROP DATABASE homeassistant;` and recreate homeassistant database and grant privileges.

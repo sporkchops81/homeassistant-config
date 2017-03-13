@@ -175,6 +175,7 @@ ecobee:
   api_key: !secret ecobee_key
   hold_temp: True
 
+# Log Severities: notset, debug, info, warn, warning, error, fatal, critical
 logger:
   default: error
 #  default: warning
@@ -359,6 +360,26 @@ logbook:
       - input_slider.leeotemperature
       - input_slider.leeohumidity
       - input_boolean.leeoalarm
+# Enables support for tracking state changes over time.
+history:
+  include:
+    entities:
+      - binary_sensor.garagedoor
+      - device_tracker.alokiosiphone
+      - device_tracker.myiphone
+      - device_tracker.pi_alokphone
+      - device_tracker.pi_rashmiphone
+      - device_tracker.rashmiappiphone
+      - device_tracker.rashmisiphone
+      - input_boolean.alokhome
+      - input_boolean.rashmihome
+      - input_select.abodestatus
+      - media_player.panasonic_viera_tv
+      - sensor.ars_bloom_temperature
+      - sensor.evening_commute
+      - sensor.morning_commute
+      - sensor.plexspy
+      - switch.driveway
 automation: !include automation.yaml
 group: !include groups.yaml
 script: !include scripts.yaml

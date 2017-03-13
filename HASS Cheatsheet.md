@@ -154,3 +154,7 @@ recorder:
 Some useful commands:
 * Use `mysqlshow -h localhost -u hass -p homeassistant` to show the tables that are created.
 * To delete all tables and start from scratch, run `DROP DATABASE homeassistant;` and recreate homeassistant database and grant privileges.
+* `show tables` to list all the tables.
+* `desc states` to describe table `states`.
+* `(SELECT event_id, time_fired FROM events ORDER BY event_id ASC LIMIT 1) UNION ALL (SELECT event_id, time_fired FROM events ORDER BY event_id DESC LIMIT 1);` to list the first and last record of `events` table.
+* `SELECT table_schema homeassistant, sum( data_length + index_length ) / (1024 * 1024) "Data Base Size in MB" FROM information_schema.TABLES GROUP BY table_schema ;` to list disk space used by each database.

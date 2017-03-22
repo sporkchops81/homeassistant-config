@@ -212,6 +212,15 @@ input_select:
      - Shield
     initial: Shield
     icon: mdi:remote
+  hdmiinput:
+    name: HDMI Input
+    options:
+     - InputHdmi1
+     - InputHdmi2
+     - InputHDMI3
+     - InputHdmi4
+    initial: InputHdmi4
+    icon: mdi:remote
 
 input_boolean:
   abodeupdate:
@@ -250,6 +259,10 @@ input_boolean:
     name: Leeo Alarm
     initial: off
     icon: mdi:fire
+  partymode:
+    name: Party Mode
+    initial: off
+    icon: mdi:theme-light-dark
 
 input_slider:
   harmonyvolume:

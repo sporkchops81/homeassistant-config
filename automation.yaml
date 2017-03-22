@@ -517,6 +517,46 @@
      service: ifttt.trigger
      data_template: {"event":"leeocolor", "value1":"{{ '{:02x}{:02x}{:02x}'.format(range(0, 255) | random, range(0, 255) | random, range(0, 255) | random) }}"}
 
+- alias: "Turn Lifx Party Mode On"
+  trigger:
+    - platform: time
+      seconds: '/5'
+  condition:
+    - condition: state
+      entity_id: input_boolean.partymode
+      state: 'on'
+  action:
+    - service: light.turn_on
+      entity_id: light.lifxnrkitchen
+      data_template:
+        rgb_color: ['{{ (range(0, 255)|random) }}', '{{ (range(0, 255)|random) }}', '{{ (range(0, 255)|random) }}']
+        brightness: 180
+        transition: '{{ (range(1, 3)|random) }}'
+    - service: light.turn_on
+      entity_id: light.lifxnrguest
+      data_template:
+        rgb_color: ['{{ (range(0, 255)|random) }}', '{{ (range(0, 255)|random) }}', '{{ (range(0, 255)|random) }}']
+        brightness: 180
+        transition: '{{ (range(1, 3)|random) }}'
+    - service: light.turn_on
+      entity_id: light.lifx3
+      data_template:
+        rgb_color: ['{{ (range(0, 255)|random) }}', '{{ (range(0, 255)|random) }}', '{{ (range(0, 255)|random) }}']
+        brightness: 180
+        transition: '{{ (range(1, 3)|random) }}'
+- alias: "Turn Lifx Party Mode Off"
+  trigger:
+    - platform: state
+      entity_id: input_boolean.partymode
+      state: 'off'
+  action:
+    - service: light.turn_on
+      entity_id: group.living_room_lights
+      data:
+        rgb_color: [255, 255, 255]
+        brightness: 250
+        color_temp: 285
+
 - alias: Downstairs thermostat to Input_Boolean
   trigger:
     platform: state
@@ -901,6 +941,25 @@
           Input3
         {%- endif -%}
       device: 31766668
+      entity_id: remote.livingroom
+- alias: "Change HDMI Input"
+  trigger:
+    platform: state
+    entity_id: input_select.hdmiinput
+  action:
+  - service: remote.send_command
+    data_template:
+      command: >-
+        {%- if trigger.to_state.state == "InputHdmi1" -%}
+          InputHdmi1
+        {%- elif trigger.to_state.state == "InputHdmi2" -%}
+          InputHdmi2
+        {%- elif trigger.to_state.state == "InputHDMI3" -%}
+          InputHDMI3
+        {%- elif trigger.to_state.state == "InputHdmi4" -%}
+          InputHdmi4
+        {%- endif -%}
+      device: 31747892
       entity_id: remote.livingroom
 - alias: "Update Volume Slider"
   trigger:

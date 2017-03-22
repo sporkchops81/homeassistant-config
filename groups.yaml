@@ -102,6 +102,7 @@
     - sensor.living_room
     - input_select.livingroomharmony
     - input_select.hdmiswitcher
+    - input_select.hdmiinput
     - input_slider.harmonyvolume
     - input_boolean.tv
 
@@ -109,7 +110,7 @@
     - switch.wemoswitch
     - switch.garage_relay_switch_8_0
     - switch.driveway
-
+    - input_boolean.partymode
 
   Household:
     - input_boolean.alokhome

@@ -517,6 +517,19 @@
      service: ifttt.trigger
      data_template: {"event":"leeocolor", "value1":"{{ '{:02x}{:02x}{:02x}'.format(range(0, 255) | random, range(0, 255) | random, range(0, 255) | random) }}"}
 
+- alias: 'Change Leeo upstairs color'
+  condition:
+    - condition: time
+      after: '19:15:00'
+      before: '07:45:00'
+  trigger:
+   - platform: time
+     minutes: '/15'
+     seconds: 00
+  action:
+     service: ifttt.trigger
+     data_template: {"event":"leeocolorup", "value1":"{{ '{:02x}{:02x}{:02x}'.format(range(0, 255) | random, range(0, 255) | random, range(0, 255) | random) }}"}
+
 - alias: "Turn Lifx Party Mode On"
   trigger:
     - platform: time

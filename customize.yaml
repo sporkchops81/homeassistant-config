@@ -65,6 +65,10 @@
        icon: mdi:thermometer-lines
      sensor.leeohumid:
        icon: mdi:water-percent
+     sensor.leeouptemp:
+       icon: mdi:thermometer-lines
+     sensor.leeouphumid:
+       icon: mdi:water-percent
      sensor.leeoalarmstatus:
        icon: mdi:fire
      sensor.ars_bloom_temperature:
@@ -161,6 +165,7 @@
      switch.driveway:
        emulated_hue: true
        emulated_hue_name: "Driveway Light"
+       friendly_name: "Driveway Light"
      switch.garage_relay_switch_8_0:
        emulated_hue: true
        emulated_hue_name: "Garage Door"

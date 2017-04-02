@@ -58,10 +58,7 @@ light:
     retain: true
     optimistic: false
     qos: 0
-#zeroconf:
-recorder:
-  purge_days: 3
-  db_url: !secret recorder_db_url
+
 # Enables the frontend
 frontend:
 
@@ -113,6 +110,10 @@ camera:
   - platform: generic
     still_image_url: https://radblast.wunderground.com/cgi-bin/radar/WUNIDS_map?station=FFC&brand=wui&num=1&delay=100&type=NTP&frame=0&scale=1&noclutter=0&showstorms=5&mapx=400&mapy=240&centerx=400&centery=240&transx=0&transy=0&showlabels=1&severe=0&rainsnow=0&lightning=0&smooth=0&rand=24427697&lat=0&lon=0&label=you
     name: RadarGA
+  - platform: synology
+    url: http://192.168.2.113:5000/
+    username: !secret synology_username
+    password: !secret synology_password
   # - platform: foscam
   #   ip: 192.168.2.224
   #   name: Door Camera
@@ -286,14 +287,46 @@ input_slider:
     min: 0
     max: 100
     step: 1
-
+  leeoupstairstemp:
+    icon: mdi:thermometer-lines
+    name: Leeo Upstairs Temp
+    initial: 60
+    min: 20
+    max: 120
+    step: 0.1
+  leeoupstairshumidity:
+    icon: mdi:water-percent
+    name: Leeo Upstairs Humidity
+    initial: 50
+    min: 0
+    max: 100
+    step: 1
 remote:
   - platform: harmony
     name: livingroom
     host: 192.168.2.153
 
-
-# switch:
+switch:
+  - platform: hikvisioncam
+    host: 192.168.2.91
+    name: PorchMotion
+    username: !secret hikvision_username
+    password: !secret hikvision_password
+  - platform: hikvisioncam
+    host: 192.168.2.92
+    name: BackyardMotion
+    username: !secret hikvision_username
+    password: !secret hikvision_password
+  - platform: hikvisioncam
+    host: 192.168.2.93
+    name: PatioMotion
+    username: !secret hikvision_username
+    password: !secret hikvision_password
+  - platform: hikvisioncam
+    host: 192.168.2.94
+    name: DrivewayMotion
+    username: !secret hikvision_username
+    password: !secret hikvision_password
 #  platform: command_line
 #  switches:
 #    #Switch for Foscam Motion Detection
@@ -316,8 +349,8 @@ ios:
 logbook:
   exclude:
     domains:
-      - sun
       - automation
+      - sun
     entities:
       - sensor.pws_weather
       - sensor.pws_temp_f
@@ -326,6 +359,8 @@ logbook:
       - binary_sensor.ars_bloom_rain
       - binary_sensor.ars_bloom_night
       - binary_sensor.garage_door_tilt_sensor_sensor_5_0
+      - binary_sensor.upstairs_occupancy
+      - binary_sensor.downstairs_occupancy
       - sensor.ars_bloom_uvindex
       - sensor.pws_wind_dir
       - sensor.pws_wind_string
@@ -370,8 +405,6 @@ logbook:
       - automation.update_ha_if_harmony_activity_changes
       - automation.update_tv_status_in_ha
       - input_slider.harmonyvolume
-      - input_slider.leeotemperature
-      - input_slider.leeohumidity
       - input_boolean.leeoalarm
 # Enables support for tracking state changes over time.
 history:
@@ -388,11 +421,34 @@ history:
       - input_boolean.rashmihome
       - input_select.abodestatus
       - media_player.panasonic_viera_tv
-      - sensor.ars_bloom_temperature
-      - sensor.evening_commute
-      - sensor.morning_commute
       - sensor.plexspy
-      - switch.driveway
+recorder:
+  purge_days: 3
+  db_url: !secret recorder_db_url
+  exclude:
+    domains:
+      - sun
+    entities:
+      - binary_sensor.backyard_motion
+      - binary_sensor.backyard_field_detection
+      - binary_sensor.backyard_line_crossing
+      - binary_sensor.driveway_motion
+      - binary_sensor.driveway_field_detection
+      - binary_sensor.driveway_line_crossing
+      - binary_sensor.patio_motion
+      - binary_sensor.patio_field_detection
+      - binary_sensor.patio_line_crossing
+      - binary_sensor.porch_field_detection
+      - binary_sensor.porch_line_crossing
+      - binary_sensor.porch_motion
+      - group.camera_sensors
+      - input_slider.leeotemperature
+      - input_slider.leeohumidity
+      - input_slider.leeoupstairstemp
+      - input_slider.leeoupstairshumidity
+      - input_select.livingroomharmony
+      - sensor.living_room
+      - zwave.garage_door_tilt_sensor_5
 automation: !include automation.yaml
 group: !include groups.yaml
 script: !include scripts.yaml

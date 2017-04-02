@@ -140,6 +140,24 @@
           {%- else -%}
             NA
           {%- endif -%}
+      leeouptemp:
+        friendly_name: "Leeo Upstairs Temperature"
+        unit_of_measurement: '°F'
+        value_template: >-
+          {%- if states.input_slider.leeoupstairstemp.state != None -%}
+            {{ states.input_slider.leeoupstairstemp.state }}
+          {%- else -%}
+            NA
+          {%- endif -%}
+      leeouphumid:
+        friendly_name: "Leeo Upstairs Humidity"
+        unit_of_measurement: '%'
+        value_template: >-
+          {%- if states.input_slider.leeoupstairshumidity.state != None -%}
+            {{ states.input_slider.leeoupstairshumidity.state }}
+          {%- else -%}
+            NA
+          {%- endif -%}
       leeoalarmstatus:
         friendly_name: "Leeo Alarm"
         value_template: >-

@@ -21,3 +21,23 @@
     state_topic: "smartthings/Rashmi_Life360/presence"
     payload_on: 'present'
     payload_off: 'not present'
+  - platform: hikvision
+    host: 192.168.2.91
+    name: Porch
+    username: !secret hikvision_username
+    password: !secret hikvision_password
+  - platform: hikvision
+    host: 192.168.2.92
+    name: Backyard
+    username: !secret hikvision_username
+    password: !secret hikvision_password
+  - platform: hikvision
+    host: 192.168.2.93
+    name: Patio
+    username: !secret hikvision_username
+    password: !secret hikvision_password
+  - platform: hikvision
+    host: 192.168.2.94
+    name: Driveway
+    username: !secret hikvision_username
+    password: !secret hikvision_password

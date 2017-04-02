@@ -20,6 +20,10 @@
     entities:
       - camera.ars_bloom
       - camera.radarga
+      - camera.driveway
+      - camera.porch
+      - camera.backyard
+      - camera.patio
       - camera.door_camera
       - camera.door_camera_2
       - camera.door_camera_3
@@ -38,7 +42,7 @@
     icon: mdi:settings
     entities:
       - group.devices
-      - group.all_scripts
+      - group.camera_sensors
       - group.household
 
   Weather:
@@ -92,6 +96,21 @@
     - sensor.leeoalarmstatus
     - sensor.leeotemp
     - sensor.leeohumid
+    - sensor.leeouptemp
+    - sensor.leeouphumid
+  Camera Sensors:
+    - binary_sensor.backyard_motion
+    - binary_sensor.backyard_field_detection
+    - binary_sensor.backyard_line_crossing
+    - binary_sensor.driveway_motion
+    - binary_sensor.driveway_field_detection
+    - binary_sensor.driveway_line_crossing
+    - binary_sensor.patio_motion
+    - binary_sensor.patio_field_detection
+    - binary_sensor.patio_line_crossing
+    - binary_sensor.porch_field_detection
+    - binary_sensor.porch_line_crossing
+    - binary_sensor.porch_motion
 
   living_room_lights:
     - light.lifx3

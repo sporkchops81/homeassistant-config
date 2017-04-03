@@ -51,6 +51,7 @@ __pycache__
 *.sqlite
 *.xml
 *.backup
+*.py
 *.google.token
 .google.token
 .HA_VERSION

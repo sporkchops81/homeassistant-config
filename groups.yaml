@@ -43,6 +43,7 @@
     entities:
       - group.devices
       - group.camera_sensors
+      - group.camera_switches
       - group.household
 
   Weather:
@@ -111,6 +112,12 @@
     - binary_sensor.porch_field_detection
     - binary_sensor.porch_line_crossing
     - binary_sensor.porch_motion
+
+  Camera Switches:
+    - switch.backyardmotion
+    - switch.drivewaymotion
+    - switch.patiomotion
+    - switch.porchmotion
 
   living_room_lights:
     - light.lifx3

@@ -25,9 +25,9 @@
   - platform: command_line
     switches:
       porch_recording:
-        command_on: 'python3 /home/hass/.homeassistant/python/camera_recording.py 2 start'
-        command_off: 'python3 /home/hass/.homeassistant/python/camera_recording.py 2 stop'
-        command_state: 'python3 /home/hass/.homeassistant/python/camera_recording.py 2 status'
+        command_on: 'python3 /home/hass/.homeassistant/python/camera_recording.py 6 start'
+        command_off: 'python3 /home/hass/.homeassistant/python/camera_recording.py 6 stop'
+        command_state: 'python3 /home/hass/.homeassistant/python/camera_recording.py 6 status'
         friendly_name: "Porch Recording"
         value_template: >
           {% if value_json is defined %}

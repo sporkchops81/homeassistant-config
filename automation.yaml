@@ -2,6 +2,7 @@
 ## Presence
 #################################################################
 - alias: 'Alok Away'
+  initial_state: 'on'
   condition:
     - condition: state
       entity_id: input_boolean.alokhome
@@ -22,6 +23,8 @@
     - platform: state
       entity_id: device_tracker.pi_alokphone, device_tracker.alokiosiphone
       state: 'not_home'
+      for:
+        minutes: 5
     - platform: state
       entity_id: binary_sensor.aloklife360, input_boolean.alok360home
       state: 'off'
@@ -37,6 +40,7 @@
           {%- endfor -%}
 
 - alias: 'Rashmi Away'
+  initial_state: 'on'
   condition:
     - condition: state
       entity_id: input_boolean.rashmihome
@@ -57,6 +61,8 @@
     - platform: state
       entity_id: device_tracker.pi_rashmiphone, device_tracker.rashmiappiphone
       state: 'not_home'
+      for:
+        minutes: 5
     - platform: state
       entity_id: binary_sensor.rashmilife360
       state: 'off'
@@ -72,6 +78,7 @@
           {%- endfor -%}
 
 - alias: 'Alok Home'
+  initial_state: 'on'
   condition:
     - condition: state
       entity_id: input_boolean.alokhome
@@ -79,7 +86,7 @@
     - condition: template
       value_template: >
         {%- if states.input_boolean.alokhome.last_changed -%}
-          {{ (as_timestamp(now()) - as_timestamp(states.input_boolean.alokhome.last_changed)) > 300 }}
+          {{ (as_timestamp(now()) - as_timestamp(states.input_boolean.alokhome.last_changed)) > 600 }}
         {%- else -%}
           true
         {%- endif -%}
@@ -102,6 +109,7 @@
           {%- endfor -%}
 
 - alias: 'Rashmi Home'
+  initial_state: 'on'
   condition:
     - condition: state
       entity_id: input_boolean.rashmihome
@@ -109,7 +117,7 @@
     - condition: template
       value_template: >
         {%- if states.input_boolean.rashmihome.last_changed -%}
-          {{ (as_timestamp(now()) - as_timestamp(states.input_boolean.rashmihome.last_changed)) > 300 }}
+          {{ (as_timestamp(now()) - as_timestamp(states.input_boolean.rashmihome.last_changed)) > 600 }}
         {%- else -%}
           true
         {%- endif -%}
@@ -132,6 +140,7 @@
           {%- endfor -%}
 
 - alias: 'Mark both away if Abode armed'
+  initial_state: 'on'
   condition:
    - condition: or
      conditions:
@@ -156,6 +165,7 @@
 #################################################################
 
 - alias: 'Disarm Abode from Away'
+  initial_state: 'on'
   condition:
     condition: state
     entity_id: input_select.abodestatus
@@ -169,6 +179,7 @@
      entity_id: script.abodestandby
 
 - alias: 'Garage Door open'
+  initial_state: 'on'
   condition:
     condition: state
     entity_id: sensor.garagedoor
@@ -189,6 +200,7 @@
       entity_id: script.notificationgaragedoor
 
 - alias: 'Disarm Abode at night'
+  initial_state: 'on'
   condition:
     condition: state
     entity_id: input_select.abodestatus
@@ -202,6 +214,7 @@
     entity_id: script.abodestandby
 
 - alias: 'Abode Home from Standby'
+  initial_state: 'on'
   condition:
     condition: and
     conditions:
@@ -230,6 +243,7 @@
      entity_id: script.abodehome
 
 - alias: 'Abode Standby'
+  initial_state: 'on'
   condition:
     condition: and
     conditions:
@@ -266,6 +280,7 @@
      entity_id: script.abodestandby
 
 - alias: 'Adjust settings changed by Abode'
+  initial_state: 'on'
   condition:
     condition: and
     conditions:
@@ -300,6 +315,7 @@
          away_mode: 'False'
 
 - alias: 'Arm Abode'
+  initial_state: 'on'
   condition:
     condition: state
     entity_id: input_boolean.abodeupdate
@@ -313,6 +329,7 @@
      entity_id: script.abodeaway
 
 - alias: 'Abode Home at night'
+  initial_state: 'on'
   condition:
     condition: and
     conditions:
@@ -330,6 +347,7 @@
      entity_id: script.abodehome
 
 - alias: 'Disarm Abode in the morning'
+  initial_state: 'on'
   condition:
     condition: and
     conditions:
@@ -347,6 +365,7 @@
      entity_id: script.abodestandby
 
 - alias: Enable Recording
+  initial_state: 'on'
   trigger:
     platform: state
     entity_id: input_boolean.startrecording
@@ -356,6 +375,7 @@
     entity_id: switch.foscam_record
 
 - alias: Disable Recording
+  initial_state: 'on'
   trigger:
     platform: state
     entity_id: input_boolean.startrecording
@@ -368,6 +388,7 @@
 #################################################################
 
 - alias: Heal Z-Wave Network
+  initial_state: 'on'
   trigger:
     platform: time
     after: '2:31:00'
@@ -375,6 +396,7 @@
     service: zwave.heal_network
 
 - alias: "Update Available Notification"
+  initial_state: 'on'
   trigger:
     platform: state
     entity_id: updater.updater
@@ -395,6 +417,7 @@
 #################################################################
 
 - alias: "Morning Commute"
+  initial_state: 'on'
   condition:
     condition: and
     conditions:
@@ -425,6 +448,7 @@
       entity_id: script.notificationleavework
 
 - alias: "Evening Commute"
+  initial_state: 'on'
   condition:
     condition: and
     conditions:
@@ -453,6 +477,7 @@
       target: device/myiPhone
 
 - alias: "Plex Spy notification"
+  initial_state: 'on'
   trigger:
     platform: state
     entity_id: sensor.plexspy
@@ -488,6 +513,7 @@
 #################################################################
 
 - alias: 'Kitchen light brightness'
+  initial_state: 'on'
   trigger:
    - platform: state
      entity_id: light.kitchen_lights
@@ -499,6 +525,7 @@
        brightness: 240
 
 - alias: 'Change Leeo color'
+  initial_state: 'on'
   condition:
     - condition: state
       entity_id: device_tracker.leeoalert
@@ -518,6 +545,7 @@
      data_template: {"event":"leeocolor", "value1":"{{ '{:02x}{:02x}{:02x}'.format(range(0, 255) | random, range(0, 255) | random, range(0, 255) | random) }}"}
 
 - alias: 'Change Leeo upstairs color'
+  initial_state: 'on'
   condition:
     - condition: time
       after: '19:15:00'
@@ -531,6 +559,7 @@
      data_template: {"event":"leeocolorup", "value1":"{{ '{:02x}{:02x}{:02x}'.format(range(0, 255) | random, range(0, 255) | random, range(0, 255) | random) }}"}
 
 - alias: "Turn Lifx Party Mode On"
+  initial_state: 'on'
   trigger:
     - platform: time
       seconds: '/3'
@@ -558,6 +587,7 @@
         brightness: 220
         transition: '{{ (range(1, 2)|random) }}'
 - alias: "Turn Lifx Party Mode Off"
+  initial_state: 'on'
   trigger:
     - platform: state
       entity_id: input_boolean.partymode
@@ -571,6 +601,7 @@
         color_temp: 285
 
 - alias: Downstairs thermostat to Input_Boolean
+  initial_state: 'on'
   trigger:
     platform: state
     entity_id: sensor.downstairsthermmode
@@ -584,6 +615,7 @@
     entity_id: input_boolean.thermo_away_main
 
 - alias: Change downstairs Thermostat mode
+  initial_state: 'on'
   condition:
     condition: template
     value_template: >
@@ -607,6 +639,7 @@
          {%- endif -%}
 
 - alias: Upstairs thermostat to Input_Boolean
+  initial_state: 'on'
   trigger:
     platform: state
     entity_id: sensor.upstairshermostatmode
@@ -620,6 +653,7 @@
     entity_id: input_boolean.thermo_away_upstairs
 
 - alias: Change upstairs Thermostat mode
+  initial_state: 'on'
   condition:
     condition: template
     value_template: >
@@ -643,6 +677,7 @@
         {%- endif -%}
 
 - alias: Driveway light at night
+  initial_state: 'on'
   trigger:
     platform: sun
     event: sunset
@@ -652,6 +687,7 @@
       entity_id: switch.driveway
 
 - alias: Driveway light Off
+  initial_state: 'on'
   trigger:
     platform: sun
     event: sunset
@@ -660,6 +696,7 @@
     - service: switch.turn_off
       entity_id: switch.driveway
 - alias: Driveway light Off during the day
+  initial_state: 'on'
   trigger:
     platform: state
     entity_id: switch.driveway
@@ -673,6 +710,7 @@
       entity_id: switch.driveway
 
 - alias: 'Reset Garage Relay'
+  initial_state: 'on'
   trigger:
     - platform: time
       seconds: '/5'
@@ -685,6 +723,7 @@
       entity_id: switch.garage_relay_switch_8_0
 
 - alias: 'Open Garage door when someone home'
+  initial_state: 'on'
   condition:
    - condition: state
      entity_id: binary_sensor.garagedoor
@@ -694,8 +733,8 @@
      state: 'on'
    - condition: template
      value_template: >
-       {%- if states.automation.open_garage_door_when_someone_home.last_triggered -%}
-         {{ (as_timestamp(now()) - as_timestamp(states.automation.open_garage_door_when_someone_home.last_triggered)) > 150 }}
+       {%- if states.automation.open_garage_door_when_someone_home.attributes.last_triggered -%}
+         {{ (as_timestamp(now()) - as_timestamp(states.automation.open_garage_door_when_someone_home.attributes.last_triggered)) > 150 }}
        {%- else -%}
          true
        {%- endif -%}
@@ -708,6 +747,7 @@
       entity_id: switch.garage_relay_switch_8_0
 
 - alias: 'Close garage door when Abode is Home or Away'
+  initial_state: 'on'
   condition:
    - condition: state
      entity_id: binary_sensor.garagedoor
@@ -735,6 +775,7 @@
       entity_id: switch.garage_relay_switch_8_0
 
 - alias: 'Sensors changed when nobody is home'
+  initial_state: 'on'
   condition:
     condition: state
     entity_id: input_select.abodestatus
@@ -746,6 +787,7 @@
         - binary_sensor.downstairs_occupancy
         - binary_sensor.living_room_occupancy
         - binary_sensor.upstairs_occupancy
+      from: 'off'
       to: 'on'
   action:
     - service: light.turn_on
@@ -759,6 +801,7 @@
       entity_id: script.notificationalarm
 
 - alias: Turn lights on randomly
+  initial_state: 'on'
   condition:
     condition: state
     entity_id: input_select.abodestatus
@@ -773,6 +816,7 @@
         entity_id: group.living_room_lights
 
 - alias: Turn off lights 2 hours
+  initial_state: 'on'
   condition:
     - condition: state
       entity_id: input_select.abodestatus
@@ -791,6 +835,7 @@
 
 ## Humidifier
 - alias: Turn on humidifier
+  initial_state: 'on'
   condition:
      - condition: time
        after: '08:15:00'
@@ -809,6 +854,7 @@
     entity_id: switch.wemoswitch
 
 - alias: Turn off humidifier
+  initial_state: 'on'
   condition:
     - condition: state
       entity_id: switch.wemoswitch
@@ -824,6 +870,7 @@
 ## Harmony Remote
 #################################################################
 - alias: "Set initial values on Harmony Start"
+  initial_state: 'on'
   trigger:
     platform: state
     entity_id: remote.livingroom
@@ -854,6 +901,7 @@
           {%- endif -%}
 
 - alias: Update TV status in HA
+  initial_state: 'on'
   trigger:
     platform: state
     entity_id: media_player.panasonic_viera_tv
@@ -862,6 +910,7 @@
       data:
         entity_id: input_boolean.tv
 - alias: Turn TV on/off
+  initial_state: 'on'
   trigger:
     platform: state
     entity_id: input_boolean.tv
@@ -872,6 +921,7 @@
       device: 31747892
       entity_id: remote.livingroom
 - alias: "Set Volume"
+  initial_state: 'on'
   trigger:
     platform: state
     entity_id: input_slider.harmonyvolume
@@ -883,6 +933,7 @@
           {{states.input_slider.harmonyvolume.state | int / 100}}
 
 - alias: "Start Harmony activity from input_select"
+  initial_state: 'on'
   trigger:
     platform: state
     entity_id: input_select.livingroomharmony
@@ -893,6 +944,7 @@
       activity: "{{trigger.to_state.state}}"
 
 - alias: "Update HA if Harmony activity changes"
+  initial_state: 'on'
   trigger:
     platform: state
     entity_id: sensor.living_room
@@ -914,9 +966,10 @@
           {%- endif -%}
 
 - alias: Update HA after startup
+  initial_state: 'on'
   trigger:
-    platform: event
-    event_type: homeassistant_start
+    platform: homeassistant
+    event: start
   action:
     - delay:
         minutes: 1
@@ -939,6 +992,7 @@
             Shield
           {%- endif -%}
 - alias: "Change HDMI Switcher"
+  initial_state: 'on'
   trigger:
     platform: state
     entity_id: input_select.hdmiswitcher
@@ -956,6 +1010,7 @@
       device: 31766668
       entity_id: remote.livingroom
 - alias: "Change HDMI Input"
+  initial_state: 'on'
   trigger:
     platform: state
     entity_id: input_select.hdmiinput
@@ -975,6 +1030,7 @@
       device: 31747892
       entity_id: remote.livingroom
 - alias: "Update Volume Slider"
+  initial_state: 'on'
   trigger:
     - platform: state
       entity_id: sensor.sonos_volume

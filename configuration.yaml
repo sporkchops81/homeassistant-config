@@ -196,7 +196,6 @@ ios:
 logbook:
   exclude:
     domains:
-      - automation
       - sun
     entities:
       - sensor.pws_weather
@@ -208,6 +207,10 @@ logbook:
       - binary_sensor.garage_door_tilt_sensor_sensor_5_0
       - binary_sensor.upstairs_occupancy
       - binary_sensor.downstairs_occupancy
+      - binary_sensor.porch_field_detection
+      - binary_sensor.patio_field_detection
+      - binary_sensor.driveway_field_detection
+      - binary_sensor.backyard_field_detection
       - sensor.ars_bloom_uvindex
       - sensor.pws_wind_dir
       - sensor.pws_wind_string
@@ -239,6 +242,8 @@ logbook:
       - group.all_lights
       - group.household
       - group.entertainment
+      - group.switches
+      - group.camera_switches
       - device_tracker.unificloudkey
       - media_player.unnamed_device
       - media_player.livingroomsonos
@@ -251,8 +256,16 @@ logbook:
       - automation.start_harmony_activity_from_input_select
       - automation.update_ha_if_harmony_activity_changes
       - automation.update_tv_status_in_ha
+      - automation.plex_spy_notification
+      - automation.reset_garage_relay
+      - automation.disarm_abode_from_away
+      - automation.open_garage_door_when_someone_home
+      - automation.rashmi_home
+      - automation.alok_home
       - input_slider.harmonyvolume
       - input_boolean.leeoalarm
+      - input_boolean.thermo_away_main
+      - input_boolean.thermo_away_upstairs
 # Enables support for tracking state changes over time.
 history:
   include:
@@ -277,15 +290,11 @@ recorder:
       - sun
     entities:
       - binary_sensor.backyard_motion
-      - binary_sensor.backyard_field_detection
       - binary_sensor.backyard_line_crossing
       - binary_sensor.driveway_motion
-      - binary_sensor.driveway_field_detection
       - binary_sensor.driveway_line_crossing
       - binary_sensor.patio_motion
-      - binary_sensor.patio_field_detection
       - binary_sensor.patio_line_crossing
-      - binary_sensor.porch_field_detection
       - binary_sensor.porch_line_crossing
       - binary_sensor.porch_motion
       - group.camera_sensors
@@ -296,6 +305,8 @@ recorder:
       - input_select.livingroomharmony
       - sensor.living_room
       - zwave.garage_door_tilt_sensor_5
+      - automation.change_leeo_color
+      - automation.change_leeo_upstairs_color
 
 automation: !include automation.yaml
 group: !include groups.yaml

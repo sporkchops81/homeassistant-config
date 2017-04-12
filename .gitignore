@@ -52,6 +52,7 @@ __pycache__
 *.xml
 *.backup
 *.py
+*.sh
 *.google.token
 .google.token
 .HA_VERSION

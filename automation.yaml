@@ -16,15 +16,12 @@
         {%- endif -%}
   trigger:
     - platform: state
-      entity_id: device_tracker.alokphone
+      entity_id: device_tracker.alokphone, device_tracker.pi_alokphone
       state: 'not_home'
-      for:
-        minutes: 10
+      for: '00:07:00'
     - platform: state
-      entity_id: device_tracker.pi_alokphone, device_tracker.alokiosiphone
+      entity_id: device_tracker.alokiosiphone, device_tracker.alok_29677a2f60cb45e1a9ef0fce8c1cb8ac
       state: 'not_home'
-      for:
-        minutes: 5
     - platform: state
       entity_id: binary_sensor.aloklife360, input_boolean.alok360home
       state: 'off'
@@ -54,15 +51,12 @@
         {%- endif -%}
   trigger:
     - platform: state
-      entity_id: device_tracker.rashmiphone
+      entity_id: device_tracker.rashmiphone, device_tracker.pi_rashmiphone
       state: 'not_home'
-      for:
-        minutes: 10
+      for: '00:07:00'
     - platform: state
-      entity_id: device_tracker.pi_rashmiphone, device_tracker.rashmiappiphone
+      entity_id: device_tracker.rashmiappiphone, device_tracker.sonu_1169166c6fc048c98e47b8bbd0423d54
       state: 'not_home'
-      for:
-        minutes: 5
     - platform: state
       entity_id: binary_sensor.rashmilife360
       state: 'off'
@@ -92,7 +86,7 @@
         {%- endif -%}
   trigger:
     - platform: state
-      entity_id: device_tracker.alokphone, device_tracker.pi_alokphone, device_tracker.alokiosiphone, device_tracker.elantrase
+      entity_id: device_tracker.alokphone, device_tracker.pi_alokphone, device_tracker.alokiosiphone, device_tracker.elantrase, device_tracker.alok_29677a2f60cb45e1a9ef0fce8c1cb8ac
       state: 'home'
     - platform: state
       entity_id: binary_sensor.aloklife360, input_boolean.alok360home
@@ -123,7 +117,7 @@
         {%- endif -%}
   trigger:
     - platform: state
-      entity_id: device_tracker.rashmiphone, device_tracker.pi_rashmiphone, device_tracker.rashmiappiphone
+      entity_id: device_tracker.rashmiphone, device_tracker.pi_rashmiphone, device_tracker.rashmiappiphone, device_tracker.sonu_1169166c6fc048c98e47b8bbd0423d54
       state: 'home'
     - platform: state
       entity_id: binary_sensor.rashmilife360

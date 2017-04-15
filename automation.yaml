@@ -780,6 +780,8 @@
     condition: state
     entity_id: input_select.abodestatus
     state: 'away'
+    for:
+      minutes: 10
   trigger:
     - platform: state
       entity_id:

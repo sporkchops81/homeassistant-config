@@ -42,7 +42,12 @@
      device_tracker.94a1a273348b:
        friendly_name: BloomSky
        icon: mdi:compass-outline
-
+     device_tracker.alok_29677a2f60cb45e1a9ef0fce8c1cb8ac:
+       entity_picture: /local/life360.png
+       friendly_name: Alok Life360
+     device_tracker.sonu_1169166c6fc048c98e47b8bbd0423d54:
+       entity_picture: /local/life360.png
+       friendly_name: Rashmi Life360
  #weather
      sensor.ars_bloom_voltage:
        friendly_name: 'BloomSky Voltage'

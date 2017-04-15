@@ -274,9 +274,11 @@ history:
       - device_tracker.alokiosiphone
       - device_tracker.myiphone
       - device_tracker.pi_alokphone
+      - device_tracker.alok_29677a2f60cb45e1a9ef0fce8c1cb8ac
       - device_tracker.pi_rashmiphone
       - device_tracker.rashmiappiphone
       - device_tracker.rashmisiphone
+      - device_tracker.sonu_1169166c6fc048c98e47b8bbd0423d54
       - input_boolean.alokhome
       - input_boolean.rashmihome
       - input_select.abodestatus

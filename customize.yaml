@@ -179,3 +179,9 @@
      climate.ecobee:
        max_temp: 90
        min_temp: 55
+     zone.home:
+       track_ios: true
+     zone.buckhead:
+       track_ios: true
+     zone.downtown:
+       track_ios: true

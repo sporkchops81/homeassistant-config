@@ -83,9 +83,7 @@ If you are using AIO (which has Mosquitto pre-installed), you can use the follow
     $ sudo npm install -g smartthings-mqtt-bridge
     ```
 3. Add details of your Mosquitto to `config.yml`. For the default AIO username password, your file should look something like:
-
     ```
-    ---
     mqtt:
         # Specify your MQTT Broker's hostname or IP address here
         host: mqtt://192.168.2.199
@@ -160,3 +158,11 @@ Some useful commands:
 * `(SELECT event_id, time_fired FROM events ORDER BY event_id ASC LIMIT 1) UNION ALL (SELECT event_id, time_fired FROM events ORDER BY event_id DESC LIMIT 1);` to list the first and last record of `events` table.
 * `SELECT table_schema homeassistant, sum( data_length + index_length ) / (1024 * 1024) "Data Base Size in MB" FROM information_schema.TABLES GROUP BY table_schema;` to list disk space used by each database.
 * `select entity_id, count(*), sum(length(state)), sum(length(attributes))/ (1024 * 1024) siz  from states group by entity_id order by siz;` to obtain the space (in MB) occupied by each entity in the `states` table.
+
+# Miscellaneous Tips/Tricks
+* You can test the the Read Speed of your SD card using (note, this command takes some time to run):
+```
+sudo dd if=/dev/mmcblk0 of=/dev/null bs=8M count=100
+sudo hdparm -t /dev/mmcblk0
+```
+* Test Write speed (will create 200MB file in /home/pi/testfile) using `dd if=/dev/zero of=/home/pi/testfile bs=8M count=25`

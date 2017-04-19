@@ -161,7 +161,11 @@ notify:
     chat_id: !secret telegram_chatID_Alok
   - platform: ecobee
     name: ecobee
-
+  - name: iOS
+    platform: group
+    services:
+      - service: ios_alokiosiphone
+      - service: ios_rashmiappiphone
 mqtt:
   broker: 127.0.0.1
   port: 1883
@@ -211,6 +215,10 @@ logbook:
       - binary_sensor.patio_field_detection
       - binary_sensor.driveway_field_detection
       - binary_sensor.backyard_field_detection
+      - binary_sensor.backyard_line_crossing
+      - binary_sensor.driveway_line_crossing
+      - binary_sensor.patio_line_crossing
+      - binary_sensor.porch_line_crossing      
       - sensor.ars_bloom_uvindex
       - sensor.pws_wind_dir
       - sensor.pws_wind_string
@@ -292,12 +300,8 @@ recorder:
       - sun
     entities:
       - binary_sensor.backyard_motion
-      - binary_sensor.backyard_line_crossing
       - binary_sensor.driveway_motion
-      - binary_sensor.driveway_line_crossing
       - binary_sensor.patio_motion
-      - binary_sensor.patio_line_crossing
-      - binary_sensor.porch_line_crossing
       - binary_sensor.porch_motion
       - group.camera_sensors
       - input_slider.leeotemperature

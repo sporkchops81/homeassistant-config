@@ -399,31 +399,13 @@
   action:
     - service: notify.ios
       data_template:
-        message: "Check {{ trigger.entity_id.split('.')[1].split('_')[0]}} camera."
+        message: "Check {{ trigger.entity_id.split('.')[1].split('_')[0] }} camera."
         data:
           push:
             category: camera
-          entity_id: >-
-              {%- if trigger.entity_id == "binary_sensor.backyard_field_detection" or trigger.entity_id == "binary_sensor.backyard_line_crossing" -%}
-              camera.backyard
-              {%- elif trigger.entity_id == "binary_sensor.driveway_field_detection" or trigger.entity_id == "binary_sensor.driveway_line_crossing" -%}
-              camera.driveway
-              {%- elif trigger.entity_id == "binary_sensor.patio_field_detection" or trigger.entity_id == "binary_sensor.patio_line_crossing" -%}
-              camera.patio
-              {%- elif trigger.entity_id == "binary_sensor.porch_field_detection" or trigger.entity_id == "binary_sensor.porch_line_crossing" -%}
-              camera.porch
-              {%- endif -%}
+          entity_id: "camera.{{ trigger.entity_id.split('.')[1].split('_')[0] }}"
           attachment:
-            url: >-
-              {%- if trigger.entity_id == "binary_sensor.backyard_field_detection" or trigger.entity_id == "binary_sensor.backyard_line_crossing" -%}
-              {{ states.camera.backyard.attributes.entity_picture }}
-              {%- elif trigger.entity_id == "binary_sensor.driveway_field_detection" or trigger.entity_id == "binary_sensor.driveway_line_crossing" -%}
-              {{ states.camera.driveway.attributes.entity_picture }}
-              {%- elif trigger.entity_id == "binary_sensor.patio_field_detection" or trigger.entity_id == "binary_sensor.patio_line_crossing" -%}
-              {{ states.camera.patio.attributes.entity_picture }}
-              {%- elif trigger.entity_id == "binary_sensor.porch_field_detection" or trigger.entity_id == "binary_sensor.porch_line_crossing" -%}
-              {{ states.camera.porch.attributes.entity_picture }}
-              {%- endif -%}
+            url: "{{ states.camera[trigger.entity_id.split('.')[1].split('_')[0]].attributes.entity_picture }}"
             content-type: jpg
             hide-thumbnail: false
     - service: logbook.log

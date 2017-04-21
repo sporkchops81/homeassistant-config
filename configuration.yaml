@@ -218,7 +218,7 @@ logbook:
       - binary_sensor.backyard_line_crossing
       - binary_sensor.driveway_line_crossing
       - binary_sensor.patio_line_crossing
-      - binary_sensor.porch_line_crossing      
+      - binary_sensor.porch_line_crossing
       - sensor.ars_bloom_uvindex
       - sensor.pws_wind_dir
       - sensor.pws_wind_string
@@ -270,6 +270,10 @@ logbook:
       - automation.open_garage_door_when_someone_home
       - automation.rashmi_home
       - automation.alok_home
+      - automation.notify_camera_pictures
+      - zwave.garage_relay_8
+      - zwave.aeotec_zw090_zstick_gen5_1
+      - zwave.garage_door_tilt_sensor_5
       - input_slider.harmonyvolume
       - input_boolean.leeoalarm
       - input_boolean.thermo_away_main

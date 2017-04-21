@@ -150,14 +150,10 @@
        icon: mdi:water-percent
      sensor.downstairsthermmode:
        icon: mdi:home
-     sensor.downstairsthermoper:
-       icon: mdi:fan
      sensor.upstairs_humidity:
        icon: mdi:water-percent
      sensor.upstairshermostatmode:
        icon: mdi:home
-     sensor.upstairsthermostatoperation:
-       icon: mdi:fan
  #Emulated_Hue Devices
      input_boolean.abodeupdate:
        emulated_hue: true

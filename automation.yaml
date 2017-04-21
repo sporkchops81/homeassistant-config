@@ -381,9 +381,16 @@
 - alias: 'Notify camera pictures'
   initial_state: 'on'
   condition:
-    condition: state
-    entity_id: input_select.abodestatus
-    state: 'away'
+    - condition: state
+      entity_id: input_select.abodestatus
+      state: 'away'
+    - condition: template
+      value_template: >
+        {%- if states.automation.notify_camera_pictures.attributes.last_triggered -%}
+          {{ (as_timestamp(now()) - as_timestamp(states.automation.notify_camera_pictures.attributes.last_triggered)) > 120 }}
+        {%- else -%}
+          true
+        {%- endif -%}
   trigger:
    - platform: state
      entity_id:
@@ -407,13 +414,12 @@
           attachment:
             url: "{{ states.camera[trigger.entity_id.split('.')[1].split('_')[0]].attributes.entity_picture }}"
             content-type: jpg
-            hide-thumbnail: false
     - service: logbook.log
       data_template:
         name: "Camera activity: "
         message: >-
           {%- for state in states if state.entity_id == trigger.entity_id -%}
-            {{ state.attributes.friendly_name }} activated at {{ as_timestamp(now()) | timestamp_custom('%I:%M:%S %p', true) }}.
+            {{ state.attributes.friendly_name }} activated at {{ as_timestamp(now()) | timestamp_custom('%I:%M:%S %p', true) }}. 
           {%- endfor -%}
 #################################################################
 ## HASS Related

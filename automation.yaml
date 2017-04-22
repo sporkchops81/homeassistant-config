@@ -419,7 +419,7 @@
         name: "Camera activity: "
         message: >-
           {%- for state in states if state.entity_id == trigger.entity_id -%}
-            {{ state.attributes.friendly_name }} activated at {{ as_timestamp(now()) | timestamp_custom('%I:%M:%S %p', true) }}. 
+            {{ state.attributes.friendly_name }} activated at {{ as_timestamp(now()) | timestamp_custom('%I:%M:%S %p', true) }}.
           {%- endfor -%}
 #################################################################
 ## HASS Related

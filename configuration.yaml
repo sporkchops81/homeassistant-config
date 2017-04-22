@@ -195,7 +195,9 @@ remote:
     host: 192.168.2.153
 
 ios:
-
+scene:
+  platform: lifx_cloud
+  token: !secret lifx_key
 # View all events in a logbook
 logbook:
   exclude:

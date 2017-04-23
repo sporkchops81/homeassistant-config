@@ -177,7 +177,15 @@
        min_temp: 55
      zone.home:
        track_ios: true
+      #  beacon:
+      #    uuid: 2F234454-CF6D-4A0F-ADF2-F4911BA9FFA6
+      #    major: 0
+      #    minor: 0
      zone.buckhead:
        track_ios: true
      zone.downtown:
        track_ios: true
+     script.colorloop_start:
+       icon: mdi:palette
+     script.lifx_stop_effects:
+       icon: mdi:palette

@@ -55,6 +55,7 @@ __pycache__
 *.sh
 *.google.token
 .google.token
+.spotify-token-cache
 .HA_VERSION
 home-assistant.env
 home-assistant.*

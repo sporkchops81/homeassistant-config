@@ -137,6 +137,8 @@
     - switch.garage_relay_switch_8_0
     - switch.driveway
     - input_boolean.partymode
+    - script.colorloop_start
+    - script.lifx_stop_effects
 
   Household:
     - input_boolean.alokhome
@@ -146,7 +148,7 @@
     - device_tracker.pi_rashmiphone
     - device_tracker.rashmiappiphone
     - device_tracker.rashmiphone
-    - device_tracker.sonu_1169166c6fc048c98e47b8bbd0423d54    
+    - device_tracker.sonu_1169166c6fc048c98e47b8bbd0423d54
     - device_tracker.pi_alokphone
     - device_tracker.alokiosiphone
     - device_tracker.alokphone

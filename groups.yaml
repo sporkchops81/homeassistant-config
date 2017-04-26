@@ -139,6 +139,7 @@
     - switch.driveway
     - input_boolean.partymode
     - script.colorloop_start
+    - script.disco_party
     - script.lifx_stop_effects
 
   Household:

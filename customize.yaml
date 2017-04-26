@@ -189,3 +189,5 @@
        icon: mdi:palette
      script.lifx_stop_effects:
        icon: mdi:palette
+     script.disco_party:
+       icon: mdi:palette

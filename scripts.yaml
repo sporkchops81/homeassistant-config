@@ -159,8 +159,19 @@
         data:
           entity_id: group.living_room_lights
           brightness: 255
-          period: 2
-          spread: 360
+          period: 10
+          spread: 35
+          change: 35
+
+  disco_party:
+    alias: 'Start Party Mode'
+    sequence:
+      - service: light.lifx_effect_colorloop
+        data:
+          entity_id: group.living_room_lights
+          brightness: 255
+          period: 1
+          spread: 359
           change: 35
 
   lifx_stop_effects:

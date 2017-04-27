@@ -135,6 +135,9 @@ camera:
   #   port: 88
   #   username: !secret foscam_username
   #   password: !secret foscam_password
+ring:
+  username: !secret ring_username
+  password: !secret ring_password
 
 ifttt:
   key: !secret ifttt_key
@@ -271,7 +274,6 @@ logbook:
       - automation.update_tv_status_in_ha
       - automation.plex_spy_notification
       - automation.reset_garage_relay
-      - automation.disarm_abode_from_away
       - automation.open_garage_door_when_someone_home
       - automation.rashmi_home
       - automation.alok_home

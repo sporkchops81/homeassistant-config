@@ -124,6 +124,8 @@
        friendly_name: USD/EUR
        icon: mdi:currency-eur
 
+     sensor.hoursslept:
+       icon: mdi:sleep
      sensor.google_travel_time:
        friendly_name: 'Morning Commute'
        icon: mdi:car

@@ -1,3 +1,24 @@
+  - platform: ring
+    monitored_conditions:
+      - battery
+      - last_activity
+      - last_ding
+      - last_motion
+      - volume
+  - platform: fitbit
+    monitored_resources:
+      - "activities/calories"
+      - "activities/distance"
+      - "activities/steps"
+      - "sleep/efficiency"
+      - "sleep/awakeningsCount"
+      - "sleep/efficiency"
+      - "sleep/minutesAfterWakeup"
+      - "sleep/minutesAsleep"
+      - "sleep/minutesAwake"
+      - "sleep/minutesToFallAsleep"
+      - "sleep/startTime"
+      - "sleep/timeInBed"
   - platform: currencylayer
     api_key: !secret currencylayer_key
     base: USD #optional
@@ -64,6 +85,15 @@
        Referer: "https://www.pollen.com"
   - platform: template
     sensors:
+      hoursslept:
+        friendly_name: "Hours Slept"
+        unit_of_measurement: "hrs"
+        value_template: >-
+           {%- if states.sensor.sleep_minutesasleep != None -%}
+             {{states.sensor.sleep_minutesasleep.state|int/60}}
+           {%- else -%}
+             unknown
+           {%- endif -%}         
       garagedoorbattery:
         friendly_name: "Garage Door Sensor Battery"
         unit_of_measurement: "%"

@@ -13,6 +13,7 @@ homeassistant:
   time_zone: America/New_York
   unit_system: imperial
   customize: !include customize.yaml
+  packages: !include_dir_named packages
 
 zone:
   name: Home
@@ -285,6 +286,11 @@ logbook:
       - input_boolean.leeoalarm
       - input_boolean.thermo_away_main
       - input_boolean.thermo_away_upstairs
+      - binary_sensor.ring_front_door_ding
+      - binary_sensor.ring_front_door_motion
+      - sensor.ring_front_door_last_activity
+      - sensor.ring_front_door_last_ding
+      - sensor.ring_front_door_last_motion
 # Enables support for tracking state changes over time.
 history:
   include:
@@ -324,6 +330,9 @@ recorder:
       - zwave.garage_door_tilt_sensor_5
       - automation.change_leeo_color
       - automation.change_leeo_upstairs_color
+      - group.ring_doorbell
+      - sensor.pollen
+      - sensor.pollen_level
 
 automation: !include automation.yaml
 group: !include groups.yaml

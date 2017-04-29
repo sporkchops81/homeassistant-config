@@ -1,10 +1,4 @@
-  - platform: ring
-    monitored_conditions:
-      - battery
-      - last_activity
-      - last_ding
-      - last_motion
-      - volume
+
   - platform: fitbit
     monitored_resources:
       - "activities/calories"
@@ -90,10 +84,10 @@
         unit_of_measurement: "hrs"
         value_template: >-
            {%- if states.sensor.sleep_minutesasleep != None -%}
-             {{states.sensor.sleep_minutesasleep.state|int/60}}
+             {{(states.sensor.sleep_minutesasleep.state|int/60)|round(2)}}
            {%- else -%}
              unknown
-           {%- endif -%}         
+           {%- endif -%}
       garagedoorbattery:
         friendly_name: "Garage Door Sensor Battery"
         unit_of_measurement: "%"

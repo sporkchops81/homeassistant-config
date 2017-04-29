@@ -41,7 +41,3 @@
     name: Driveway
     username: !secret hikvision_username
     password: !secret hikvision_password
-  - platform: ring
-    monitored_conditions:
-      - ding
-      - motion

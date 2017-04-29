@@ -53,11 +53,11 @@ Thanks to @dale3h for assistance with these instructions.
     * If you get an error about `*** Please tell me who you are.`, run `git config --global user.email "your@email.here"` and `git config --global user.name "Your Name"`
     * After that commit succeeds, run: `git remote add origin git@github.com:yourusername/homeassistant-config.git` (make sure you enter the correct repo URL here)
     * Just to confirm everything is right, run `git remote -v` and you should see:
-```
-hass@raspberrypi:~/.homeassistant$ git remote -v
-origin  git@github.com:arsaboo/homeassistant-config.git (fetch)
-origin  git@github.com:arsaboo/homeassistant-config.git (push)
-```
+      ```
+      hass@raspberrypi:~/.homeassistant$ git remote -v
+      origin  git@github.com:arsaboo/homeassistant-config.git (fetch)
+      origin  git@github.com:arsaboo/homeassistant-config.git (push)
+      ```
     * Finally, run `git push origin master`.
 
 10. For subsequent updates:
@@ -66,7 +66,12 @@ origin  git@github.com:arsaboo/homeassistant-config.git (push)
     * `git add .`
     * `git commit -m 'your commit message'`
     * `git push origin master`
-
+11. To restore from your Github repository (replace the URL):
+    ```
+    sudo su -s /bin/bash homeassistant
+    cd /home/homeassistant
+    git clone git@github.com:arsaboo/homeassistant-config.git .homeassistant
+    ```
 # Integrating HASS (AIO) with Smartthings using Mosquitto
 If you are using AIO (which has Mosquitto pre-installed), you can use the following to integrate Smartthings and HA.
 

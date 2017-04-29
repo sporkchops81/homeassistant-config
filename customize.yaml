@@ -7,47 +7,7 @@
      climate.upstairs:
        friendly_name: EcobeeUp
        entity_picture: /local/Ecobee.png
-#devices
 
-     device_tracker.myiphone:
-       icon: mdi:cellphone-iphone
-       friendly_name: Alok's iPhone
-     device_tracker.pi_alokphone:
-       icon: mdi:cellphone-iphone
-       friendly_name: Alok's iPhone MQTT
-     device_tracker.rashmisiphone:
-       icon: mdi:cellphone-iphone
-       friendly_name: Rashmi's iPhone
-     device_tracker.pi_rashmiphone:
-       icon: mdi:cellphone-iphone
-       friendly_name: Rashmi's iPhone MQTT
-     device_tracker.alokdelllatitude:
-       icon: mdi:laptop-windows
-       friendly_name: Dell Laptop
-     device_tracker.gameroom:
-       icon: mdi:access-point-network
-       friendly_name: Ubiquiti Unifi
-     device_tracker.harmonyhub:
-       icon: mdi:remote
-       friendly_name: Logitech Harmony
-     device_tracker.hpaio:
-       icon: mdi:desktop-mac
-       friendly_name: HP AIO
-     device_tracker.toshibaaio:
-       icon: mdi:desktop-mac
-       friendly_name: Toshiba AIO
-     device_tracker.44650d8ae465:
-       friendly_name: Echo Dot
-       icon: mdi:amazon
-     device_tracker.94a1a273348b:
-       friendly_name: BloomSky
-       icon: mdi:compass-outline
-     device_tracker.alok_29677a2f60cb45e1a9ef0fce8c1cb8ac:
-       entity_picture: /local/life360.png
-       friendly_name: Alok Life360
-     device_tracker.sonu_1169166c6fc048c98e47b8bbd0423d54:
-       entity_picture: /local/life360.png
-       friendly_name: Rashmi Life360
  #weather
      sensor.ars_bloom_voltage:
        friendly_name: 'BloomSky Voltage'

@@ -1,0 +1,212 @@
+homeassistant:
+  customize:
+    device_tracker.myiphone:
+      icon: mdi:cellphone-iphone
+      friendly_name: Alok's iPhone
+    device_tracker.pi_alokphone:
+      icon: mdi:cellphone-iphone
+      friendly_name: Alok's iPhone MQTT
+    device_tracker.rashmisiphone:
+      icon: mdi:cellphone-iphone
+      friendly_name: Rashmi's iPhone
+    device_tracker.pi_rashmiphone:
+      icon: mdi:cellphone-iphone
+      friendly_name: Rashmi's iPhone MQTT
+    device_tracker.alokdelllatitude:
+      icon: mdi:laptop-windows
+      friendly_name: Dell Laptop
+    device_tracker.gameroom:
+      icon: mdi:access-point-network
+      friendly_name: Ubiquiti Unifi
+    device_tracker.harmonyhub:
+      icon: mdi:remote
+      friendly_name: Logitech Harmony
+    device_tracker.hpaio:
+      icon: mdi:desktop-mac
+      friendly_name: HP AIO
+    device_tracker.toshibaaio:
+      icon: mdi:desktop-mac
+      friendly_name: Toshiba AIO
+    device_tracker.44650d8ae465:
+      friendly_name: Echo Dot
+      icon: mdi:amazon
+    device_tracker.94a1a273348b:
+      friendly_name: BloomSky
+      icon: mdi:compass-outline
+    device_tracker.alok_29677a2f60cb45e1a9ef0fce8c1cb8ac:
+      entity_picture: /local/life360.png
+      friendly_name: Alok Life360
+    device_tracker.sonu_1169166c6fc048c98e47b8bbd0423d54:
+      entity_picture: /local/life360.png
+      friendly_name: Rashmi Life360
+
+#################################################################
+## Presence
+#################################################################
+device_tracker:
+  - platform: owntracks
+    max_gps_accuracy: 200
+  - platform: unifi
+    host: 192.168.2.163
+    username: !secret unifi_username
+    password: !secret unifi_password
+    verify_ssl: False
+  # - platform: asuswrt
+  #   host: 192.168.2.1
+  #   protocol: telnet
+  #   username: !secret asus_username
+  #   password: !secret asus_password
+
+automation:
+- alias: 'Alok Away'
+  initial_state: 'on'
+  condition:
+    - condition: state
+      entity_id: input_boolean.alokhome
+      state: 'on'
+    - condition: template
+      value_template: >
+        {%- if states.input_boolean.alokhome.last_changed -%}
+          {{ (as_timestamp(now()) - as_timestamp(states.input_boolean.alokhome.last_changed)) > 300 }}
+        {%- else -%}
+          true
+        {%- endif -%}
+  trigger:
+    - platform: state
+      entity_id: device_tracker.alokphone, device_tracker.pi_alokphone
+      state: 'not_home'
+      for: '00:07:00'
+    - platform: state
+      entity_id: device_tracker.alokiosiphone, device_tracker.alok_29677a2f60cb45e1a9ef0fce8c1cb8ac
+      state: 'not_home'
+    - platform: state
+      entity_id: binary_sensor.aloklife360, input_boolean.alok360home
+      state: 'off'
+  action:
+    - service: homeassistant.turn_off
+      entity_id: input_boolean.alokhome
+    - service: logbook.log
+      data_template:
+        name: "Alok away: "
+        message: >-
+          {%- for state in states if state.entity_id == trigger.entity_id -%}
+            {{ state.attributes.friendly_name }} is Away.
+          {%- endfor -%}
+
+- alias: 'Rashmi Away'
+  initial_state: 'on'
+  condition:
+    - condition: state
+      entity_id: input_boolean.rashmihome
+      state: 'on'
+    - condition: template
+      value_template: >
+        {%- if states.input_boolean.rashmihome.last_changed -%}
+          {{ (as_timestamp(now()) - as_timestamp(states.input_boolean.rashmihome.last_changed)) > 300 }}
+        {%- else -%}
+          true
+        {%- endif -%}
+  trigger:
+    - platform: state
+      entity_id: device_tracker.rashmiphone, device_tracker.pi_rashmiphone
+      state: 'not_home'
+      for: '00:07:00'
+    - platform: state
+      entity_id: device_tracker.rashmiappiphone, device_tracker.sonu_1169166c6fc048c98e47b8bbd0423d54
+      state: 'not_home'
+    - platform: state
+      entity_id: binary_sensor.rashmilife360
+      state: 'off'
+  action:
+    - service: homeassistant.turn_off
+      entity_id: input_boolean.rashmihome
+    - service: logbook.log
+      data_template:
+        name: "Rashmi away: "
+        message: >-
+          {%- for state in states if state.entity_id == trigger.entity_id -%}
+            {{ state.attributes.friendly_name }} is Away.
+          {%- endfor -%}
+
+- alias: 'Alok Home'
+  initial_state: 'on'
+  condition:
+    - condition: state
+      entity_id: input_boolean.alokhome
+      state: 'off'
+    - condition: template
+      value_template: >
+        {%- if states.input_boolean.alokhome.last_changed -%}
+          {{ (as_timestamp(now()) - as_timestamp(states.input_boolean.alokhome.last_changed)) > 600 }}
+        {%- else -%}
+          true
+        {%- endif -%}
+  trigger:
+    - platform: state
+      entity_id: device_tracker.alokphone, device_tracker.pi_alokphone, device_tracker.alokiosiphone, device_tracker.elantrase, device_tracker.alok_29677a2f60cb45e1a9ef0fce8c1cb8ac
+      state: 'home'
+    - platform: state
+      entity_id: binary_sensor.aloklife360, input_boolean.alok360home
+      state: 'on'
+  action:
+    - service: homeassistant.turn_on
+      entity_id: input_boolean.alokhome
+    - service: logbook.log
+      data_template:
+        name: "Alok home: "
+        message: >-
+          {%- for state in states if state.entity_id == trigger.entity_id -%}
+            {{ state.attributes.friendly_name }} is Home.
+          {%- endfor -%}
+
+- alias: 'Rashmi Home'
+  initial_state: 'on'
+  condition:
+    - condition: state
+      entity_id: input_boolean.rashmihome
+      state: 'off'
+    - condition: template
+      value_template: >
+        {%- if states.input_boolean.rashmihome.last_changed -%}
+          {{ (as_timestamp(now()) - as_timestamp(states.input_boolean.rashmihome.last_changed)) > 600 }}
+        {%- else -%}
+          true
+        {%- endif -%}
+  trigger:
+    - platform: state
+      entity_id: device_tracker.rashmiphone, device_tracker.pi_rashmiphone, device_tracker.rashmiappiphone, device_tracker.sonu_1169166c6fc048c98e47b8bbd0423d54
+      state: 'home'
+    - platform: state
+      entity_id: binary_sensor.rashmilife360
+      state: 'on'
+  action:
+    - service: homeassistant.turn_on
+      entity_id: input_boolean.rashmihome
+    - service: logbook.log
+      data_template:
+        name: "Rashmi home: "
+        message: >-
+          {%- for state in states if state.entity_id == trigger.entity_id -%}
+            {{ state.attributes.friendly_name }} is Home.
+          {%- endfor -%}
+
+- alias: 'Mark both away if Abode armed'
+  initial_state: 'on'
+  condition:
+   - condition: or
+     conditions:
+      - condition: state
+        entity_id: input_boolean.rashmihome
+        state: 'on'
+      - condition: state
+        entity_id: input_boolean.alokhome
+        state: 'on'
+  trigger:
+    - platform: state
+      entity_id: input_select.abodestatus
+      state: 'away'
+  action:
+    - service: homeassistant.turn_off
+      entity_id: input_boolean.rashmihome
+    - service: homeassistant.turn_off
+      entity_id: input_boolean.alokhome

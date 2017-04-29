@@ -143,20 +143,6 @@ ring:
 ifttt:
   key: !secret ifttt_key
 
-device_tracker:
-  # - platform: asuswrt
-  #   host: 192.168.2.1
-  #   protocol: telnet
-  #   username: !secret asus_username
-  #   password: !secret asus_password
-  - platform: owntracks
-    max_gps_accuracy: 200
-  - platform: unifi
-    host: 192.168.2.163
-    username: !secret unifi_username
-    password: !secret unifi_password
-    verify_ssl: False
-
 notify:
   - platform: ios
   - platform: pushbullet

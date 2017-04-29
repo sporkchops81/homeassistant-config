@@ -10,18 +10,6 @@
     name: Camera Recording
     initial: off
     icon: mdi:record-rec
-  alokhome:
-    name: Alok Home
-    initial: on
-    icon: mdi:cellphone-iphone
-  alok360home:
-    name: Alok Life360
-    initial: on
-    icon: mdi:cellphone-iphone
-  rashmihome:
-    name: Rashmi Home
-    initial: on
-    icon: mdi:cellphone-iphone
   thermo_away_main:
     name: Downstairs Away Mode
     initial: off
@@ -42,3 +30,15 @@
     name: Party Mode
     initial: off
     icon: mdi:theme-light-dark
+  alokhome:
+    name: Alok Home
+    initial: on
+    icon: mdi:cellphone-iphone
+  alok360home:
+    name: Alok Life360
+    initial: on
+    icon: mdi:cellphone-iphone
+  rashmihome:
+    name: Rashmi Home
+    initial: on
+    icon: mdi:cellphone-iphone

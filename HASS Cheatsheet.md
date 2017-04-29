@@ -76,13 +76,13 @@ Thanks to @dale3h for assistance with these instructions.
 If you are using AIO (which has Mosquitto pre-installed), you can use the following to integrate Smartthings and HA.
 
 1. Install node.js, and pm2
-```
+    ```
     sudo apt-get update && sudo apt-get upgrade -y
     curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
     sudo apt-get install -y nodejs
     sudo npm install -g pm2
     sudo su -c "env PATH=$PATH:/usr/local/bin pm2 startup systemd -u pi --hp /user/pi"
-```
+    ```
 2. Install the [SmartThings MQTT Bridge](https://github.com/stjohnjohnson/smartthings-mqtt-bridge)
     ```
     $ sudo npm install -g smartthings-mqtt-bridge

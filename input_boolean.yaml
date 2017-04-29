@@ -1,10 +1,6 @@
 #################################################################
 ## Input_boolean
 #################################################################
-  startrecording:
-    name: Camera Recording
-    initial: off
-    icon: mdi:record-rec
   thermo_away_main:
     name: Downstairs Away Mode
     initial: off

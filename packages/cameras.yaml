@@ -1,0 +1,129 @@
+homeassistant:
+  customize:
+     input_boolean.startrecording:
+       emulated_hue: true
+camera:
+  - platform: bloomsky
+  - platform: generic
+    still_image_url: https://radblast.wunderground.com/cgi-bin/radar/WUNIDS_map?station=FFC&brand=wui&num=1&delay=100&type=NTP&frame=0&scale=1&noclutter=0&showstorms=5&mapx=400&mapy=240&centerx=400&centery=240&transx=0&transy=0&showlabels=1&severe=0&rainsnow=0&lightning=0&smooth=0&rand=24427697&lat=0&lon=0&label=you
+    name: RadarGA
+  - platform: synology
+    url: http://192.168.2.113:5000/
+    username: !secret synology_username
+    password: !secret synology_password
+  # - platform: foscam
+  #   ip: 192.168.2.224
+  #   name: Door Camera
+  #   port: 88
+  #   username: !secret foscam_username
+  #   password: !secret foscam_password
+  # - platform: foscam
+  #   ip: 192.168.2.173
+  #   name: Door Camera
+  #   port: 88
+  #   username: !secret foscam_username
+  #   password: !secret foscam_password
+  # - platform: foscam
+  #   ip: 192.168.2.50
+  #   name: Door Camera
+  #   port: 88
+  #   username: !secret foscam_username
+  #   password: !secret foscam_password
+
+input_boolean:
+  startrecording:
+    name: Camera Recording
+    initial: off
+    icon: mdi:record-rec
+
+automation:
+
+- alias: Enable Recording
+  initial_state: 'on'
+  trigger:
+    platform: state
+    entity_id: input_boolean.startrecording
+    state: 'on'
+  action:
+    service: switch.turn_on
+    entity_id: switch.foscam_record
+
+- alias: Disable Recording
+  initial_state: 'on'
+  trigger:
+    platform: state
+    entity_id: input_boolean.startrecording
+    state: 'off'
+  action:
+    service: switch.turn_off
+    entity_id: switch.foscam_record
+
+- alias: 'Notify camera pictures'
+  initial_state: 'on'
+  condition:
+    - condition: state
+      entity_id: input_select.abodestatus
+      state: 'away'
+    - condition: template
+      value_template: >
+        {%- if states.automation.notify_camera_pictures.attributes.last_triggered -%}
+          {{ (as_timestamp(now()) - as_timestamp(states.automation.notify_camera_pictures.attributes.last_triggered)) > 120 }}
+        {%- else -%}
+          true
+        {%- endif -%}
+    - condition: template
+      value_template: >
+        {%- if trigger.entity_id == "binary_sensor.backyard_field_detection" or trigger.entity_id == "binary_sensor.backyard_line_crossing" -%}
+        {{((as_timestamp(now()) - as_timestamp(states.binary_sensor.backyard_motion.attributes.last_tripped_time)))|round|abs < 30}}
+        {%- elif trigger.entity_id == "binary_sensor.driveway_field_detection" or trigger.entity_id == "binary_sensor.driveway_line_crossing" -%}
+        {{((as_timestamp(now()) - as_timestamp(states.binary_sensor.driveway_motion.attributes.last_tripped_time)))|round|abs < 30}}
+        {%- elif trigger.entity_id == "binary_sensor.patio_field_detection" or trigger.entity_id == "binary_sensor.patio_line_crossing" -%}
+        {{((as_timestamp(now()) - as_timestamp(states.binary_sensor.patio_motion.attributes.last_tripped_time)))|round|abs < 30}}
+        {%- elif trigger.entity_id == "binary_sensor.porch_field_detection" or trigger.entity_id == "binary_sensor.porch_line_crossing" -%}
+        {{((as_timestamp(now()) - as_timestamp(states.binary_sensor.porch_motion.attributes.last_tripped_time)))|round|abs < 30}}
+        {%- else -%}
+          true
+        {%- endif -%}
+  trigger:
+   - platform: state
+     entity_id:
+       - binary_sensor.backyard_field_detection
+       - binary_sensor.driveway_field_detection
+       - binary_sensor.patio_field_detection
+       - binary_sensor.porch_field_detection
+       - binary_sensor.backyard_line_crossing
+       - binary_sensor.driveway_line_crossing
+       - binary_sensor.patio_line_crossing
+       - binary_sensor.porch_line_crossing
+     state: 'on'
+  action:
+    - service: notify.ios
+      data_template:
+        message: "Check {{ trigger.entity_id.split('.')[1].split('_')[0] }} camera."
+        data:
+          push:
+            category: camera
+          entity_id: "camera.{{ trigger.entity_id.split('.')[1].split('_')[0] }}"
+          attachment:
+            url: "{{ states.camera[trigger.entity_id.split('.')[1].split('_')[0]].attributes.entity_picture }}"
+            content-type: jpg
+    - service: logbook.log
+      data_template:
+        name: "Camera activity: "
+        message: >-
+          {%- for state in states if state.entity_id == trigger.entity_id -%}
+            {{ state.attributes.friendly_name }} activated at {{ as_timestamp(now()) | timestamp_custom('%I:%M:%S %p', true) }}.
+          {%- endfor -%}
+    - service: logbook.log
+      data_template:
+        name: "Motion detected: "
+        message: >-
+          {%- if trigger.entity_id == "binary_sensor.backyard_field_detection" or trigger.entity_id == "binary_sensor.backyard_line_crossing" -%}
+            {{(as_timestamp(now()) - as_timestamp(states.binary_sensor.backyard_motion.attributes.last_tripped_time))}} seconds ago.
+          {%- elif trigger.entity_id == "binary_sensor.driveway_field_detection" or trigger.entity_id == "binary_sensor.driveway_line_crossing" -%}
+            {{(as_timestamp(now()) - as_timestamp(states.binary_sensor.driveway_motion.attributes.last_tripped_time))}} seconds ago.
+          {%- elif trigger.entity_id == "binary_sensor.patio_field_detection" or trigger.entity_id == "binary_sensor.patio_line_crossing" -%}
+            {{(as_timestamp(now()) - as_timestamp(states.binary_sensor.patio_motion.attributes.last_tripped_time))}} seconds ago.
+          {%- elif trigger.entity_id == "binary_sensor.porch_field_detection" or trigger.entity_id == "binary_sensor.porch_line_crossing" -%}
+            {{(as_timestamp(now()) - as_timestamp(states.binary_sensor.porch_motion.attributes.last_tripped_time))}} seconds ago.
+          {%- endif -%}

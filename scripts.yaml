@@ -1,58 +1,6 @@
 #################################################################
 ## Scripts
 #################################################################
-
-  abodeaway:
-    alias: 'Abode Arm'
-    sequence:
-      - service: input_select.select_option
-        data:
-          entity_id: input_select.abodestatus
-          option: 'away'
-      - service: ifttt.trigger
-        data: {"event":"AbodeAway", "value1":"Arm Abode"}
-      - service: climate.set_away_mode
-        data:
-          entity_id: climate.downstairs
-          away_mode: 'True'
-      - service: climate.set_away_mode
-        data:
-          entity_id: climate.upstairs
-          away_mode: 'True'
-      # - service: homeassistant.turn_on
-      #   entity_id: input_boolean.startrecording
-
-  abodehome:
-    alias: 'Abode Home'
-    sequence:
-      - service: input_select.select_option
-        data:
-          entity_id: input_select.abodestatus
-          option: 'home'
-      - service: ifttt.trigger
-        data: {"event":"AbodeHome", "value1":"Abode Home"}
-
-  abodestandby:
-    alias: 'Abode Standby'
-    sequence:
-      - service: input_select.select_option
-        data:
-          entity_id: input_select.abodestatus
-          option: 'standby'
-      - service: ifttt.trigger
-        data: {"event":"AbodeStandby", "value1":"Abode Standby"}
-      - service: climate.set_away_mode
-        data:
-          entity_id: climate.upstairs
-          away_mode: 'False'
-      - service: climate.set_away_mode
-        data:
-          entity_id: climate.downstairs
-          away_mode: 'False'
-      - service: light.turn_off
-        entity_id: group.living_room_lights
-      # - service: homeassistant.turn_off
-      #   entity_id: input_boolean.startrecording
   sonos_say:
     alias: "Sonos TTS script"
     sequence:
@@ -110,19 +58,6 @@
       - delay: '00:01:28'
       - service: media_player.sonos_restore
         entity_id: media_player.livingroomsonos
-
-  arm_security:
-    alias: 'Arm Security'
-    sequence:
-      - delay: 00:05:00
-      - service: homeassistant.turn_on
-        entity_id: script.abodeaway
-
-  disarm_security:
-    alias: 'Disarm Security'
-    sequence:
-      - service: homeassistant.turn_on
-        entity_id: script.abodestandby
 
   playradio:
     alias: 'Play Radio on Sonos'

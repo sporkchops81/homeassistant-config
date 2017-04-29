@@ -109,33 +109,6 @@ media_player:
   - platform: spotify
     client_id: !secret spotify_client_id
     client_secret: !secret spotify_client_secret
-camera:
-  - platform: bloomsky
-  - platform: generic
-    still_image_url: https://radblast.wunderground.com/cgi-bin/radar/WUNIDS_map?station=FFC&brand=wui&num=1&delay=100&type=NTP&frame=0&scale=1&noclutter=0&showstorms=5&mapx=400&mapy=240&centerx=400&centery=240&transx=0&transy=0&showlabels=1&severe=0&rainsnow=0&lightning=0&smooth=0&rand=24427697&lat=0&lon=0&label=you
-    name: RadarGA
-  - platform: synology
-    url: http://192.168.2.113:5000/
-    username: !secret synology_username
-    password: !secret synology_password
-  # - platform: foscam
-  #   ip: 192.168.2.224
-  #   name: Door Camera
-  #   port: 88
-  #   username: !secret foscam_username
-  #   password: !secret foscam_password
-  # - platform: foscam
-  #   ip: 192.168.2.173
-  #   name: Door Camera
-  #   port: 88
-  #   username: !secret foscam_username
-  #   password: !secret foscam_password
-  # - platform: foscam
-  #   ip: 192.168.2.50
-  #   name: Door Camera
-  #   port: 88
-  #   username: !secret foscam_username
-  #   password: !secret foscam_password
 ring:
   username: !secret ring_username
   password: !secret ring_password

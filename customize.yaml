@@ -118,8 +118,6 @@
        icon: mdi:home
  #Emulated_Hue Devices
 
-     input_boolean.startrecording:
-       emulated_hue: true
      input_boolean.alokhome:
        emulated_hue: true
      input_boolean.rashmihome:

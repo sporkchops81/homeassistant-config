@@ -17,10 +17,6 @@
     name: Leeo Alarm
     initial: off
     icon: mdi:fire
-  partymode:
-    name: Party Mode
-    initial: off
-    icon: mdi:theme-light-dark
   alokhome:
     name: Alok Home
     initial: on

@@ -122,10 +122,6 @@
        emulated_hue: true
      input_boolean.rashmihome:
        emulated_hue: true
-     switch.driveway:
-       emulated_hue: true
-       emulated_hue_name: "Driveway Light"
-       friendly_name: "Driveway Light"
      switch.garage_relay_switch_8_0:
        emulated_hue: true
        emulated_hue_name: "Garage Door"

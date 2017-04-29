@@ -37,7 +37,6 @@ input_boolean:
     icon: mdi:record-rec
 
 automation:
-
 - alias: Enable Recording
   initial_state: 'on'
   trigger:

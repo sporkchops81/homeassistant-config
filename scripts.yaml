@@ -86,38 +86,3 @@
               x-rincon-mp3radio://pba-ice.streamguys.org:80/wabe
             {% endif %}
           media_content_type: "MUSIC"
-
-  colorloop_start:
-    alias: 'Start LIFX colorloop'
-    sequence:
-      - service: light.lifx_effect_colorloop
-        data:
-          entity_id: group.living_room_lights
-          brightness: 255
-          period: 10
-          spread: 35
-          change: 35
-
-  disco_party:
-    alias: 'Start Party Mode'
-    sequence:
-      - service: light.lifx_effect_colorloop
-        data:
-          entity_id: group.living_room_lights
-          brightness: 255
-          period: 1
-          spread: 359
-          change: 35
-
-  lifx_stop_effects:
-    alias: 'Stop LIFX effects'
-    sequence:
-      - service: light.lifx_effect_stop
-        data:
-          entity_id: group.all_lights
-      - service: light.turn_on
-        entity_id: group.living_room_lights
-        data:
-          rgb_color: [255, 255, 255]
-          brightness: 250
-          color_temp: 285

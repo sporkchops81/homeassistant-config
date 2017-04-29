@@ -43,22 +43,6 @@ http:
   base_url: !secret base_url
   trusted_networks:
     - 192.168.2.0/24
-light:
-  - platform: lifx
-  # z-wave dimmer switch (http://amzn.to/2j1UEli)
-  - platform: mqtt
-    name: "Kitchen Lights"
-    state_topic: "smartthings/Kitchen/switch"
-    command_topic: "smartthings/Kitchen/switch"
-    payload_on: "on"
-    payload_off: "off"
-    brightness_state_topic: "smartthings/Kitchen/level"
-    brightness_command_topic: "smartthings/Kitchen/level"
-    brightness_scale: 99
-    brightness_value_template: '{{ value }}'
-    retain: true
-    optimistic: false
-    qos: 0
 
 # Enables the frontend
 frontend:

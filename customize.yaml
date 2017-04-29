@@ -117,8 +117,7 @@
      sensor.upstairshermostatmode:
        icon: mdi:home
  #Emulated_Hue Devices
-     input_boolean.abodeupdate:
-       emulated_hue: true
+
      input_boolean.startrecording:
        emulated_hue: true
      input_boolean.alokhome:

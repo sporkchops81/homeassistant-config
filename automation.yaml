@@ -161,9 +161,12 @@
 - alias: 'Disarm Abode from Away'
   initial_state: 'on'
   condition:
-    condition: state
-    entity_id: input_select.abodestatus
-    state: 'away'
+   - condition: state
+     entity_id: input_select.abodestatus
+     state: 'away'
+   - condition: state
+     entity_id: input_boolean.abodeupdate
+     state: 'on'
   trigger:
    - platform: state
      entity_id: group.household
@@ -196,9 +199,12 @@
 - alias: 'Disarm Abode at night'
   initial_state: 'on'
   condition:
-    condition: state
-    entity_id: input_select.abodestatus
-    state: 'home'
+    - condition: state
+      entity_id: input_select.abodestatus
+      state: 'home'
+    - condition: state
+      entity_id: input_boolean.abodeupdate
+      state: 'on'
   trigger:
    - platform: state
      entity_id: input_boolean.rashmihome, input_boolean.alokhome

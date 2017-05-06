@@ -2,6 +2,7 @@
 ## Input_boolean
 #################################################################
 
+
   abodeupdate:
     name: Abode Updates
     initial: on
@@ -34,6 +35,10 @@
     name: TV
     initial: off
     icon: mdi:television
+  tvtime:
+    name: TV Time
+    initial: on
+    icon: mdi:television-guide
   leeoalarm:
     name: Leeo Alarm
     initial: off

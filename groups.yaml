@@ -138,6 +138,7 @@
     - input_select.hdmiinput
     - input_slider.harmonyvolume
     - input_boolean.tv
+    - input_boolean.tvtime
 
   Switches:
     - switch.wemoswitch

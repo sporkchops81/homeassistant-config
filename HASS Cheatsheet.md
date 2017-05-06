@@ -115,7 +115,8 @@ If you are using AIO (which has Mosquitto pre-installed), you can use the follow
 *  Login to Raspberry Pi `ssh pi@your_raspberry_pi_ip`
 *  Change to homeassistant user `sudo su -s /bin/bash hass`
 *  Change to virtual enviroment `source /srv/hass/hass_venv/bin/activate`
-*  Update HA `pip3 install --upgrade homeassistant`
+*  Update HA `pip3 install --upgrade homeassistant`. To update to a different branch, use the complete git URL, `pip3 install --upgrade git+git://github.com/home-assistant/home-assistant.git@dev
+`
 *  Type `exit` to logout the hass user and return to the `pi` user.
 *  Restart the Home-Assistant Service `sudo systemctl restart home-assistant.service`
 
@@ -171,3 +172,4 @@ sudo dd if=/dev/mmcblk0 of=/dev/null bs=8M count=100
 sudo hdparm -t /dev/mmcblk0
 ```
 * Test Write speed (will create 200MB file in /home/pi/testfile) using `dd if=/dev/zero of=/home/pi/testfile bs=8M count=25`
+* To check which files are using up all the space on your SD card, run `sudo du | sort -n`. You can delete the culprits using something like `sudo rm -rf ./.pm2/logs/` (will recursively delete folder /logs/).

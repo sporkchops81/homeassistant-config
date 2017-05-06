@@ -167,9 +167,9 @@ Some useful commands:
 
 # Miscellaneous Tips/Tricks
 * You can test the the Read Speed of your SD card using (note, this command takes some time to run):
-```
-sudo dd if=/dev/mmcblk0 of=/dev/null bs=8M count=100
-sudo hdparm -t /dev/mmcblk0
-```
+  ```
+  sudo dd if=/dev/mmcblk0 of=/dev/null bs=8M count=100
+  sudo hdparm -t /dev/mmcblk0
+  ```
 * Test Write speed (will create 200MB file in /home/pi/testfile) using `dd if=/dev/zero of=/home/pi/testfile bs=8M count=25`
 * To check which files are using up all the space on your SD card, run `sudo du | sort -n`. You can delete the culprits using something like `sudo rm -rf ./.pm2/logs/` (will recursively delete folder /logs/).

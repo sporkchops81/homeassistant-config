@@ -1,3 +1,9 @@
+  - platform: transmission
+    host: 192.168.2.113
+    monitored_variables:
+      - 'current_status'
+      - 'download_speed'
+      - 'upload_speed'
   - platform: fitbit
     monitored_resources:
       - "activities/calories"

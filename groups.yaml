@@ -36,6 +36,7 @@
     entities:
       - group.entertainment
       - group.media_player
+      - group.network_details
 
   settings:
     name: Settings
@@ -74,6 +75,7 @@
 
   Information:
     - sensor.time__date
+    - sensor.ha_uptime
     - sensor.morning_commute
     - sensor.evening_commute
     - sensor.plexspy
@@ -84,6 +86,12 @@
     - sensor.steps
     - sensor.calories
     - sensor.hoursslept
+
+  Network Details:
+    - sensor.transmission_down_speed
+    - sensor.transmission_status
+    - sensor.transmission_up_speed
+    - switch.transmission_turtle_mode
 
   Media Player:
     - media_player.livingroomsonos

@@ -291,6 +291,9 @@ logbook:
       - sensor.ring_front_door_last_activity
       - sensor.ring_front_door_last_ding
       - sensor.ring_front_door_last_motion
+      - sensor.transmission_down_speed
+      - sensor.transmission_status
+      - sensor.transmission_up_speed
 # Enables support for tracking state changes over time.
 history:
   include:
@@ -333,6 +336,7 @@ recorder:
       - group.ring_doorbell
       - sensor.pollen
       - sensor.pollen_level
+      - sensor.ha_uptime
 
 automation: !include automation.yaml
 group: !include groups.yaml

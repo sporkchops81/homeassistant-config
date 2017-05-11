@@ -588,11 +588,14 @@
    - platform: state
      entity_id: light.kitchen_lights
      state: 'on'
+  condition:
+    - condition: template
+      value_template: '{{ trigger.from_state.state == "off" }}'
   action:
      service: light.turn_on
      data:
        entity_id: light.kitchen_lights
-       brightness: 240
+       brightness: 200
 
 - alias: 'Change Leeo color'
   initial_state: 'on'
